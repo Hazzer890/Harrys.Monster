@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry's Monster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1 class="monster-title">HARRY'S MONSTER</h1>
+            <p class="monster-tagline">RAHHHHHHHHHHHHHHH</p>
+            <div class="monster-eyes">
+                <div class="eye left-eye">
+                    <div class="pupil"></div>
+                </div>
+                <div class="eye right-eye">
+                    <div class="pupil"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about">
+            <div class="container">
+                <h2>Welcome to the Monster's Lair</h2>
+                <p>This is Harry's digital monster den! A fun little corner of the internet where monsters roam free and creativity runs wild.</p>
+                <div class="monster-facts">
+                    <div class="fact">
+                        <h3>🦄 Monster Type</h3>
+                        <p>Friendly Code Monster</p>
+                    </div>
+                    <div class="fact">
+                        <h3>⚡ Superpower</h3>
+                        <p>Turning coffee into websites</p>
+                    </div>
+                    <div class="fact">
+                        <h3>🌟 Favorite Activity</h3>
+                        <p>Building cool things on the web</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="coming-soon">
+            <div class="container">
+                <h2>More Coming Soon...</h2>
+                <p>The monster is constantly evolving and growing. Check back soon for more monstrous updates!</p>
+                <div class="loading-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Harry's Monster. All monsters reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add some monster interactivity
+        document.addEventListener('mousemove', function(e) {
+            const eyes = document.querySelectorAll('.pupil');
+            eyes.forEach(eye => {
+                const rect = eye.getBoundingClientRect();
+                const eyeCenterX = rect.left + rect.width / 2;
+                const eyeCenterY = rect.top + rect.height / 2;
+                
+                const deltaX = e.clientX - eyeCenterX;
+                const deltaY = e.clientY - eyeCenterY;
+                const angle = Math.atan2(deltaY, deltaX);
+                const distance = Math.min(8, Math.sqrt(deltaX * deltaX + deltaY * deltaY) / 10);
+                
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                
+                eye.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Add monster roar effect
+        document.querySelector('.monster-title').addEventListener('click', function() {
+            this.style.animation = 'roar 0.5s ease-in-out';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
