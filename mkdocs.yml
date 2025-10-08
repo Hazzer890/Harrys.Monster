@@ -1,0 +1,6 @@
+site_name: Harry's Monster
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - PID Visualizer: PID.md
