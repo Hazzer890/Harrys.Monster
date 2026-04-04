@@ -1,0 +1,124 @@
+/* Responsive Overrides */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+
+  /* Nav: show hamburger, hide links by default */
+  .nav-toggle {
+    display: block;
+    z-index: 10;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--color-surface);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform var(--transition);
+  }
+
+  .header.nav-open .nav-links {
+    transform: translateX(0);
+  }
+
+  /* Hamburger animation */
+  .header.nav-open .nav-toggle span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .header.nav-open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  .header.nav-open .nav-toggle span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .nav-link {
+    font-size: var(--text-lg);
+  }
+
+  /* About: single column */
+  .about-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .about-image-placeholder {
+    width: 220px;
+    height: 260px;
+  }
+
+  /* Timeline: left-aligned single column */
+  .timeline::before {
+    left: 16px;
+    transform: none;
+  }
+
+  .timeline-item,
+  .timeline-item[data-position="left"],
+  .timeline-item[data-position="right"] {
+    width: 100%;
+    margin-left: 0;
+    padding-left: calc(16px + var(--space-10));
+    padding-right: var(--space-4);
+    text-align: left;
+  }
+
+  .timeline-dot,
+  .timeline-item[data-position="left"] .timeline-dot,
+  .timeline-item[data-position="right"] .timeline-dot {
+    left: 10px;
+    right: auto;
+  }
+
+  /* Timeline animation: all from left on mobile */
+  .timeline-item[data-position="left"].fade-in,
+  .timeline-item[data-position="right"].fade-in {
+    transform: translateX(-24px) translateY(0);
+  }
+
+  /* Projects: single column on narrow tablets */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero actions: stack on small screens */
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .section {
+    padding: var(--space-16) 0;
+  }
+
+  .hero-name {
+    font-size: var(--text-3xl);
+  }
+
+  .hero-tagline {
+    font-size: var(--text-2xl);
+  }
+
+  .timeline-content {
+    padding: var(--space-4);
+  }
+
+  .project-info {
+    padding: var(--space-4);
+  }
+}
