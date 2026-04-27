@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Small-Group GitHub Guide — a practical Git workflow for university projects together.">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="canonical" href="https://harrys.monster/guide-to-github.html">
+  <title>GitHub Guide | Harry Cassidy</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://harrys.monster/guide-to-github.html">
+  <meta property="og:title" content="GitHub Guide">
+  <meta property="og:description" content="A practical Git workflow for student teams working together.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <style>.fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">Harry Cassidy</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link active">Guides</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== GUIDE HERO ===== -->
+    <section class="section timeline-hero">
+      <div class="container">
+        <h1 class="section-title">The Small-Group GitHub Guide</h1>
+        <p class="contact-intro">Everything you need to stop emailing <code>project_final_v3_REAL.zip</code> around your group chat and start collaborating like people who ship software for a living.</p>
+
+        <div class="guide-meta">
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Audience</span>
+            <span class="guide-meta-value">University students · small groups</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Pre-reqs</span>
+            <span class="guide-meta-value">Zero · bring a laptop</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Read time</span>
+            <span class="guide-meta-value">~30 minutes end-to-end</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GUIDE BODY ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="guide-layout">
+
+          <nav class="guide-toc" aria-label="Table of contents">
+            <div class="guide-toc-label">Contents</div>
+            <ol>
+              <li><a href="#why">Why bother with Git?</a></li>
+              <li><a href="#git-vs-github">Git vs. GitHub</a></li>
+              <li><a href="#mental-model">The mental model</a></li>
+              <li><a href="#setup">One-time setup</a></li>
+              <li><a href="#workflow">The daily workflow</a></li>
+              <li><a href="#branching">Branching for groups</a></li>
+              <li><a href="#pull-requests">Pull requests</a></li>
+              <li><a href="#conflicts">Merge conflicts</a></li>
+              <li><a href="#gitignore">What not to commit</a></li>
+              <li><a href="#project-mgmt">Issues &amp; boards</a></li>
+              <li><a href="#norms">Team norms</a></li>
+              <li><a href="#mistakes">Common mistakes</a></li>
+              <li><a href="#recovery">Recovery moves</a></li>
+              <li><a href="#cheatsheet">Cheat sheet</a></li>
+              <li><a href="#resources">Resources</a></li>
+            </ol>
+          </nav>
+
+          <article class="guide-content">
+
+            <section id="why" class="fade-in">
+              <span class="section-num">§ 01</span>
+              <h2>Why bother with Git?</h2>
+              <p>Group projects fail in predictable ways. One person keeps the "real" copy. Someone edits the wrong version. A file gets overwritten the night before submission. Nobody can reconstruct who broke what, or why. Git exists to make all of that impossible... or at least, fixable.</p>
+              <p>Git gives your team four things that spreadsheets, Dropbox, and Discord attachments cannot:</p>
+              <ul>
+                <li><strong>A real history.</strong> Every change is a labelled save-point. You can see what changed, who changed it, when, and why.</li>
+                <li><strong>Safe parallel work.</strong> Two people can edit the same file at the same time without overwriting each other. Their changes get merged, not clobbered.</li>
+                <li><strong>An undo button that actually works.</strong> Broke everything? Roll back to yesterday. Need a file from three weeks ago? It's there.</li>
+                <li><strong>A portfolio.</strong> The moment you graduate and apply for work, recruiters will look at your GitHub. Your coursework becomes evidence.</li>
+              </ul>
+              <div class="callout callout-info">
+                <span class="callout-label">Don't be scared</span>
+                Yes, the learning curve is real. But the ten hours you spend learning Git in Week 1 will save you fifty hours — and one catastrophic fight — by Week 12.
+                  Getting the basics down, is also really not that hard.
+              </div>
+            </section>
+
+            <section id="git-vs-github" class="fade-in">
+              <span class="section-num">§ 02</span>
+              <h2>Git vs. GitHub: these are not the same thing.</h2>
+              <p>People say "Git" and "GitHub" interchangeably. They're different tools with overlapping names, and confusing them is easy until you understand.</p>
+              <div class="two-col">
+                <div class="col-card">
+                  <div class="col-card-head">◆ Git</div>
+                  <p>A <strong>program</strong> that runs on your computer. It tracks changes to files inside a folder. It works without internet. It has nothing to do with any website.</p>
+                </div>
+                <div class="col-card">
+                  <div class="col-card-head">◆ GitHub</div>
+                  <p>A <strong>website</strong> where you can store Git repositories so other people can access them. It adds discussion, review, and project-management features on top.</p>
+                </div>
+              </div>
+              <p>You could use Git entirely alone, on one laptop, and never touch GitHub. You could also use GitLab, Bitbucket, or a server in your basement instead. But for group work, GitHub is almost certainly where your repo should live, it's free for students and nearly universal.</p>
+              <div class="callout callout-tip">
+                <span class="callout-label">Free Stuff!!</span>
+                You can link your student email and apply for the <strong>GitHub Student Developer Pack</strong>! It unlocks free access to dozens of paid developer tools (Copilot, domain names, cloud credits) that are actually good.
+              </div>
+            </section>
+
+            <section id="mental-model" class="fade-in">
+              <span class="section-num">§ 03</span>
+              <h2>The mental model you actually need.</h2>
+              <div class="mental-model">
+                <div class="mental-model-title">Three locations. Always three.</div>
+                <div class="mental-grid">
+                  <div class="mental-cell">
+                    <div class="mental-cell-head">1. Working directory</div>
+                    <div class="mental-cell-body">The files you see in your editor. You edit here. Git doesn't care about them until you stage them.</div>
+                  </div>
+                  <div class="mental-cell">
+                    <div class="mental-cell-head">2. Local repository</div>
+                    <div class="mental-cell-body">The hidden <code>.git</code> folder. Your personal history of commits lives here, on your machine.</div>
+                  </div>
+                  <div class="mental-cell">
+                    <div class="mental-cell-head">3. Remote (GitHub)</div>
+                    <div class="mental-cell-body">A copy of the repo on GitHub's servers that your whole team can reach. This is the shared source of truth.</div>
+                  </div>
+                </div>
+              </div>
+              <p>Everything you do in Git is moving work from one of these places to another. <strong><code>commit</code></strong> saves from working directory into your local repo. <strong><code>push</code></strong> sends your local repo up to GitHub. <strong><code>pull</code></strong> brings GitHub's version down to you. Memorize that sentence.</p>
+              <h3>Core vocab</h3>
+              <table>
+                <thead>
+                  <tr><th>Term</th><th>What it means in plain English</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>repository</code> (repo)</td><td>A project folder that Git is tracking.</td></tr>
+                  <tr><td><code>commit</code></td><td>A labelled snapshot of your project at one moment in time. The basic unit of history.</td></tr>
+                  <tr><td><code>branch</code></td><td>A parallel line of work. Your experiments don't affect the main version until you merge them in.</td></tr>
+                  <tr><td><code>main</code></td><td>The default branch. Treat it as the "known-working" version.</td></tr>
+                  <tr><td><code>clone</code></td><td>Download a complete copy of a repo to your machine for the first time.</td></tr>
+                  <tr><td><code>push / pull</code></td><td>Upload your commits to GitHub / download everyone else's.</td></tr>
+                  <tr><td><code>merge</code></td><td>Combine two branches into one.</td></tr>
+                  <tr><td><code>pull request</code> (PR)</td><td>A GitHub feature that proposes merging one branch into another, with a discussion and review attached.</td></tr>
+                  <tr><td><code>conflict</code></td><td>Git's way of saying "two people changed the same line; a human has to decide which version wins."</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <div class="ornament">§ § §</div>
+
+            <section id="setup" class="fade-in">
+              <span class="section-num">§ 04</span>
+              <h2>One-time setup (do this once, forget forever).</h2>
+              <p>You will only do this on each machine once. These steps attrubute your commits to you.</p>
+              <h3>1. Install Git and sign into GitHub</h3>
+              <ul>
+                <li><strong>macOS:</strong> open Terminal, run <code>git --version</code>, and accept the install prompt. Or use Homebrew: <code>brew install git</code>.</li>
+                <li><strong>Windows:</strong> download from <a href="https://git-scm.com">git-scm.com</a>. Accept the defaults; the installer includes a Bash prompt you'll use.</li>
+                <li><strong>Linux:</strong> <code>sudo apt install git</code> (or your distro's equivalent).</li>
+                <li>Create a free account at <a href="https://github.com">github.com</a> </li>
+              </ul>
+              <h3>2. Tell Git who you are</h3>
+              <pre data-label="terminal"><span class="tok-cmt"># Use the same email as your GitHub account</span>
+<span class="tok-cmd">git</span> config --global user.name <span class="tok-str">"Your Full Name"</span>
+<span class="tok-cmd">git</span> config --global user.email <span class="tok-str">"you@youremail.provider"</span>
+<span class="tok-cmd">git</span> config --global init.defaultBranch <span class="tok-str">main</span></pre>
+              <h3>3. Set up authentication (the GitHub CLI is easiest)</h3>
+              <p>GitHub doesn't let you push with your password any more. The smoothest path for a small team is the official <strong>GitHub Command Line Interface (CLI)</strong> (<code>gh</code>), it logs you in through your browser and wires Git up to use that login automatically.</p>
+              <ul>
+                <li><strong>macOS:</strong> <code>brew install gh</code></li>
+                <li><strong>Windows:</strong> <code>winget install --id GitHub.cli</code></li>
+              </ul>
+              <p>Then run a single command and answer the prompts:</p>
+              <pre data-label="terminal"><span class="tok-cmd">gh</span> auth login
+<span class="tok-cmt"># ? What account do you want to log into?     GitHub.com</span>
+<span class="tok-cmt"># ? What is your preferred protocol?           HTTPS</span>
+<span class="tok-cmt"># ? Authenticate Git with your credentials?    Yes</span>
+<span class="tok-cmt"># ? How would you like to authenticate?        Login with a web browser</span>
+<span class="tok-cmt">#</span>
+<span class="tok-cmt"># gh prints a one-time code —> copy it, then press Enter to open the browser,</span>
+<span class="tok-cmt"># paste the code, and approve the login.</span></pre>
+              <p>Confirm it worked:</p>
+              <pre data-label="terminal"><span class="tok-cmd">gh</span> auth status
+<span class="tok-cmt"># ✓ Logged in to github.com as your-username (oauth_token)</span>
+<span class="tok-cmt"># ✓ Git operations for github.com configured to use https protocol.</span></pre>
+            </section>
+
+            <section id="workflow" class="fade-in">
+              <span class="section-num">§ 05</span>
+              <h2>The daily workflow.</h2>
+              <p>This is the loop you'll run dozens of times a week. Internalize it and Git becomes muscle memory rather than a source of dread.</p>
+              <div class="workflow">
+                <div class="workflow-title">A normal day</div>
+                <div class="workflow-steps">
+                  <div class="workflow-step">
+                    <div class="workflow-step-cmd">git pull</div>
+                    <div class="workflow-step-desc">Get teammates' latest work</div>
+                  </div>
+                  <div class="workflow-step">
+                    <div class="workflow-step-cmd">edit files</div>
+                    <div class="workflow-step-desc">Do the work</div>
+                  </div>
+                  <div class="workflow-step">
+                    <div class="workflow-step-cmd">git add</div>
+                    <div class="workflow-step-desc">Stage what's ready</div>
+                  </div>
+                  <div class="workflow-step">
+                    <div class="workflow-step-cmd">git commit</div>
+                    <div class="workflow-step-desc">Save a checkpoint</div>
+                  </div>
+                  <div class="workflow-step">
+                    <div class="workflow-step-cmd">git push</div>
+                    <div class="workflow-step-desc">Share with the team</div>
+                  </div>
+                </div>
+              </div>
+              <h3>Starting a project (one person does this)</h3>
+                <p>On GitHub: click "New repository", give it a name, add a README and .gitignore.</p>
+              <pre data-label="terminal">
+<span class="tok-cmt"># Then on your laptop:</span>
+<span class="tok-cmd">git</span> clone git@github.com:your-team/project-name.git
+<span class="tok-cmd">cd</span> project-name</pre>
+
+              <h3>Joining a project (everyone else does this)</h3>
+                <p>The repo owner adds you as a collaborator in GitHub's "settings > Collaborators" then:</p>
+              <pre data-label="terminal">
+<span class="tok-cmd">git</span> clone git@github.com:your-team/project-name.git
+<span class="tok-cmd">cd</span> project-name</pre>
+
+              <h3>A typical commit cycle</h3>
+              <pre data-label="terminal"><span class="tok-cmt"># 1. Pull first. Always. Always always always.</span>
+<span class="tok-cmd">git</span> pull
+
+<span class="tok-cmt"># 2. See what you've changed</span>
+<span class="tok-cmd">git</span> status
+<span class="tok-cmd">git</span> diff
+
+<span class="tok-cmt"># 3. Stage the specific files you want in this commit</span>
+<span class="tok-cmd">git</span> add src/sensor_driver.py docs/calibration.md
+
+<span class="tok-cmt"># 4. Commit with a message that explains WHY, not just what</span>
+<span class="tok-cmd">git</span> commit -m <span class="tok-str">"Fix sensor drift in cold conditions"</span>
+
+<span class="tok-cmt"># 5. Share with the team</span>
+<span class="tok-cmd">git</span> push</pre>
+              <h3>Writing commit messages</h3>
+              <div class="two-col">
+                <div class="col-card col-card-good">
+                  <div class="col-card-head">✓ Good</div>
+                  <ul>
+                    <li><code>Add ultrasonic sensor calibration routine</code></li>
+                    <li><code>Fix off-by-one in grid traversal</code></li>
+                    <li><code>Refactor auth module to use JWT</code></li>
+                    <li><code>Add lab 3 results to report</code></li>
+                  </ul>
+                </div>
+                <div class="col-card col-card-bad">
+                  <div class="col-card-head">✗ Please no</div>
+                  <ul>
+                    <li><code>update</code></li>
+                    <li><code>stuff</code></li>
+                    <li><code>asdf</code></li>
+                    <li><code>it works now!!!</code></li>
+                    <li><code>final changes for real</code></li>
+                  </ul>
+                </div>
+              </div>
+              <p>Rule of thumb: start with a verb in the imperative (<em>"Add", "Fix", "Remove"</em>, not <em>"Added"</em>). Keep the first line under 70 characters. If you need more detail, leave a blank line and write a paragraph underneath.</p>
+            </section>
+
+            <section id="branching" class="fade-in">
+              <span class="section-num">§ 06</span>
+              <h2>Branching: working in parallel</h2>
+              <p>If your whole group commits directly to <code>main</code>, you'll collide constantly. Branches let each person (or each feature) have its own line of work. When it's ready, you merge it in.</p>
+                <img src="assets/images/githubTimeline.png" alt="github branching timeline visual">
+              <h3>The loop</h3>
+              <pre data-label="terminal"><span class="tok-cmt"># 1. Start from an up-to-date main</span>
+<span class="tok-cmd">git</span> checkout main
+<span class="tok-cmd">git</span> pull
+
+<span class="tok-cmt"># 2. Create and switch to a new branch</span>
+<span class="tok-cmd">git</span> checkout -b feature/sensor-calibration
+
+<span class="tok-cmt"># 3. Work, commit, push. As many times as you need</span>
+<span class="tok-cmd">git</span> add .
+<span class="tok-cmd">git</span> commit -m <span class="tok-str">"Draft calibration script"</span>
+<span class="tok-cmd">git</span> push -u origin feature/sensor-calibration
+
+<span class="tok-cmt"># 4. When ready, open a Pull Request on GitHub</span>
+<span class="tok-cmt">#    (see next section)</span></pre>
+              <h3>Branch-naming conventions that scale</h3>
+              <p>Pick one and stick to it. Most teams use a short prefix plus a hyphenated description:</p>
+              <ul>
+                <li><code>feature/ultrasonic-driver</code> — new functionality</li>
+                <li><code>fix/gripper-timeout</code> — bug fixes</li>
+                <li><code>docs/week-6-report</code> — documentation only</li>
+                <li><code>experiment/try-lstm-model</code> — exploratory work that may get scrapped</li>
+              </ul>
+              <div class="callout callout-tip">
+                <span class="callout-label">Small-group reality</span>
+                In a small project you don't need GitFlow or any elaborate branching strategy. One branch per feature, merged into <code>main</code> via PR after one teammate reviews it, is plenty.
+              </div>
+            </section>
+
+            <section id="pull-requests" class="fade-in">
+              <span class="section-num">§ 07</span>
+              <h2>Pull requests: Accepting changes</h2>
+              <p>A pull request (PR) is GitHub's interface for saying "I think this branch is ready! Please have a look and merge it into <code>main</code>." It is where your group catches each other's mistakes before they become your mistakes.</p>
+              <h3>How to open one</h3>
+              <ol>
+                <li>Push your branch: <code>git push -u origin your-branch-name</code></li>
+                  <li>Open the repo on GitHub -> a yellow banner appears offering <em>Compare &amp; pull request</em>.</li>
+                <li>Write a clear title and description. Explain <em>what</em> changed and <em>why</em>. Screenshot anything visual.</li>
+                <li>Add reviewers from your group. It's good practice to not merge your own PR.</li>
+              </ol>
+              <h3>How to review one (even if you feel unqualified)</h3>
+              <p>You do not need to be the expert on someone else's code to give useful review. Run through these questions:</p>
+              <ul>
+                <li>Can I pull this branch and actually run it?</li>
+                <li>Does the description match what the diff actually changes?</li>
+                <li>Are there any obvious bugs, typos, or hardcoded passwords?</li>
+                <li>Do the new files sit in sensible places?</li>
+                <li>Could I understand this code in a few weeks? (Because you'll need to at demo time.)</li>
+              </ul>
+              <div class="callout callout-info">
+                <span class="callout-label">Why this matters for marks</span>
+                Reviewed PRs give your marker a clean, discoverable record of who contributed what. For unit contribution disputes this is the evidence that settles them.
+              </div>
+            </section>
+
+            <section id="conflicts" class="fade-in">
+              <span class="section-num">§ 08</span>
+              <h2>Merge conflicts: keeping the correct code.</h2>
+              <p>A conflict happens when two people have changed the same region of the same file, and Git can't figure out which version should win. It doesn't mean anything is broken, it just means Git is asking for a human decision.</p>
+              <h3>What a conflict looks like</h3>
+              <p>Git puts both versions directly into the file, separated by markers:</p>
+              <pre data-label="sensor.py"><span class="tok-hi">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD
+sample_rate = 50   <span class="tok-cmt"># your version</span>
+<span class="tok-hi">=======</span>
+sample_rate = 100  <span class="tok-cmt"># teammate's version</span>
+<span class="tok-hi">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> main</pre>
+              <h3>How to resolve it</h3>
+              <ol>
+                <li>Open the file in your editor. You'll see the conflict markers above.</li>
+                <li>Delete the markers. Keep whichever version is correct — or combine them into something that makes sense.</li>
+                <li>Save the file.</li>
+                <li><code>git add the-file.py</code> to tell Git you've resolved it.</li>
+                <li><code>git commit</code> (no message needed; Git fills one in).</li>
+                <li><code>git push</code>.</li>
+              </ol>
+              <div class="callout callout-warn">
+                <span class="callout-label">If you panic</span>
+                You can always bail out of a merge-in-progress with <code>git merge --abort</code>. Nothing is broken. Take a breath. Ask a teammate. Start again.
+              </div>
+              <h3>How to have fewer of them</h3>
+              <ul>
+                <li><strong>Pull often.</strong> Before you start work. Before you push. The longer you go without pulling, the bigger the conflict.</li>
+                <li><strong>Keep branches short-lived.</strong> A branch that lives for three weeks will conflict with everything.</li>
+                <li><strong>Split up work by file.</strong> If Lily owns <code>sensor.py</code> and Sarah owns <code>display.py</code>, they won't fight.</li>
+                <li><strong>Talk before you touch shared things.</strong> The <code>README</code>, config files, and report documents are conflict magnets.</li>
+              </ul>
+            </section>
+
+            <section id="gitignore" class="fade-in">
+              <span class="section-num">§ 09</span>
+              <h2>What not to commit.</h2>
+              <p>Git tracks everything in your project folder by default. That is often the wrong behaviour. Some files should never enter your history.</p>
+              <h3>Categories to exclude</h3>
+              <ul>
+                <li><strong>Secrets.</strong> API keys, passwords, database URLs, <code>.env</code> files. Once pushed to GitHub, treat them as leaked forever... even if you delete them later.</li>
+                <li><strong>Generated files.</strong> Compiled binaries, build artifacts, <code>__pycache__</code>, <code>node_modules</code>, <code>.venv</code>. They can be regenerated. They make your repo huge.</li>
+                <li><strong>IDE and OS junk.</strong> <code>.vscode/</code>, <code>.idea/</code>, <code>.DS_Store</code>, <code>Thumbs.db</code>.</li>
+                <li><strong>Massive data files.</strong> GitHub rejects anything over 100 MB per file. Large datasets belong on shared drives, not in Git. (Use Git LFS only if you really need to.)</li>
+              </ul>
+              <h3>The .gitignore file</h3>
+              <p>Create a file called <code>.gitignore</code> at the root of your repo. Anything listed inside it is invisible to Git:</p>
+              <pre data-label=".gitignore"><span class="tok-cmt"># Secrets</span>
+.env
+*.key
+credentials.json
+
+<span class="tok-cmt"># Python</span>
+__pycache__/
+*.pyc
+.venv/
+
+<span class="tok-cmt"># Node</span>
+node_modules/
+
+<span class="tok-cmt"># OS</span>
+.DS_Store
+Thumbs.db
+
+<span class="tok-cmt"># Editor</span>
+.vscode/
+.idea/
+
+<span class="tok-cmt"># Data (keep schemas, not CSVs)</span>
+data/*.csv
+!data/sample.csv</pre>
+              <div class="callout callout-tip">
+                <span class="callout-label">Don't write this from scratch</span>
+                GitHub has ready-made <code>.gitignore</code> templates for every major language. When you create a new repo on github.com, pick one from the dropdown. Or grab one from <a href="https://github.com/github/gitignore">github.com/github/gitignore</a>.
+              </div>
+              <div class="callout callout-warn">
+                <span class="callout-label">Already committed a secret?</span>
+                Assume it is compromised. Rotate it (generate a new key, invalidate the old one) and <em>then</em> remove it from history. Just deleting the file in a new commit is not enough; Git remembers.
+              </div>
+            </section>
+
+            <section id="project-mgmt" class="fade-in">
+              <span class="section-num">§ 10</span>
+              <h2>Issues and Projects: free project management.</h2>
+              <p>GitHub is not just a place to store code. The <em>Issues</em> and <em>Projects</em> tabs give you a fully working task tracker that's integrated with your commits and PRs.</p>
+              <h3>Issues</h3>
+              <p>Create one for every task, bug, or question. Good issues have:</p>
+              <ul>
+                <li>A clear, short title (<code>"Ultrasonic sensor returns nan below 5cm"</code>)</li>
+                <li>Steps to reproduce, or a description of what needs doing</li>
+                <li>A label (<code>bug</code>, <code>feature</code>, <code>docs</code>, <code>week-5</code>)</li>
+                <li>An assignee</li>
+              </ul>
+              <p>In a commit message, write <code>"Closes #12"</code> and GitHub will close issue #12 automatically when that commit lands on <code>main</code>.</p>
+              <h3>Projects (boards)</h3>
+              <p>Go to the <em>Projects</em> tab, create a board, and drag issues into columns like <strong>Backlog → In Progress → In Review → Done</strong>. Takes fifteen minutes to set up. Makes supervisor check-ins five times easier because you can just share the board.</p>
+            </section>
+
+            <div class="ornament">§ § §</div>
+
+            <section id="norms" class="fade-in">
+              <span class="section-num">§ 11</span>
+              <h2>Team norms to agree on.</h2>
+              <p>Most Git disasters are not technical, they're social. Have this conversation with your group in the first or second meeting, write the answers in your README, and refer back to it.</p>
+              <table>
+                <thead><tr><th>Question</th><th>Typical small-group answer</th></tr></thead>
+                <tbody>
+                  <tr><td>Who can push directly to <code>main</code>?</td><td>Nobody. Everything goes through a PR.</td></tr>
+                  <tr><td>How many reviewers per PR?</td><td>At least one other teammate.</td></tr>
+                  <tr><td>How often should we pull?</td><td>Every time we sit down to work.</td></tr>
+                  <tr><td>What do branch names look like?</td><td><code>feature/*</code>, <code>fix/*</code>, <code>docs/*</code></td></tr>
+                  <tr><td>What's our commit-message style?</td><td>Imperative verb, ≤70 chars, explains <em>why</em>.</td></tr>
+                  <tr><td>When do PRs get merged?</td><td>Once one teammate has approved and CI (if any) is green.</td></tr>
+                  <tr><td>Where do we track tasks?</td><td>GitHub Issues, one board per milestone.</td></tr>
+                  <tr><td>What happens when someone is stuck?</td><td>Ask in group chat, no need to struggle silently.</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="mistakes" class="fade-in">
+              <span class="section-num">§ 12</span>
+              <h2>Mistakes students make, every semester.</h2>
+              <ol>
+                <li><strong>Committing giant files.</strong> Datasets, videos, binaries. Your repo bloats and GitHub starts rejecting pushes. Use <code>.gitignore</code>.</li>
+                <li><strong>Committing secrets.</strong> API keys in config files. Assume it's leaked the moment you push. Rotate the key.</li>
+                <li><strong>Never pulling.</strong> Working for a week on a stale copy of <code>main</code>. The merge will be miserable. Pull every time you sit down.</li>
+                <li><strong>Committing to <code>main</code> directly.</strong> You bypass review, and any bug you introduce is everyone's bug instantly. Use branches.</li>
+                <li><strong>One person doing all the commits.</strong> Markers will notice. So will your teammates' self-esteem. Spread the work.</li>
+                <li><strong><code>Force push</code> on a shared branch.</strong> Rewrites history and can erase teammates' work. Never use <code>--force</code> on <code>main</code>.</li>
+                <li><strong>Vague commit messages.</strong> When something breaks at 2am the night before submission, you'll want to know what <code>"update"</code> actually meant.</li>
+                <li><strong>Ignoring the <code>README</code>.</strong> A markdown file with setup instructions, team list, and how to run the project costs an hour and saves the marker's patience.</li>
+                <li><strong>Starting Git the night before submission.</strong> "We'll add it at the end" is how the end becomes a disaster. Set up Git on day one.</li>
+              </ol>
+            </section>
+
+            <section id="recovery" class="fade-in">
+              <span class="section-num">§ 13</span>
+              <h2>"Oh no" recovery moves.</h2>
+              <p>Git rarely destroys your work. It just hides it in places that feel scary. Here are the moves that rescue most situations.</p>
+
+              <div class="scenario">
+                <span class="scenario-num">Scenario 1</span>
+                <div class="scenario-q">I made changes but haven't committed them, and I want to throw them away.</div>
+                <div class="scenario-a"><code>git restore .</code> (everything in working directory) or <code>git restore filename</code> (one file).</div>
+              </div>
+              <div class="scenario">
+                <span class="scenario-num">Scenario 2</span>
+                <div class="scenario-q">I committed to <code>main</code> by accident and haven't pushed yet.</div>
+                <div class="scenario-a"><code>git reset --soft HEAD~1</code> undoes the commit but keeps your changes. Then make a branch and commit there instead.</div>
+              </div>
+              <div class="scenario">
+                <span class="scenario-num">Scenario 3</span>
+                <div class="scenario-q">I need to save my work-in-progress to deal with something urgent on another branch.</div>
+                <div class="scenario-a"><code>git stash</code> tucks your changes away. Do what you need. <code>git stash pop</code> brings them back.</div>
+              </div>
+              <div class="scenario">
+                <span class="scenario-num">Scenario 4</span>
+                <div class="scenario-q">I want to see who changed this specific line and when.</div>
+                <div class="scenario-a"><code>git blame filename</code> not a judgment, just historical record.</div>
+              </div>
+              <div class="scenario">
+                <span class="scenario-num">Scenario 5</span>
+                <div class="scenario-q">I think I've lost commits.</div>
+                <div class="scenario-a"><code>git reflog</code> this is Git's backstage log. Almost every commit you've ever made in the last 90 days is findable here, even if it looks deleted.</div>
+              </div>
+              <div class="scenario">
+                <span class="scenario-num">Scenario 6</span>
+                <div class="scenario-q">Everything is on fire.</div>
+                <div class="scenario-a">Make a backup copy of the whole project folder elsewhere. Now nothing you do can make things worse. Then ask someone.</div>
+              </div>
+            </section>
+
+            <section id="cheatsheet" class="fade-in">
+              <span class="section-num">§ 14</span>
+              <h2>Cheat sheet.</h2>
+              <p>Print this. Stick it above your desk. Most of your Git work sits inside these ~20 commands.</p>
+              <div class="cheatsheet">
+                <h3>Starting out</h3>
+                <div class="cheat-row"><span class="cheat-cmd">git clone &lt;url&gt;</span><span class="cheat-desc">Download a repo to your machine</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git init</span><span class="cheat-desc">Turn a folder into a Git repo</span></div>
+
+                <h3>The daily loop</h3>
+                <div class="cheat-row"><span class="cheat-cmd">git status</span><span class="cheat-desc">What's changed? What's staged?</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git diff</span><span class="cheat-desc">Show unstaged changes</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git add &lt;file&gt;</span><span class="cheat-desc">Stage a file for commit</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git add .</span><span class="cheat-desc">Stage everything changed</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git commit -m "msg"</span><span class="cheat-desc">Save a snapshot locally</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git pull</span><span class="cheat-desc">Fetch + merge teammates' work</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git push</span><span class="cheat-desc">Send your commits to GitHub</span></div>
+
+                <h3>Branches</h3>
+                <div class="cheat-row"><span class="cheat-cmd">git branch</span><span class="cheat-desc">List branches</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git checkout -b &lt;name&gt;</span><span class="cheat-desc">Create and switch to a new branch</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git switch &lt;name&gt;</span><span class="cheat-desc">Switch to an existing branch</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git merge &lt;branch&gt;</span><span class="cheat-desc">Bring another branch into this one</span></div>
+
+                <h3>History</h3>
+                <div class="cheat-row"><span class="cheat-cmd">git log --oneline</span><span class="cheat-desc">Compact commit history</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git log --graph --all</span><span class="cheat-desc">Visualise all branches</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git blame &lt;file&gt;</span><span class="cheat-desc">Who last touched each line</span></div>
+
+                <h3>Undo</h3>
+                <div class="cheat-row"><span class="cheat-cmd">git restore &lt;file&gt;</span><span class="cheat-desc">Discard unstaged changes</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git reset --soft HEAD~1</span><span class="cheat-desc">Undo last commit, keep changes</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git stash / git stash pop</span><span class="cheat-desc">Tuck away changes / bring them back</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git reflog</span><span class="cheat-desc">The "I thought I lost it" rescue log</span></div>
+                <div class="cheat-row"><span class="cheat-cmd">git merge --abort</span><span class="cheat-desc">Bail out of a merge in progress</span></div>
+              </div>
+            </section>
+
+            <section id="resources" class="fade-in">
+              <span class="section-num">§ 15</span>
+              <h2>Where to go next.</h2>
+              <ul>
+                <li><a href="https://docs.github.com/en/get-started">GitHub Docs — Getting Started</a>. The official primer, clearer than most.</li>
+                <li><a href="https://learngitbranching.js.org">Learn Git Branching</a>. An interactive visualisation that teaches branching in about 30 minutes. The single best way to build a real mental model.</li>
+                <li><a href="https://ohshitgit.com">Oh Shit, Git!?!</a>. A list of the exact ways you've broken things, with the fix for each.</li>
+                <li><a href="https://education.github.com/pack">GitHub Student Developer Pack</a>. Free stuff you should claim now.</li>
+                <li><strong>Your teammates.</strong> The single fastest way to learn is to open a pull request and have someone else review it. Do it this week.</li>
+              </ul>
+              <div class="ornament">§</div>
+              <p style="text-align: center; margin-top: var(--space-6);">Now close this tab, open your project, and run <code>git pull</code>.</p>
+            </section>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Harry Cassidy &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

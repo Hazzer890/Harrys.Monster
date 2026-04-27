@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SSH into the Curtin University Computer Science labs from VSCode, a step-by-step setup guide.">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="canonical" href="https://harrys.monster/guide-to-ssh-curtin.html">
+  <title>SSH into Curtin CS Labs | Harry Cassidy</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://harrys.monster/guide-to-ssh-curtin.html">
+  <meta property="og:title" content="SSH into Curtin CS Labs with VSCode">
+  <meta property="og:description" content="Connect to the Curtin University Computer Science lab machines from VSCode over SSH.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <style>.fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">Harry Cassidy</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link active">Guides</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== GUIDE HERO ===== -->
+    <section class="section timeline-hero">
+      <div class="container">
+        <h1 class="section-title">SSH into Curtin CS Labs with VSCode</h1>
+        <p class="contact-intro">Skip the trip to building 314. Use VSCode to drive a Computer Science lab machine from your own laptop, anywhere on the planet, with the same files and toolchain you'd get sitting in front of it.</p>
+
+        <div class="guide-meta">
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Audience</span>
+            <span class="guide-meta-value">Curtin CS &amp; Mechatronic students</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Pre-reqs</span>
+            <span class="guide-meta-value">Laptop · OASIS login · VSCode</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Read time</span>
+            <span class="guide-meta-value">~10 minutes end-to-end</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GUIDE BODY ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="guide-layout">
+
+          <nav class="guide-toc" aria-label="Table of contents">
+            <div class="guide-toc-label">Contents</div>
+            <ol>
+              <li><a href="#why">Why bother?</a></li>
+              <li><a href="#prereqs">Prerequisites</a></li>
+              <li><a href="#vpn">VPN setup</a></li>
+              <li><a href="#ssh-basics">SSH connection basics</a></li>
+              <li><a href="#vscode">VSCode remote setup</a></li>
+              <li><a href="#troubleshooting">Troubleshooting</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ol>
+          </nav>
+
+          <article class="guide-content">
+
+            <section id="why" class="fade-in">
+              <span class="section-num">§ 01</span>
+              <h2>Why bother?</h2>
+              <p>The CS lab machines come pre-loaded with the compilers, libraries, and marker scripts your unit coordinator expects. Your editor, your keyboard shortcuts, your machine, but every file and command lives on Curtin's hardware.</p>
+
+            </section>
+
+            <section id="prereqs" class="fade-in">
+              <span class="section-num">§ 02</span>
+              <h2>Prerequisites</h2>
+              <p>You'll need three things before any of this works:</p>
+              <ul>
+                <li>A personal computer running <strong>Windows or macOS</strong>.</li>
+                <li><strong>Internet access</strong> — anywhere off-campus is fine, on-campus Wi-Fi is also fine.</li>
+                <li><strong>Microsoft Visual Studio Code</strong> installed. Download it from <code>code.visualstudio.com</code> if you haven't.</li>
+              </ul>
+            </section>
+
+            <section id="vpn" class="fade-in">
+              <span class="section-num">§ 03</span>
+              <h2>VPN setup</h2>
+              <p>The lab machines aren't reachable from the open internet — you have to enter Curtin's network first via VPN. The official, supported instructions live inside Curtin's own help system rather than on a public page, so the link rots if I copy it here.</p>
+              <ol>
+                <li>Log into your <strong>OASIS</strong> account.</li>
+                <li>Open the <strong>My Studies</strong> tab and find the <strong>SupportU Hub</strong>.</li>
+                <li>Search for <code>VPN</code>.</li>
+                <li>Follow the platform-specific guide (Mac or Windows) to install and connect.</li>
+              </ol>
+                <p>At the time of writing the links for the above are: <a href="https://supportu.curtin.edu.au/sp?id=kb_article&sysparm_article=KB0010350&table=kb_knowledge&searchTerm=vpn)">Mac</a> + <a href="https://supportu.curtin.edu.au/sp?id=kb_article&sysparm_article=KB0010349&table=kb_knowledge&searchTerm=vpn">Windows</a></p>
+
+              <div class="callout callout-tip">
+                <span class="callout-label">Test the VPN first</span>
+                Connect the VPN and confirm it's running before you touch SSH. If the VPN is down, every later step will fail.
+              </div>
+            </section>
+
+            <section id="ssh-basics" class="fade-in">
+              <span class="section-num">§ 04</span>
+              <h2>SSH connection basics</h2>
+              <p>SSH (<em>Secure Shell</em>) is the protocol that lets you run commands on a remote machine as if you were sat at its keyboard. Curtin's lab machines all follow the same naming pattern, so once you know the shape of the address, you can target any of them.</p>
+
+              <p>The command structure is:</p>
+              <pre data-label="terminal"><span class="tok-cmd">ssh</span> <span class="tok-flag">[StudentID]</span>@<span class="tok-flag">[labID]</span>-<span class="tok-flag">[PCID]</span>.cs.curtin.edu.au</pre>
+
+              <p>For example, to log in as student <code>20607591</code> on machine <code>a01</code> in lab <code>232</code>:</p>
+              <pre data-label="terminal"><span class="tok-cmd">ssh</span> 20607591@lab232-a01.cs.curtin.edu.au</pre>
+              <img src="assets/images/SSH_Terminal.webp" alt="Terminal Excecution of SSH">
+              <div class="callout callout-info">
+                <span class="callout-label">Picking a machine</span>
+                Any of the lab PCs work — but if you pick one someone is physically using, you'll be sharing the same processes and files with them. Stick to machines you know are unattended (early mornings and weekends are safe bets).
+              </div>
+            </section>
+
+            <section id="vscode" class="fade-in">
+              <span class="section-num">§ 05</span>
+              <h2>VSCode remote setup</h2>
+              <p>Doing everything in a raw terminal is fine, but the whole point of this guide is to keep VSCode as your editor. Microsoft's <em>Remote — SSH</em> extension makes the lab machine appear as if its filesystem were local.</p>
+
+              <h3>Step 1 — Install the extension</h3>
+              <p>Open the Extensions panel (<code>Ctrl+Shift+X</code> / <code>⌘+Shift+X</code>) and install <strong>Remote Explorer</strong>. It pulls in <em>Remote — SSH</em> and the related Microsoft remote-development extensions automatically.</p>
+                <img src="assets/images/RemoteExplorer.png" alt="Remote Explorer Extension"
+
+              <h3>Step 2 — Add a remote host</h3>
+              <ul>
+                <li>Open the <strong>Remote Explorer</strong> view in the activity bar and switch the dropdown to <strong>SSH</strong>.</li>
+                <li>Click <strong>New Remote</strong> (the <code>+</code> icon).</li>
+                <li>Enter your full SSH command, e.g. <code>ssh 20607591@lab232-a01.cs.curtin.edu.au</code>.</li>
+                <li>When asked which SSH config file to update, accept the default. On Windows that's typically <code>C:\Users\[username]\.ssh\config</code>; on macOS it's <code>~/.ssh/config</code>.</li>
+              </ul>
+
+              <h3>Step 3 — Establish the connection</h3>
+              <ul>
+                <li>Click your new remote in the list — VSCode opens a fresh window for it.</li>
+                <li>Choose <strong>Linux</strong> when prompted for the platform type. (The lab machines run Linux, even though you're on Windows or Mac.)</li>
+                <li>Review the SSH fingerprint and accept it.</li>
+                <li>Enter your OASIS password when asked.</li>
+              </ul>
+                <video width="530" height="360" autoplay muted>
+                  <source src="assets/videos/Connectingtossh.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+              <h3>Step 4 — Start working</h3>
+              <p>You're in. The bottom-left status bar should show the lab machine's hostname in a green pill. Open the integrated terminal (<code>Ctrl+`</code>) and you're now running commands on Curtin's hardware.</p>
+
+              <p>From here, clone a Git repo and you're set:</p>
+              <pre data-label="terminal"><span class="tok-cmd">git</span> clone git@github.com:your-org/your-project.git
+<span class="tok-cmd">cd</span> your-project</pre>
+
+              <div class="callout callout-tip">
+                <span class="callout-label">Pair this with the GitHub guide</span>
+                If you haven't set up SSH keys for GitHub yet, the <a href="guide-to-github.html">Small-Group GitHub Guide</a> covers it. Generate the key on the lab machine, not your laptop — it lives with the user account on the lab side.
+              </div>
+            </section>
+
+            <section id="troubleshooting" class="fade-in">
+              <span class="section-num">§ 06</span>
+              <h2>Troubleshooting</h2>
+              <p>The most common failure is the password prompt going weird — it disappears too fast, doesn't accept input, or the connection drops mid-handshake.</p>
+              <ul>
+                <li><strong>Look bottom-right.</strong> When VSCode is mid-handshake it shows a <em>details</em> button in the status bar — click it to open the underlying connection terminal where you can type your password manually.</li>
+                <li><strong>Check the VPN.</strong> If you got disconnected, every SSH attempt will hang until it times out. Reconnect the VPN before trying again.</li>
+                <li><strong>Try a different lab machine.</strong> If a specific PC is offline, broken, or rebooting, swapping the host portion of the address (e.g. <code>lab232-a02</code> instead of <code>a01</code>) is the fastest fix.</li>
+              </ul>
+                <video width="530" height="360" autoplay muted>
+                  <source src="assets/videos/notConnectingtossh.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </section>
+
+            <div class="ornament">§ § §</div>
+
+            <section id="contact" class="fade-in">
+              <span class="section-num">§ 07</span>
+              <h2>Contact</h2>
+                <p>Stuck on a step or spotted something out of date? Reach out via contact form! </p>
+            </section>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Harry Cassidy &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

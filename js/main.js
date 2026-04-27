@@ -12,6 +12,7 @@ function initMobileNav() {
   const header = document.querySelector('.header');
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelectorAll('.nav-link');
+  if (!toggle || !header) return;
 
   toggle.addEventListener('click', () => {
     const isOpen = header.classList.toggle('nav-open');
@@ -30,7 +31,6 @@ function initMobileNav() {
 function initSmoothScroll() {
   const headerHeight = document.querySelector('.header').offsetHeight;
 
-  // Only intercept same-page anchor links (starting with # and no path)
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href');
@@ -49,7 +49,8 @@ function initScrollAnimations() {
   const elements = document.querySelectorAll('.fade-in');
   if (!elements.length) return;
 
-  // Group elements by their parent section for staggered delays
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const sectionMap = new Map();
   elements.forEach(el => {
     const section = el.closest('.section') || el;
@@ -60,10 +61,12 @@ function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const section = entry.target.closest('.section') || entry.target;
-        const siblings = sectionMap.get(section) || [entry.target];
-        const index = siblings.indexOf(entry.target);
-        entry.target.style.transitionDelay = `${index * 0.1}s`;
+        if (!reduceMotion) {
+          const section = entry.target.closest('.section') || entry.target;
+          const siblings = sectionMap.get(section) || [entry.target];
+          const index = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${index * 0.08}s`;
+        }
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
@@ -78,7 +81,6 @@ function initActiveNavHighlight() {
   const sections = document.querySelectorAll('main .section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  // If there are no sections with IDs (e.g. timeline page), just keep the .active class from HTML
   if (!sections.length) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -91,7 +93,7 @@ function initActiveNavHighlight() {
         });
       }
     });
-  }, { rootMargin: '-40% 0px -60% 0px' });
+  }, { rootMargin: '-30% 0px -55% 0px' });
 
   sections.forEach(section => observer.observe(section));
 }
@@ -113,7 +115,6 @@ function initFormHandler() {
     e.preventDefault();
     const action = form.getAttribute('action');
 
-    // If no real form endpoint is configured yet, show a note
     if (!action || action === '#') {
       status.textContent = 'Form endpoint not configured yet. Update the form action with your Formspree URL.';
       status.className = 'form-status error';

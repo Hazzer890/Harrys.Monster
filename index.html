@@ -4,10 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Harry's portfolio — engineer, educator, and egalitarian.">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="canonical" href="https://harrys.monster/">
   <title>Harry | Portfolio</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1f4bb;</text></svg>">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/">
+  <meta property="og:title" content="Harry Cassidy — Engineer, Educator, Egalitarian">
+  <meta property="og:description" content="Portfolio of Harry Cassidy: engineer, educator, and egalitarian.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +46,7 @@
         <li><a href="#hero" class="nav-link active">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link">Guides</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -54,11 +64,10 @@
     <!-- ===== HERO ===== -->
     <section id="hero" class="section hero">
       <div class="container hero-content">
-        <p class="hero-greeting">Hi, my name is</p>
         <h1 class="hero-name">Harry</h1>
-        <p class="hero-tagline">Communication and Education will change the world.</p>
+        <p class="hero-greeting">Communication and Education will change the world.</p>
         <p class="hero-description">
-          I'm a passionate engineer, educator, and egalitarian dedicated to making technology accessible and inclusive for everyone.
+            On this site you will find a collection of my work, achievements, and thoughts.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -74,13 +83,24 @@
         <div class="about-grid">
           <div class="about-image">
             <div class="about-image-placeholder">
-              <span><img src="assets/images/headshot.jpg" alt="Harry"></span>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="assets/images/headshot.webp 1x, assets/images/headshot@2x.webp 2x">
+                <img
+                  src="assets/images/headshot.jpg"
+                  alt="Portrait of Harry Cassidy"
+                  width="560"
+                  height="640"
+                  loading="lazy"
+                  decoding="async">
+              </picture>
             </div>
           </div>
           <div class="about-text">
             <p>
-              Hello! I'm Harry, I enjoy turning ideas into reality through code, CAD, and education.
-              My interest in engineering sttarted when I was young, I cannot remember a time before I wanted to change the world with engineering.
+              Hello! I'm Harry, I'm a passionate engineer, educator, and egalitarian dedicated to making technology accessible and inclusive for everyone.
+              My interest in engineering started when I was young, and I cannot remember a time before I wanted to change the world with engineering.
               I have had a passion for understanding how things works and sharing that my whole life.
             </p>
             <p>
@@ -101,15 +121,14 @@
     </section>
 
     <!-- ===== PROJECTS ===== -->
-    <section id="projects" class="section section-alt fade-in">
+    <section id="projects" class="section fade-in">
       <div class="container">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
 
           <article class="project-card fade-in">
             <div class="project-image">
-              <div class="project-image-placeholder">Project Screenshot</div>
-              <!-- Replace with: <img src="assets/images/project1.jpg" alt="Project One"> -->
+              <div class="project-image-placeholder" data-label="project-one.png"></div>
             </div>
             <div class="project-info">
               <h3 class="project-title">Project One</h3>
@@ -136,7 +155,7 @@
 
           <article class="project-card fade-in">
             <div class="project-image">
-              <div class="project-image-placeholder">Project Screenshot</div>
+              <div class="project-image-placeholder" data-label="project-two.png"></div>
             </div>
             <div class="project-info">
               <h3 class="project-title">Project Two</h3>
@@ -163,7 +182,7 @@
 
           <article class="project-card fade-in">
             <div class="project-image">
-              <div class="project-image-placeholder">Project Screenshot</div>
+              <div class="project-image-placeholder" data-label="project-three.png"></div>
             </div>
             <div class="project-info">
               <h3 class="project-title">Project Three</h3>
@@ -191,7 +210,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- ===== EXPERIENCE CTA ===== -->
     <section class="section experience-cta fade-in">
       <div class="container experience-cta-content">
@@ -246,7 +265,7 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <p>Designed &amp; Built by Harry &copy; <span id="year"></span></p>
+      <p>Harry Cassidy &copy; <span id="year"></span></p>
     </div>
   </footer>
 

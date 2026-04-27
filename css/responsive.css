@@ -94,6 +94,56 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* Guides grid: single column */
+  .guides-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet and below — guide layout collapses earlier */
+@media (max-width: 900px) {
+  .guide-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .guide-toc {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .guide-content {
+    max-width: none;
+  }
+
+  .mental-grid,
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-steps {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .workflow-step:not(:last-child)::after {
+    content: '↓';
+    right: 50%;
+    top: auto;
+    bottom: -0.6rem;
+    transform: translateX(50%);
+  }
+
+  .cheat-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .guide-content > section {
+    padding: var(--space-6) var(--space-5);
+  }
 }
 
 /* Small phones */
@@ -107,7 +157,8 @@
   }
 
   .hero-name {
-    font-size: var(--text-3xl);
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    letter-spacing: -0.025em;
   }
 
   .hero-tagline {
@@ -121,4 +172,5 @@
   .project-info {
     padding: var(--space-4);
   }
+
 }

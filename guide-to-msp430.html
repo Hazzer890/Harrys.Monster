@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get an MSP430 board flashing from a fresh laptop — drivers, Code Composer Studio, and uploading .ino sketches from the Arduino IDE.">
+  <meta name="theme-color" content="#fafafa">
+  <link rel="canonical" href="https://harrys.monster/guide-to-msp430.html">
+  <title>MSP430 Guide | Harry Cassidy</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://harrys.monster/guide-to-msp430.html">
+  <meta property="og:title" content="Guide to Using the MSP430">
+  <meta property="og:description" content="Drivers, Code Composer Studio, and the Arduino IDE — a beginner's path to flashing an MSP430.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <style>.fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">Harry Cassidy</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link active">Guides</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== GUIDE HERO ===== -->
+    <section class="section timeline-hero">
+      <div class="container">
+        <h1 class="section-title">Guide to Using the MSP430</h1>
+        <p class="contact-intro">Get a Texas Instruments MSP430 board from a fresh, driverless laptop to "<code>blink.ino</code> is uploading" — using either Code Composer Studio's cloud IDE or the Arduino IDE with the right boards-manager URL.</p>
+
+        <div class="guide-meta">
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Audience</span>
+            <span class="guide-meta-value">Embedded students · MSP430 first-timers</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Pre-reqs</span>
+            <span class="guide-meta-value">Laptop · USB cable · MSP430 board</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Read time</span>
+            <span class="guide-meta-value">~10 minutes end-to-end</span>
+          </div>
+          <div class="guide-meta-item">
+            <span class="guide-meta-label">Payoff</span>
+            <span class="guide-meta-value">Working toolchain, blinking LED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GUIDE BODY ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="guide-layout">
+
+          <nav class="guide-toc" aria-label="Table of contents">
+            <div class="guide-toc-label">Contents</div>
+            <ol>
+              <li><a href="#why">Why this guide?</a></li>
+              <li><a href="#drivers">Installing drivers</a></li>
+              <li><a href="#ino">Using <code>.ino</code> files</a></li>
+              <li><a href="#troubleshooting">Troubleshooting</a></li>
+              <li><a href="#contact">Contact &amp; credits</a></li>
+            </ol>
+          </nav>
+
+          <article class="guide-content">
+
+            <section id="why" class="fade-in">
+              <span class="section-num">§ 01</span>
+              <h2>Why this guide?</h2>
+              <p>The MSP430 family is a great low-power microcontroller line, but the path from "I have a board in my hand" to "my code is running on it" is more obstacle course than highway. There are two viable routes — TI's own Code Composer Studio (which now runs in the browser), and the Arduino IDE with a third-party boards package. This guide walks both, so you can pick whichever fits the assignment.</p>
+
+              <div class="callout callout-info">
+                <span class="callout-label">Reality check</span>
+                The hardest part is almost always the drivers. Once your machine actually <em>sees</em> the board over USB, the rest is just clicking <strong>Upload</strong>.
+              </div>
+            </section>
+
+            <section id="drivers" class="fade-in">
+              <span class="section-num">§ 02</span>
+              <h2>Installing drivers</h2>
+              <p>The most reliable way to get the MSP430 USB drivers onto your machine is to let TI's <strong>Code Composer Studio (CCS)</strong> install them for you. CCS now offers a cloud package that runs entirely from Chrome — you just need a small browser extension and a one-time desktop driver installer.</p>
+
+              <h3>Step-by-step</h3>
+              <ol>
+                <li>Go to <a href="https://www.ti.com/tool/CCSTUDIO" target="_blank" rel="noopener noreferrer"><code>ti.com/tool/CCSTUDIO</code></a>.</li>
+                <li>Click <strong>Launch</strong> on the web application.</li>
+                <li>Sign in with a TI account (create one if you don't have it — it's free).</li>
+                <li>Complete the first two on-screen installation steps (the Chrome extension and the desktop helper).</li>
+                <li>Create a new project, and when prompted, select <code>MSP430FR5739</code> as the board.</li>
+                <li>Pick a sample sketch — the LED blink example is the canonical one.</li>
+                <li>Click <strong>Flash</strong>.</li>
+              </ol>
+
+              <p>The driver install is triggered by that flash attempt. It runs whether or not the board is physically connected — once it's done, plug your MSP430 in and Windows / macOS should now recognise it.</p>
+
+              <div class="callout callout-tip">
+                <span class="callout-label">You don't have to <em>use</em> CCS</span>
+                Even if you intend to do all your work in the Arduino IDE later, run through this CCS flow once. It's the easiest way to get the drivers onto your machine. After that, CCS can sit in the browser tab graveyard.
+              </div>
+            </section>
+
+            <section id="ino" class="fade-in">
+              <span class="section-num">§ 03</span>
+              <h2>Using <code>.ino</code> files</h2>
+              <p>If your unit gives you Arduino-style <code>.ino</code> sketches, you can flash them straight from the <strong>Arduino IDE</strong> (this guide assumes <code>v2.3.6</code>) once you've added the right boards package.</p>
+
+              <p>The package is community-maintained by <a href="https://github.com/Andy4495/TI_Platform_Cores_For_Arduino" target="_blank" rel="noopener noreferrer">Andy4495</a> and shipped via a custom boards-manager URL.</p>
+
+              <h3>Add the boards URL</h3>
+              <ol>
+                <li>Open the Arduino IDE with your MSP430 board plugged in.</li>
+                <li>Open <strong>File → Preferences</strong> (<code>Ctrl + ,</code>).</li>
+                <li>Paste the URL below into the <strong>Additional Boards manager URLs</strong> field:</li>
+              </ol>
+
+              <pre data-label="boards manager URL"><span class="tok-cmd">https</span>://raw.githubusercontent.com/Andy4495/TI_Platform_Cores_For_Arduino/main/json/package_energia_optimized_index.json</pre>
+
+              <ol start="4">
+                <li>Click <strong>OK</strong>.</li>
+              </ol>
+
+              <h3>Select your board</h3>
+              <ol>
+                <li>Open the board dropdown and choose <strong>Select other board and port…</strong></li>
+                <li>Search for your specific MSP board — for the FR5739 LaunchPad that's <code>MSP-EXP430FR5739LP</code>.</li>
+                <li>Pick the COM port your board is on.</li>
+                <li>Hit <strong>Upload</strong>.</li>
+              </ol>
+
+              <p>The first upload may prompt you to install the board package — accept it and wait. Subsequent uploads are instant.</p>
+
+              <div class="callout callout-warn">
+                <span class="callout-label">Match the LaunchPad model</span>
+                There are several MSP430 LaunchPads (FR5739, FR5969, FR2433, G2553, …) and they each have their own board entry. Picking the wrong one usually <em>looks</em> like it works — until your pin assignments silently misbehave.
+              </div>
+            </section>
+
+            <section id="troubleshooting" class="fade-in">
+              <span class="section-num">§ 04</span>
+              <h2>Troubleshooting</h2>
+              <ul>
+                <li><strong>No COM port shows up.</strong> The CCS driver install didn't run cleanly — re-run the CCS flow above, then unplug and replug the board.</li>
+                <li><strong>Upload hangs.</strong> Close any other program that might be holding the COM port (other IDEs, serial monitors, terminal sessions).</li>
+                <li><strong>Wrong board listed.</strong> Double-check the LaunchPad part number printed on the silkscreen and match it exactly in the Arduino IDE.</li>
+                <li><strong>Permission denied on Linux.</strong> Add your user to the <code>dialout</code> group: <code>sudo usermod -aG dialout $USER</code>, then log out and back in.</li>
+              </ul>
+            </section>
+
+            <div class="ornament">§ § §</div>
+
+            <section id="contact" class="fade-in">
+              <span class="section-num">§ 05</span>
+              <h2>Contact &amp; credits</h2>
+              <p>Questions, corrections, or a board this guide doesn't cover? Reach out at <a href="mailto:harry.cassidy@student.curtin.edu.au">harry.cassidy@student.curtin.edu.au</a>.</p>
+              <p><em>With thanks to Robert Lewis, whose original notes seeded this guide.</em></p>
+            </section>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Harry Cassidy &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
