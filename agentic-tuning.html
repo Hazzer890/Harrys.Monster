@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An agentic loop on the Claude API that tunes machine-learning hyperparameters.">
+  <title>Agentic model tuning | Harry Cassidy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">Harry Cassidy</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link">Guides</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+  <main class="case-main">
+    <p class="case-kicker">Case study</p>
+    <h1 class="case-title">An agent that tunes machine-learning models</h1>
+    <div class="case-meta">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">Claude API</span>
+      <span class="tech-pill">Agentic loop</span>
+      <span class="tech-pill">Curtin coursework</span>
+    </div>
+    <div class="case-body">
+      <h2>The problem</h2>
+      <p>Hyperparameter tuning eats time. Train, wait, read the metrics, adjust, repeat. Each cycle needs judgement, but it is the same kind of judgement every time. That combination, a slow loop plus repeatable judgement inside known bounds, is exactly the shape of work an agent should take over.</p>
+      <h2>The approach</h2>
+      <p>I wrapped my training pipeline in an agentic loop built on the Claude API. The agent proposes a configuration, launches the run, reads the results, reasons about what to change, and tries again. It keeps a log of every attempt and the reasoning behind it. My role changed from turning knobs to setting the bounds, auditing the log, and stepping in when the reasoning drifted.</p>
+      <h2>The outcome</h2>
+      <p>Top marks on Machine Learning and Machine Perception assignments at Curtin, and a tuning process I supervised rather than babysat. The pattern generalises well past coursework: give an agent a measurable objective, a bounded search space, and an audit trail, and it will grind through iterations that would otherwise consume your evenings.</p>
+    </div>
+    <a href="index.html#projects" class="case-back">&larr; All work</a>
+  </main>
+  <footer class="footer">
+    <div class="container"><p>Harry Cassidy &copy; <span id="year"></span></p></div>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
