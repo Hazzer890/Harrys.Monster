@@ -1133,3 +1133,51 @@ button:focus-visible {
   font-size: var(--text-lg);
   letter-spacing: 0.5em;
 }
+
+/* ===== Case studies ===== */
+.case-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + var(--space-12)) var(--space-6) var(--space-16);
+}
+.case-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+.case-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+.case-body h2 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin: var(--space-10) 0 var(--space-3);
+}
+.case-body p {
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+  line-height: 1.7;
+}
+.case-back {
+  display: inline-block;
+  margin-top: var(--space-12);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+.case-back:hover { color: var(--color-accent-hover); }
