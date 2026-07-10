@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Harry's portfolio — engineer, educator, and egalitarian.">
+  <meta name="description" content="Harry's portfolio — AI strategist and implementation engineer, educator, and egalitarian.">
   <meta name="theme-color" content="#fafafa">
   <link rel="canonical" href="https://harrys.monster/">
   <title>Harry | Portfolio</title>
@@ -65,6 +65,7 @@
     <section id="hero" class="section hero">
       <div class="container hero-content">
         <h1 class="hero-name">Harry</h1>
+        <p class="hero-tagline">I build AI systems and teach people to use them.</p>
         <p class="hero-greeting">Communication and Education will change the world.</p>
         <p class="hero-description">
             On this site you will find a collection of my work, achievements, and thoughts.
@@ -72,6 +73,7 @@
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">View My Work</a>
           <a href="#contact" class="btn btn-outline">Get In Touch</a>
+          <a href="assets/cv.pdf" class="btn btn-outline" download>Download CV</a>
         </div>
       </div>
     </section>
@@ -114,6 +116,10 @@
               <span class="skill-pill">Microsoft Suite</span>
               <span class="skill-pill">Microcontrollers</span>
               <span class="skill-pill">Git</span>
+              <span class="skill-pill">Claude &amp; OpenAI APIs</span>
+              <span class="skill-pill">Agentic systems</span>
+              <span class="skill-pill">TypeScript</span>
+              <span class="skill-pill">AI-assisted analytics</span>
             </div>
           </div>
         </div>
@@ -128,81 +134,76 @@
 
           <article class="project-card fade-in">
             <div class="project-image">
-              <div class="project-image-placeholder" data-label="project-one.png"></div>
+              <div class="project-image-placeholder" data-label="agentic-tuning"></div>
             </div>
             <div class="project-info">
-              <h3 class="project-title">Project One</h3>
+              <h3 class="project-title">Agentic model tuning</h3>
               <p class="project-description">
-                A brief description of what this project does and what problem it solves.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">JavaScript</span>
-                <span class="tech-pill">React</span>
-                <span class="tech-pill">Node.js</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  Code
-                </a>
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card fade-in">
-            <div class="project-image">
-              <div class="project-image-placeholder" data-label="project-two.png"></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-title">Project Two</h3>
-              <p class="project-description">
-                A brief description of what this project does and what problem it solves.
+                An agentic loop on the Claude API that proposes hyperparameters, runs training, reads the metrics and iterates. Top marks on Machine Learning and Machine Perception assignments at Curtin.
               </p>
               <div class="project-tech">
                 <span class="tech-pill">Python</span>
-                <span class="tech-pill">Flask</span>
-                <span class="tech-pill">PostgreSQL</span>
+                <span class="tech-pill">Claude API</span>
               </div>
               <div class="project-links">
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  Code
-                </a>
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Live Demo
-                </a>
+                <a href="agentic-tuning.html" class="project-link">Read the case study &rarr;</a>
               </div>
             </div>
           </article>
 
           <article class="project-card fade-in">
             <div class="project-image">
-              <div class="project-image-placeholder" data-label="project-three.png"></div>
+              <div class="project-image-placeholder" data-label="single-use-software"></div>
             </div>
             <div class="project-info">
-              <h3 class="project-title">Project Three</h3>
+              <h3 class="project-title">Single-use software</h3>
               <p class="project-description">
-                A brief description of what this project does and what problem it solves.
+                A Curtin Festival of AI talk and a working practice: deterministic, disposable tools built with AI so non-technical professionals get trustworthy software in minutes.
               </p>
               <div class="project-tech">
-                <span class="tech-pill">HTML</span>
-                <span class="tech-pill">CSS</span>
-                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">Festival of AI</span>
+                <span class="tech-pill">LLM APIs</span>
               </div>
               <div class="project-links">
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  Code
-                </a>
-                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Live Demo
-                </a>
+                <a href="single-use-software.html" class="project-link">Read the case study &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-in">
+            <div class="project-image">
+              <div class="project-image-placeholder" data-label="ai-web-products"></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-title">Building web products with AI</h3>
+              <p class="project-description">
+                The WARES storefront and Robotics West site, in build end to end with AI coding tools. This portfolio is live proof of the same method.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">HTML/CSS/JS</span>
+                <span class="tech-pill">AI coding tools</span>
+              </div>
+              <div class="project-links">
+                <a href="ai-web-products.html" class="project-link">Read the case study &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card fade-in">
+            <div class="project-image">
+              <div class="project-image-placeholder" data-label="how-i-work"></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-title">How I work</h3>
+              <p class="project-description">
+                A daily environment of multi-model agent orchestration: cost-aware routing, custom skill libraries, and cross-model review loops.
+              </p>
+              <div class="project-tech">
+                <span class="tech-pill">Agents</span>
+                <span class="tech-pill">Orchestration</span>
+              </div>
+              <div class="project-links">
+                <a href="how-i-work.html" class="project-link">Read the case study &rarr;</a>
               </div>
             </div>
           </article>
