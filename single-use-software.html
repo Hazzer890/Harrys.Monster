@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Deterministic, disposable software built with AI: a Curtin Festival of AI talk and a working practice.">
+  <title>Single-use software | Harry Cassidy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">Harry Cassidy</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
+        <li><a href="guides.html" class="nav-link">Guides</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+  <main class="case-main">
+    <p class="case-kicker">Case study · Talk</p>
+    <h1 class="case-title">Single-use software</h1>
+    <div class="case-meta">
+      <span class="tech-pill">Curtin Festival of AI</span>
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">LLM APIs</span>
+      <span class="tech-pill">Data analysis</span>
+    </div>
+    <div class="case-body">
+      <h2>The problem</h2>
+      <p>Professionals meet problems every week that a small program would solve: reformat this data, cross-check these lists, chart this trend. Software was always too expensive to commission for one job, so people do these tasks by hand, or skip them.</p>
+      <h2>The idea</h2>
+      <p>AI collapses the cost of a small program to minutes. That makes a new category viable: single-use software. Build a deterministic tool for one job, verify it on cases you already know the answer to, run it, throw it away. You get the reliability of code, where the same input produces the same output every time, without the price tag that used to come with it. Asking a chatbot to do the task directly gives you neither the reliability nor the audit trail.</p>
+      <h2>The talk</h2>
+      <p>I presented this at Curtin's Festival of AI, with worked examples showing non-technical professionals how to get useful, trustworthy software out of AI tools: how to describe the job, how to verify the result, and when to trust it.</p>
+      <h2>The practice</h2>
+      <p>I use the method constantly. The most recent run: a series of single-use analysis tools for surfacing and visualising trends in moderate-sized datasets. Each took minutes to build and answered a question that would otherwise have stayed open.</p>
+    </div>
+    <a href="index.html#projects" class="case-back">&larr; All work</a>
+  </main>
+  <footer class="footer">
+    <div class="container"><p>Harry Cassidy &copy; <span id="year"></span></p></div>
+  </footer>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
