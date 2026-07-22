@@ -40,7 +40,6 @@
 @media (max-width: 640px) {
   /* Pill nav collapses to brand + toggle; links drop into a glass sheet */
   .nav { justify-content: space-between; gap: 8px; }
-  .nav-cta { display: none; }
   .nav-toggle {
     display: inline-flex;
     flex-direction: column;
