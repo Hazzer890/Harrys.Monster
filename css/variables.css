@@ -1,67 +1,118 @@
-/* Design Tokens */
+/* ============================================================
+   Design tokens — hybrid liquid-glass system, dual-theme
+   Light is the default · dark via :root[data-theme="dark"].
+   Terminal chrome + guide code blocks stay dark in BOTH themes
+   (dark code on a light page is the readable convention), so
+   they use the fixed terminal/code palette below.
+   ============================================================ */
 :root {
-  /* Colors */
-  --color-bg: #fafafa;
-  --color-surface: #ffffff;
-  --color-text: #1a1a2e;
-  --color-text-muted: #6b7280;
-  --color-border: #e5e7eb;
-  --color-section-alt: #f3f4f6;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #dbeafe;
+  /* ---- Theme-independent ---- */
+  --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-heading: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Back-compat aliases */
-  --color-primary: var(--color-accent);
-  --color-primary-hover: var(--color-accent-hover);
-  --color-primary-gradient: linear-gradient(7deg, #2563eb, #6363eb);
+  --radius: 22px;
+  --radius-lg: 30px;
+  --maxw: 1120px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Atmospheric blob opacities */
-  --blob-opacity-a: 0.08;
-  --blob-opacity-b: 0.06;
-  --grain-opacity: 0.03;
-  --grain-blend: multiply;
+  --reading-measure: 66ch;
+  --reading-pad: clamp(28px, 4vw, 56px);
 
-  /* Typography */
-  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Fixed dark chrome — terminal window + guide code blocks + their ink/syntax */
+  --term-bg: rgba(12, 16, 30, 0.85);
+  --code-bg: #0b1020;
+  --code-ink: #e6ebf5;
+  --code-ink-soft: #b9c3da;
+  --code-ink-mute: #8b96b3;
+  --term-green: #7ee787;
+  --term-blue: #6cb6ff;
+  --term-amber: #ffb454;
 
-  /* Fluid type scale */
-  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
-  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1rem);
-  --text-lg: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
-  --text-3xl: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
-  --text-4xl: clamp(2.6rem, 1.9rem + 2.75vw, 4.2rem);
+  /* ---- Light theme (default) ---- */
+  --bg: #f5f7fc;
+  --bg-2: #eef1fa;
 
-  /* Spacing (4px base) */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
+  --ink: #111832;
+  --ink-soft: #3f4a68;
+  --ink-mute: #6b7590;
 
-  /* Layout */
-  --max-width: 1100px;
-  --header-height: 70px;
+  --glass-fill: rgba(255, 255, 255, 0.34);
+  --glass-fill-strong: rgba(255, 255, 255, 0.55);
+  --glass-brd: rgba(23, 34, 77, 0.12);
+  --glass-rim: rgba(255, 255, 255, 0.9);
+  --glass-rim-2: rgba(255, 255, 255, 0.4);
 
-  /* Effects */
-  --radius: 0.5rem;
-  --radius-lg: 0.75rem;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+  --accent: #3b5bdb;
+  --accent-2: #0e7490;
+  --accent-3: #a21caf;
 
-  /* Motion */
-  --transition-fast: 180ms cubic-bezier(0.2, 0, 0, 1);
-  --transition-spring: 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  --transition: var(--transition-fast);
+  /* Semantic status (theme-aware — distinct from the fixed terminal palette) */
+  --ok: #15803d;
+  --warn: #b45309;
+  --danger: #dc2626;
+
+  /* Overlay surface tints (single vocabulary for fills + hovers) */
+  --surface-1: rgba(23, 34, 77, 0.03);
+  --surface-2: rgba(23, 34, 77, 0.05);
+  --surface-3: rgba(23, 34, 77, 0.07);
+  --surface-hover: rgba(23, 34, 77, 0.09);
+
+  /* Solid accent button (primary + nav CTA) */
+  --btn-solid: linear-gradient(135deg, #3b5bdb, #5b78e8);
+  --btn-solid-ink: #ffffff;
+
+  /* Drop shadows */
+  --shadow-soft: rgba(30, 41, 90, 0.10);
+  --shadow-strong: rgba(30, 41, 90, 0.16);
+
+  /* Ambient background field */
+  --bg-glow-1: #dbe4ff;
+  --bg-glow-2: #f2e2ff;
+  --blob-1: #6d8bff;
+  --blob-2: #34c7d6;
+  --blob-3: #c26bff;
+  --blob-opacity: 0.34;
+}
+
+/* ---- Dark theme (the original liquid-glass system) ---- */
+:root[data-theme="dark"] {
+  --bg: #0a0e1a;
+  --bg-2: #0c1224;
+
+  --ink: #eef2fb;
+  --ink-soft: #b9c3da;
+  --ink-mute: #8b96b3;
+
+  --glass-fill: rgba(20, 27, 48, 0.30);
+  --glass-fill-strong: rgba(18, 24, 44, 0.46);
+  --glass-brd: rgba(255, 255, 255, 0.14);
+  --glass-rim: rgba(255, 255, 255, 0.55);
+  --glass-rim-2: rgba(255, 255, 255, 0.14);
+
+  --accent: #6d8bff;
+  --accent-2: #34e2e2;
+  --accent-3: #d16bff;
+
+  --ok: #7ee787;
+  --warn: #ffb454;
+  --danger: #ff8a8a;
+
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.10);
+
+  --btn-solid: linear-gradient(135deg, #d6e3ff, #ffffff);
+  --btn-solid-ink: var(--bg);
+
+  --shadow-soft: rgba(0, 0, 0, 0.7);
+  --shadow-strong: rgba(0, 0, 0, 0.8);
+
+  --bg-glow-1: #101a3a;
+  --bg-glow-2: #170f30;
+  --blob-1: #4256ff;
+  --blob-2: #12c7d6;
+  --blob-3: #b13cff;
+  --blob-opacity: 0.55;
 }

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Harry Cassidy — AI strategist and implementation engineer, educator, egalitarian. I build AI systems and teach people to use them.">
+  <meta name="theme-color" content="#08090a">
+  <link rel="canonical" href="https://harrys.monster/design-proposals/immersive-story/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/design-proposals/immersive-story/">
+  <meta property="og:title" content="Harry Cassidy — Engineer, Educator, Egalitarian">
+  <meta property="og:description" content="A scroll narrative: I build AI systems and teach people to use them.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <title>Harry Cassidy — Engineer · Educator · Egalitarian</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <!-- Arm kinetic reveals before first paint; without JS content stays visible. -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#chapter-build">Skip to content</a>
+
+  <!-- Ambient flow-field canvas, sits behind everything -->
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <!-- Scroll progress rail -->
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+  <header class="topbar">
+    <a class="brand" href="../../index.html" aria-label="Harry Cassidy — home">
+      <span aria-hidden="true">h<em>.</em>m</span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#chapter-build">Work</a>
+      <a href="#chapter-teach">Teaching</a>
+      <a href="#chapter-contact">Contact</a>
+      <a class="topnav-cv" href="../../assets/cv.pdf">CV ↓</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== CHAPTER 1 — HERO ===== -->
+    <section class="chapter hero" id="chapter-hero" aria-labelledby="hero-title">
+      <p class="eyebrow reveal" data-reveal>AI strategist &amp; implementation engineer</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="line" data-split>Harry</span>
+        <span class="line" data-split>Cassidy</span>
+      </h1>
+      <p class="hero-roles reveal" data-reveal>
+        <span>Engineer</span><i aria-hidden="true">·</i><span>Educator</span><i aria-hidden="true">·</i><span class="accent">Egalitarian</span>
+      </p>
+      <p class="hero-lede reveal" data-reveal>
+        I build AI systems and teach people to use them.
+        <em>Communication and education will change the world.</em>
+      </p>
+      <a class="scroll-cue reveal" data-reveal href="#chapter-build">
+        <span>Scroll to begin</span>
+        <span class="scroll-cue-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ===== CHAPTER 2 — BUILD / PROJECTS ===== -->
+    <section class="chapter build" id="chapter-build" aria-labelledby="build-title">
+      <div class="chapter-inner">
+        <p class="chapter-index reveal" data-reveal>01 — The work</p>
+        <h2 class="chapter-lead" id="build-title">
+          <span data-split>I&nbsp;build</span>
+          <span data-split class="accent">AI&nbsp;systems.</span>
+        </h2>
+        <p class="chapter-sub reveal" data-reveal>
+          Agentic loops, disposable tools, whole products — engineered end to end with
+          model orchestration, then shipped.
+        </p>
+
+        <ol class="projects" role="list">
+          <li class="project reveal" data-reveal>
+            <a href="../../agentic-tuning.html">
+              <span class="project-num">01</span>
+              <h3>Agentic model tuning</h3>
+              <p>An agentic loop on the Claude API proposes hyperparameters, runs training,
+                reads the metrics and iterates — earning top marks in ML units at Curtin.</p>
+              <span class="project-go" aria-hidden="true">Read the case study →</span>
+            </a>
+          </li>
+          <li class="project reveal" data-reveal>
+            <a href="../../single-use-software.html">
+              <span class="project-num">02</span>
+              <h3>Single-use software</h3>
+              <p>Deterministic, disposable tools built with AI for non-technical
+                professionals — the subject of my Curtin Festival of AI talk.</p>
+              <span class="project-go" aria-hidden="true">Read the case study →</span>
+            </a>
+          </li>
+          <li class="project reveal" data-reveal>
+            <a href="../../ai-web-products.html">
+              <span class="project-num">03</span>
+              <h3>Building web products with AI</h3>
+              <p>The WARES storefront and the Robotics West site, designed and built
+                end to end with AI tooling.</p>
+              <span class="project-go" aria-hidden="true">Read the case study →</span>
+            </a>
+          </li>
+          <li class="project reveal" data-reveal>
+            <a href="../../how-i-work.html">
+              <span class="project-num">04</span>
+              <h3>How I work</h3>
+              <p>Daily multi-model agent orchestration: cost-aware routing, custom skill
+                libraries and cross-model review loops.</p>
+              <span class="project-go" aria-hidden="true">Read the case study →</span>
+            </a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== CHAPTER 3 — TEACH ===== -->
+    <section class="chapter teach" id="chapter-teach" aria-labelledby="teach-title">
+      <div class="chapter-inner">
+        <p class="chapter-index reveal" data-reveal>02 — The mission</p>
+        <h2 class="chapter-lead" id="teach-title">
+          <span data-split>…&nbsp;and&nbsp;teach&nbsp;people</span>
+          <span data-split class="accent">to&nbsp;use&nbsp;them.</span>
+        </h2>
+        <p class="chapter-sub reveal" data-reveal>
+          The frontier is only worth something if everyone can reach it. I turn what I
+          build into plain-language guides, talks and practice for people who never
+          expected to touch this technology.
+        </p>
+
+        <div class="teach-grid">
+          <a class="teach-card teach-card--lead reveal" data-reveal href="../../guides.html">
+            <h3>Guides &amp; education</h3>
+            <p>Practical, jargon-free walkthroughs that take people from curious to
+              capable with AI tools.</p>
+            <span class="teach-go" aria-hidden="true">Browse the guides →</span>
+          </a>
+          <div class="teach-card reveal" data-reveal>
+            <h3>Festival of AI</h3>
+            <p>Spoke at the Curtin Festival of AI on single-use software — deterministic
+              tools anyone can build and throw away.</p>
+          </div>
+          <div class="teach-card reveal" data-reveal>
+            <h3>Egalitarian by design</h3>
+            <p>Communication and education are the levers. If understanding is shared,
+              the technology serves everyone — not only the few who built it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CHAPTER 4 — TIMELINE TEASER ===== -->
+    <section class="chapter timeline-teaser" id="chapter-timeline" aria-labelledby="timeline-title">
+      <div class="chapter-inner">
+        <p class="chapter-index reveal" data-reveal>03 — The path</p>
+        <h2 class="chapter-lead" id="timeline-title">
+          <span data-split>A&nbsp;working</span>
+          <span data-split class="accent">timeline.</span>
+        </h2>
+        <ul class="skills reveal" data-reveal aria-label="Core skills">
+          <li>Agentic systems</li>
+          <li>Claude &amp; OpenAI APIs</li>
+          <li>Python</li>
+          <li>TypeScript</li>
+          <li>C &amp; C++</li>
+          <li>Microcontrollers</li>
+          <li>3D design — Solidworks, Onshape, Autodesk</li>
+          <li>Git</li>
+          <li>AI-assisted analytics</li>
+          <li>Microsoft Suite</li>
+        </ul>
+        <p class="chapter-sub reveal" data-reveal>
+          From microcontrollers and CAD to agent orchestration — the full arc of how I
+          got here, project by project.
+        </p>
+        <a class="btn btn-ghost reveal" data-reveal href="../../timeline.html">
+          Explore the experience timeline →
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== CHAPTER 5 — CONTACT FINALE ===== -->
+    <section class="chapter contact" id="chapter-contact" aria-labelledby="contact-title">
+      <div class="chapter-inner contact-inner">
+        <div class="contact-copy">
+          <p class="chapter-index reveal" data-reveal>04 — Say hello</p>
+          <h2 class="chapter-lead" id="contact-title">
+            <span data-split>Let's&nbsp;build</span>
+            <span data-split class="accent">something.</span>
+          </h2>
+          <figure class="contact-card reveal" data-reveal>
+            <img src="../../assets/images/headshot.jpg" width="72" height="72"
+                 alt="Portrait of Harry Cassidy" decoding="async">
+            <figcaption>
+              <strong>Harry Cassidy</strong>
+              <span>Engineer · Educator · Egalitarian</span>
+            </figcaption>
+          </figure>
+          <p class="contact-alt reveal" data-reveal>
+            Prefer email? <a href="mailto:harrycassidy@protonmail.com">harrycassidy@protonmail.com</a>
+          </p>
+          <ul class="socials reveal" data-reveal aria-label="Social links">
+            <li><a href="https://github.com/Hazzer890">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/harry-cassidy/">LinkedIn</a></li>
+            <li><a href="../../assets/cv.pdf">Download CV</a></li>
+          </ul>
+        </div>
+
+        <form class="contact-form reveal" data-reveal action="https://formspree.io/f/mkopqyqa" method="POST">
+          <p class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </p>
+          <p class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </p>
+          <p class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </p>
+          <button type="submit" class="btn btn-solid">Send message →</button>
+        </form>
+      </div>
+
+      <footer class="site-footer">
+        <p>© <span id="year">2026</span> Harry Cassidy — Communication and education will change the world.</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

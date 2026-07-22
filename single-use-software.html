@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Harry Cassidy's experience and education timeline.">
+  <meta name="description" content="Deterministic, disposable software built with AI: a Curtin Festival of AI talk and a working practice.">
   <meta name="theme-color" content="#f5f7fc">
-  <link rel="canonical" href="https://harrys.monster/timeline.html">
-  <title>Experience | Harry Cassidy</title>
+  <link rel="canonical" href="https://harrys.monster/single-use-software.html">
+  <title>Single-use software | Harry Cassidy</title>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://harrys.monster/timeline.html">
-  <meta property="og:title" content="Experience | Harry Cassidy">
-  <meta property="og:description" content="Education and work timeline of Harry Cassidy.">
+  <meta property="og:url" content="https://harrys.monster/single-use-software.html">
+  <meta property="og:title" content="Single-use software">
+  <meta property="og:description" content="Deterministic, disposable software built with AI: a Curtin Festival of AI talk and a working practice.">
   <meta name="twitter:card" content="summary">
 
   <!-- Favicon: h.m monogram -->
@@ -30,10 +30,11 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
+
 </head>
 <body>
 
-  <!-- SVG filter: liquid-glass refraction on the hero panel backdrop -->
+  <!-- SVG filter defs (shared background mount) -->
   <svg class="glass-defs" aria-hidden="true" focusable="false" width="0" height="0">
     <defs>
       <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
@@ -61,9 +62,9 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="index.html#about" class="nav-link">About</a></li>
-        <li><a href="timeline.html" class="nav-link active">Experience</a></li>
+        <li><a href="timeline.html" class="nav-link">Experience</a></li>
         <li><a href="guides.html" class="nav-link">Guides</a></li>
-        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#projects" class="nav-link active">Projects</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -81,66 +82,34 @@
     </nav>
   </header>
 
-  <main>
-
-    <!-- ===== TIMELINE PAGE HERO ===== -->
-    <section class="section">
-      <h1 class="hero-name reveal">Experience</h1>
-      <p class="contact-intro reveal reveal--late">My journey so far — education, work, and everything in between.</p>
-    </section>
-
-    <!-- ===== TIMELINE: offset glass panels riding the asymmetric grid ===== -->
-    <section class="section">
-      <div class="projects-list">
-
-        <div class="project-wrap" data-reveal="left">
-          <article class="card glass">
-            <p class="card-index">2023 — Present</p>
-            <h3 class="card-title">2nd Year Mechatronic Engineering Lab Demonstrator</h3>
-            <div class="tags"><span>Curtin University</span></div>
-            <p class="card-body">
-              In this role, I assist in providing second-year mechatronic engineering students with high quality education of embedded engineering concepts.
-              I help them understand complex concepts, provide guidance on lab projects, and foster a collaborative learning environment.
-              My responsibilities include preparing lab materials, conducting demonstrations, and offering one-on-one support to students as they work through their assignments and tasks.
-            </p>
-          </article>
-        </div>
-
-        <div class="project-wrap" data-reveal="right">
-          <article class="card glass">
-            <p class="card-index">2022 — Present</p>
-            <h3 class="card-title">Bachelor of Engineering (Mechatronic) W/ Honours &amp; Computer Science Double Degree</h3>
-            <div class="tags"><span>Curtin University</span></div>
-            <p class="card-body">
-              During my time in this degree program, I have developed a strong foundation in both mechatronic engineering and computer science.
-              I have gained hands-on experience in designing and building complex systems that integrate mechanical, electrical, and software components.
-              My coursework has included subjects such as control systems, robotics, embedded systems, and software development, which have equipped me with a diverse skill set and a deep understanding of the principles underlying modern technology.
-              I have also had the opportunity to work on various projects and collaborate with peers, further enhancing my problem-solving abilities and teamwork skills.
-            </p>
-          </article>
-        </div>
-
-        <div class="project-wrap" data-reveal="left">
-          <article class="card glass">
-            <p class="card-index">December 2002</p>
-            <h3 class="card-title">Birth</h3>
-            <div class="tags"><span>Western Aus</span></div>
-            <p class="card-body">
-              Born into this world. A great plight or boon depending on your perspective.
-            </p>
-          </article>
-        </div>
-
+  <main class="case-main">
+    <div class="case-head" data-reveal="left">
+      <h1 class="case-title">Single-use software</h1>
+      <div class="case-meta">
+        <span class="tech-pill">Curtin Festival of AI</span>
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">LLM APIs</span>
+        <span class="tech-pill">Data analysis</span>
       </div>
-    </section>
+    </div>
 
+    <div class="case-body glass" data-reveal="right">
+      <h2>The problem</h2>
+      <p>Professionals meet problems every week that a small program would solve: reformat this data, cross-check these lists, chart this trend. Software was always too expensive to commission for one job, so people do these tasks by hand, or skip them.</p>
+      <h2>The idea</h2>
+      <p>AI collapses the cost of a small program to minutes. That makes a new category viable: single-use software. Build a deterministic tool for one job, verify it on cases you already know the answer to, run it, throw it away. You get the reliability of code, where the same input produces the same output every time, without the price tag that used to come with it. Asking a chatbot to do the task directly gives you neither the reliability nor the audit trail.</p>
+      <h2>The talk</h2>
+      <p>I presented this at Curtin's Festival of AI, with worked examples showing non-technical professionals how to get useful, trustworthy software out of AI tools: how to describe the job, how to verify the result, and when to trust it.</p>
+      <h2>The practice</h2>
+      <p>I use the method constantly. The most recent run: a series of single-use analysis tools for surfacing and visualising trends in moderate-sized datasets. Each took minutes to build and answered a question that would otherwise have stayed open.</p>
+    </div>
+
+    <a href="index.html#projects" class="case-back btn btn-ghost">&larr; All work</a>
   </main>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="container">
-      <p>Harry Cassidy &copy; <span id="year">2026</span></p>
-    </div>
+    <div class="container"><p>Harry Cassidy &copy; <span id="year">2026</span></p></div>
   </footer>
 
   <script src="js/background.js" defer></script>
