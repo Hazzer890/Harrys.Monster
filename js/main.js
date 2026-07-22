@@ -52,7 +52,7 @@
   }
 
   /* ---- Scroll spy: highlight the nav link for the section in view ---- */
-  var spySections = document.querySelectorAll('main [id]');
+  var spySections = document.querySelectorAll('main section[id]');
   var navLinks = document.querySelectorAll('.nav-link');
   if (spySections.length && navLinks.length && 'IntersectionObserver' in window) {
     var spy = new IntersectionObserver(function (entries) {
@@ -92,13 +92,18 @@
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
   if (!reduceMotion && parallaxEls.length) {
     var pTicking = false;
+    var wideView = window.matchMedia('(min-width: 901px)'); // parallax els are static below this
     var updateParallax = function () {
+      pTicking = false;
+      if (!wideView.matches) {
+        parallaxEls.forEach(function (el) { el.style.transform = ''; });
+        return;
+      }
       var y = window.scrollY || document.documentElement.scrollTop;
       parallaxEls.forEach(function (el) {
         var f = parseFloat(el.getAttribute('data-parallax')) || 0;
         el.style.transform = 'translateY(' + (-y * f).toFixed(1) + 'px)';
       });
-      pTicking = false;
     };
     window.addEventListener('scroll', function () {
       if (!pTicking) { pTicking = true; requestAnimationFrame(updateParallax); }

@@ -199,11 +199,16 @@ body {
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  background: linear-gradient(180deg, #ffffff 20%, #b6c6ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff;
   margin: 0 0 18px;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-name {
+    background: linear-gradient(180deg, #ffffff 20%, #b6c6ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 .hero-tagline {
   font-size: clamp(1.15rem, 2.6vw, 1.6rem);
