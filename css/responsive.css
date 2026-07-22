@@ -1,176 +1,109 @@
-/* Responsive Overrides */
+/* ============================================================
+   Responsive + motion preferences
+   ============================================================ */
 
-/* Tablet and below */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .project-wrap:nth-child(odd)  { margin-right: 0; }
+  .project-wrap:nth-child(even) { margin-left: 0; }
+}
 
-  /* Nav: show hamburger, hide links by default */
-  .nav-toggle {
-    display: block;
-    z-index: 10;
+@media (max-width: 900px) {
+  /* Hero: terminal stacks under the panel, still nudged across the boundary */
+  .hero-panel { width: 100%; }
+  .hero-terminal {
+    position: static;
+    width: min(100%, 520px);
+    margin: 24px 0 -48px auto;
   }
+  #about { margin-top: clamp(120px, 16vw, 160px); }
 
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100vh;
-    background: var(--color-surface);
+  /* About: single column, photo overlaps panel top instead of side */
+  .about-layout { grid-template-columns: 1fr; }
+  .about-photo {
+    max-width: 240px;
+    margin: 0 auto -48px;
+    transform: rotate(-2.5deg);
+  }
+  .about-panel { padding: clamp(28px, 5vw, 40px); padding-top: 76px; }
+
+  /* Projects: rail unpins and sits above the cards */
+  .projects-layout { grid-template-columns: 1fr; }
+  .projects-rail { position: static; }
+  .projects-rail-note { max-width: none; }
+
+  .explore { grid-template-columns: 1fr; }
+  .explore-card:nth-child(2) { margin-top: 0; }
+
+  .contact-panel { margin-left: 0; }
+}
+
+@media (max-width: 640px) {
+  /* Pill nav collapses to brand + toggle; links drop into a glass sheet */
+  .nav { justify-content: space-between; gap: 8px; }
+  .nav-cta { display: none; }
+  .nav-toggle {
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: var(--space-8);
-    box-shadow: var(--shadow-lg);
-    transform: translateX(100%);
-    transition: transform var(--transition);
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 9px;
+    border-radius: 999px;
   }
-
-  .header.nav-open .nav-links {
-    transform: translateX(0);
-  }
-
-  /* Hamburger animation */
-  .header.nav-open .nav-toggle span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  .header.nav-open .nav-toggle span:nth-child(2) {
-    opacity: 0;
-  }
-  .header.nav-open .nav-toggle span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
-
-  .nav-link {
-    font-size: var(--text-lg);
-  }
-
-  /* About: single column */
-  .about-grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .about-image-placeholder {
-    width: 220px;
-    height: 260px;
-  }
-
-  /* Timeline: left-aligned single column */
-  .timeline::before {
-    left: 16px;
-    transform: none;
-  }
-
-  .timeline-item,
-  .timeline-item[data-position="left"],
-  .timeline-item[data-position="right"] {
+  .nav-toggle span {
+    display: block;
     width: 100%;
-    margin-left: 0;
-    padding-left: calc(16px + var(--space-10));
-    padding-right: var(--space-4);
-    text-align: left;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform 0.25s var(--ease), opacity 0.2s;
   }
-
-  .timeline-dot,
-  .timeline-item[data-position="left"] .timeline-dot,
-  .timeline-item[data-position="right"] .timeline-dot {
-    left: 10px;
-    right: auto;
-  }
-
-  /* Timeline animation: all from left on mobile */
-  .timeline-item[data-position="left"].fade-in,
-  .timeline-item[data-position="right"].fade-in {
-    transform: translateX(-24px) translateY(0);
-  }
-
-  /* Projects: single column on narrow tablets */
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Hero actions: stack on small screens */
-  .hero-actions {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 2px;
+    padding: 10px;
+    border-radius: var(--radius);
+    background: var(--glass-fill-strong);
+    border: 1px solid var(--glass-brd);
+    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8);
   }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav-links {
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      backdrop-filter: blur(22px) saturate(160%);
+    }
+  }
+  .nav-open .nav-links { display: flex; }
+  .nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-link { display: block; border-radius: 12px; padding: 11px 14px; }
 
-  /* Guides grid: single column */
-  .guides-grid {
-    grid-template-columns: 1fr;
-  }
+  .hero-terminal { margin-bottom: -32px; }
+  .terminal { font-size: 0.78rem; }
+  .hero-actions .btn { flex: 1 1 auto; }
 }
 
-/* Tablet and below — guide layout collapses earlier */
-@media (max-width: 900px) {
-  .guide-layout {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+/* ============================================================
+   Reduced motion: stop canvas (JS side), blobs, tilt, reveals,
+   caret blink and smooth scroll. Content fully visible.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none !important; }
+  .js .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .js [data-reveal],
+  .js .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .tilt { transform: none !important; }
+  .js .caret { animation: none !important; }
+  .glass--hero {
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
   }
-
-  .guide-toc {
-    position: static;
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .guide-content {
-    max-width: none;
-  }
-
-  .mental-grid,
-  .two-col {
-    grid-template-columns: 1fr;
-  }
-
-  .workflow-steps {
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .workflow-step:not(:last-child)::after {
-    content: '↓';
-    right: 50%;
-    top: auto;
-    bottom: -0.6rem;
-    transform: translateX(50%);
-  }
-
-  .cheat-row {
-    grid-template-columns: 1fr;
-    gap: var(--space-1);
-  }
-
-  .guide-content > section {
-    padding: var(--space-6) var(--space-5);
-  }
-}
-
-/* Small phones */
-@media (max-width: 480px) {
-  .container {
-    padding: 0 var(--space-4);
-  }
-
-  .section {
-    padding: var(--space-16) 0;
-  }
-
-  .hero-name {
-    font-size: clamp(2.2rem, 10vw, 3rem);
-    letter-spacing: -0.025em;
-  }
-
-  .hero-tagline {
-    font-size: var(--text-2xl);
-  }
-
-  .timeline-content {
-    padding: var(--space-4);
-  }
-
-  .project-info {
-    padding: var(--space-4);
-  }
-
+  * { scroll-behavior: auto !important; }
 }
