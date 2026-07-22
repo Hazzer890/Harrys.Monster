@@ -11,6 +11,32 @@
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
+  /* ---- Theme: light default, dark remembered (head script sets it pre-paint) ---- */
+  var THEME_KEY = 'theme';
+  var toggles = document.querySelectorAll('.theme-toggle');
+  function applyTheme(t) {
+    var dark = t === 'dark';
+    if (dark) root.setAttribute('data-theme', 'dark');
+    else root.removeAttribute('data-theme');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', dark ? '#0a0e1a' : '#f5f7fc');
+    toggles.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(dark));
+      b.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    });
+    if (window.__setFieldTheme) window.__setFieldTheme(dark ? 'dark' : 'light');
+  }
+  var stored;
+  try { stored = localStorage.getItem(THEME_KEY); } catch (e) {}
+  applyTheme(stored === 'dark' ? 'dark' : 'light');
+  toggles.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      applyTheme(next);
+    });
+  });
+
   /* ---- Mobile nav toggle ---- */
   var header = document.querySelector('.header');
   var toggle = document.querySelector('.nav-toggle');

@@ -8,23 +8,20 @@
 }
 
 @media (max-width: 900px) {
-  /* Hero: terminal stacks under the panel, still nudged across the boundary */
+  /* Hero: photo + terminal drop below the panel and stack in flow */
   .hero-panel { width: 100%; }
+  .hero-photo {
+    position: static;
+    width: min(100%, 300px);
+    margin: 24px auto 0;
+  }
   .hero-terminal {
     position: static;
     width: min(100%, 520px);
     margin: 24px 0 -48px auto;
   }
   #about { margin-top: clamp(120px, 16vw, 160px); }
-
-  /* About: single column, photo overlaps panel top instead of side */
-  .about-layout { grid-template-columns: 1fr; }
-  .about-photo {
-    max-width: 240px;
-    margin: 0 auto -48px;
-    transform: rotate(-2.5deg);
-  }
-  .about-panel { padding: clamp(28px, 5vw, 40px); padding-top: 76px; }
+  .about-panel { padding: clamp(28px, 5vw, 40px); }
 
   /* Projects: rail unpins and sits above the cards */
   .projects-layout { grid-template-columns: 1fr; }
@@ -70,7 +67,7 @@
     border-radius: var(--radius);
     background: var(--glass-fill-strong);
     border: 1px solid var(--glass-brd);
-    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 24px 60px -24px var(--shadow-strong);
   }
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .nav-links {

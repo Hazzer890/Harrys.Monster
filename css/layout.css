@@ -10,8 +10,8 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background:
-    radial-gradient(1200px 900px at 15% -10%, #101a3a 0%, transparent 55%),
-    radial-gradient(1000px 800px at 110% 20%, #170f30 0%, transparent 55%),
+    radial-gradient(1200px 900px at 15% -10%, var(--bg-glow-1) 0%, transparent 55%),
+    radial-gradient(1000px 800px at 110% 20%, var(--bg-glow-2) 0%, transparent 55%),
     var(--bg);
   line-height: 1.6;
   overflow-x: hidden;
@@ -52,12 +52,12 @@ body {
   min-height: 460px;
   border-radius: 50%;
   filter: blur(90px);
-  opacity: 0.55;
+  opacity: var(--blob-opacity);
   will-change: transform;
 }
-.blob--indigo  { background: radial-gradient(circle at 30% 30%, #4256ff, transparent 68%); top: -12%; left: -8%;  animation: drift-a 26s var(--ease) infinite alternate; }
-.blob--cyan    { background: radial-gradient(circle at 30% 30%, #12c7d6, transparent 68%); top: 34%;  left: 58%;  animation: drift-b 32s var(--ease) infinite alternate; }
-.blob--magenta { background: radial-gradient(circle at 30% 30%, #b13cff, transparent 68%); top: 66%;  left: 6%;   animation: drift-c 29s var(--ease) infinite alternate; }
+.blob--indigo  { background: radial-gradient(circle at 30% 30%, var(--blob-1), transparent 68%); top: -12%; left: -8%;  animation: drift-a 26s var(--ease) infinite alternate; }
+.blob--cyan    { background: radial-gradient(circle at 30% 30%, var(--blob-2), transparent 68%); top: 34%;  left: 58%;  animation: drift-b 32s var(--ease) infinite alternate; }
+.blob--magenta { background: radial-gradient(circle at 30% 30%, var(--blob-3), transparent 68%); top: 66%;  left: 6%;   animation: drift-c 29s var(--ease) infinite alternate; }
 
 .grain {
   position: absolute;
@@ -130,14 +130,32 @@ body {
   background: var(--glass-fill-strong);
   border: 1px solid var(--glass-brd);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
-    0 20px 50px -20px rgba(0, 0, 0, 0.7);
+    inset 0 1px 0 0 var(--glass-rim),
+    inset 0 0 0 1px var(--surface-2),
+    inset 0 -10px 26px -14px var(--surface-3),
+    0 10px 30px -10px var(--shadow-soft),
+    0 2px 6px -2px var(--shadow-soft);
 }
+/* Liquid specular sheen — bright gloss curving across the top of the bar */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0) 52%);
+  pointer-events: none;
+  z-index: 0;
+}
+.nav > * { position: relative; z-index: 1; }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .nav {
     background: var(--glass-fill);
-    -webkit-backdrop-filter: blur(22px) saturate(160%);
-    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(200%);
+    backdrop-filter: blur(26px) saturate(200%) url(#glass-distortion);
   }
 }
 .nav-logo {
@@ -165,14 +183,14 @@ body {
   border-radius: 999px;
   transition: color 0.2s, background 0.2s;
 }
-.nav-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.07); }
-.nav-link.active { color: var(--ink); background: rgba(255, 255, 255, 0.09); }
+.nav-link:hover { color: var(--ink); background: var(--surface-2); }
+.nav-link.active { color: var(--ink); background: var(--surface-hover); }
 .nav-cta {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--bg);
-  background: linear-gradient(135deg, #cfe0ff, #ffffff);
+  color: var(--btn-solid-ink);
+  background: var(--btn-solid);
   padding: 9px 16px;
   border-radius: 999px;
   white-space: nowrap;
@@ -199,16 +217,8 @@ body {
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: var(--ink);
   margin: 0 0 18px;
-}
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .hero-name {
-    background: var(--name-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
 }
 .hero-tagline {
   font-size: clamp(1.15rem, 2.6vw, 1.6rem);
@@ -237,31 +247,28 @@ body {
   width: min(44%, 470px);
   z-index: 3;
 }
-
-/* ---------- About: photo breaks out of the panel ---------- */
-#about { margin-top: clamp(150px, 18vw, 220px); }
-.about-layout {
-  position: relative;
-  display: grid;
-  grid-template-columns: 290px 1fr;
-  align-items: center;
-}
-.about-photo {
-  position: relative;
+/* Headshot: glass-framed panel in the hero's top-right; the terminal
+   overlaps its lower edge (higher z-index) for the stacked-glass look. */
+.hero-photo {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  width: min(33%, 344px);
+  aspect-ratio: 5 / 6;
   z-index: 2;
-  margin-right: -70px;
-  margin-top: -56px;
-  transform: rotate(-2.5deg);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--glass-brd);
-  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.8);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-rim),
+    0 30px 60px -24px var(--shadow-strong);
 }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 7 / 8; }
-.about-panel {
-  padding: clamp(28px, 4vw, 48px);
-  padding-left: clamp(96px, 10vw, 128px);
-}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- About: single full-width panel ---------- */
+#about { margin-top: clamp(150px, 18vw, 220px); }
+.about-layout { position: relative; }
+.about-panel { padding: clamp(28px, 4vw, 48px); }
 
 /* ---------- Projects: pinned rail + staggered cards ---------- */
 .projects-layout {

@@ -11,6 +11,31 @@
   var ctx = canvas.getContext('2d');
   if (!ctx) return;
 
+  // Per-theme field palette. trail(s) drifts colour with scroll progress.
+  var THEMES = {
+    dark: {
+      base: '#0a0e1a',
+      fade: 'rgba(10,14,26,0.10)',
+      trail: function (s) { // cyan → magenta
+        return 'rgba(' + Math.round(52 + s * 157) + ',' +
+          Math.round(226 - s * 119) + ',' + Math.round(226 + s * 29) + ',0.20)';
+      }
+    },
+    light: {
+      base: '#eef1fa',
+      fade: 'rgba(238,241,250,0.08)',
+      trail: function (s) { // deep indigo → magenta, stronger contrast on white
+        return 'rgba(' + Math.round(48 + s * 108) + ',' +
+          Math.round(64 - s * 44) + ',' + Math.round(168 - s * 20) + ',0.30)';
+      }
+    }
+  };
+  var pal = THEMES[document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'];
+  window.__setFieldTheme = function (t) {
+    pal = THEMES[t === 'dark' ? 'dark' : 'light'];
+    if (ctx) { ctx.fillStyle = pal.base; ctx.fillRect(0, 0, W, H); }
+  };
+
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   var particles = [];
   var COUNT = 0;
@@ -34,7 +59,7 @@
     COUNT = Math.min(260, Math.floor((W * H) / 7000));
     particles = [];
     for (var i = 0; i < COUNT; i++) particles.push(spawn());
-    ctx.fillStyle = '#0a0e1a';
+    ctx.fillStyle = pal.base;
     ctx.fillRect(0, 0, W, H);
   }
 
@@ -67,14 +92,11 @@
   function frame() {
     t += 0.02;
     // fade previous frame for trails
-    ctx.fillStyle = 'rgba(10,14,26,0.11)';
+    ctx.fillStyle = pal.fade;
     ctx.fillRect(0, 0, W, H);
 
-    // line colour drifts cyan → magenta as you descend
-    var r = Math.round(52 + scrollProgress * 157);
-    var g = Math.round(226 - scrollProgress * 119);
-    var b = Math.round(226 + scrollProgress * 29);
-    ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.14)';
+    // line colour drifts with scroll depth (per-theme)
+    ctx.strokeStyle = pal.trail(scrollProgress);
     ctx.lineWidth = 1;
     ctx.beginPath();
 
