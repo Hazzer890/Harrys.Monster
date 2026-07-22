@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Harry Cassidy — AI strategist and implementation engineer, educator, and egalitarian. I build AI systems and teach people to use them.">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="canonical" href="https://harrys.monster/">
+  <title>Harry Cassidy — AI Strategist &amp; Implementation Engineer</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/">
+  <meta property="og:title" content="Harry Cassidy — Engineer, Educator, Egalitarian">
+  <meta property="og:description" content="Portfolio of Harry Cassidy: I build AI systems and teach people to use them.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- No-JS fallback: reveal any content that JS would otherwise animate in -->
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+</head>
+<body>
+
+  <!-- SVG filter: liquid-glass refraction (applied to hero panel backdrop) -->
+  <svg class="glass-defs" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="2" result="softNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Drifting gradient blobs behind the glass -->
+  <div class="backdrop" aria-hidden="true">
+    <span class="blob blob--indigo"></span>
+    <span class="blob blob--cyan"></span>
+    <span class="blob blob--magenta"></span>
+    <span class="grain"></span>
+  </div>
+
+  <!-- ===== FLOATING NAV ===== -->
+  <header class="site-header">
+    <nav class="nav glass" aria-label="Primary">
+      <a href="#hero" class="nav-brand"><span class="nav-brand-mono">h.m</span> Harry Cassidy</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="../../timeline.html">Experience</a></li>
+        <li><a href="../../guides.html">Guides</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="../../assets/cv.pdf" class="nav-cta" download>CV</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="hero">
+      <div class="hero-panel glass glass--hero reveal">
+        <p class="eyebrow"><span class="dot"></span> AI strategist &amp; implementation engineer</p>
+        <h1 class="hero-name">Harry Cassidy</h1>
+        <p class="hero-tagline">I build AI systems and teach people to use them.</p>
+        <p class="hero-sub">Communication and Education will change the world.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View my work</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          <a href="../../assets/cv.pdf" class="btn btn-ghost" download>Download CV</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section">
+      <div class="about glass reveal">
+        <div class="about-photo">
+          <picture>
+            <source type="image/webp" srcset="../../assets/images/headshot.webp 1x, ../../assets/images/headshot@2x.webp 2x">
+            <img src="../../assets/images/headshot.jpg" alt="Portrait of Harry Cassidy" width="560" height="640" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="about-text">
+          <h2 class="section-title">About</h2>
+          <p>I'm an engineer, educator, and egalitarian working to make technology accessible and inclusive for everyone. I've wanted to change the world with engineering for as long as I can remember, and I've always paired that with a habit of understanding how things work and sharing it.</p>
+          <p>These days that means designing AI systems and teaching people to use them well. A few of the tools and areas I work across:</p>
+          <ul class="skills">
+            <li>3D Design (Autodesk, Solidworks, Onshape)</li>
+            <li>C &amp; C++</li>
+            <li>Python</li>
+            <li>Microsoft Suite</li>
+            <li>Microcontrollers</li>
+            <li>Git</li>
+            <li>Claude &amp; OpenAI APIs</li>
+            <li>Agentic systems</li>
+            <li>TypeScript</li>
+            <li>AI-assisted analytics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="section">
+      <h2 class="section-title section-title--center reveal">Selected work</h2>
+      <div class="projects">
+
+        <article class="card glass reveal">
+          <p class="card-index">01</p>
+          <h3 class="card-title">Agentic model tuning</h3>
+          <p class="card-body">An agentic loop on the Claude API that proposes hyperparameters, runs training, reads the metrics, and iterates — earning top marks in the ML units at Curtin.</p>
+          <div class="tags"><span>Python</span><span>Claude API</span></div>
+          <a href="../../agentic-tuning.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="card glass reveal">
+          <p class="card-index">02</p>
+          <h3 class="card-title">Single-use software</h3>
+          <p class="card-body">A Curtin Festival of AI talk and a working practice: deterministic, disposable tools built with AI so non-technical professionals get trustworthy software in minutes.</p>
+          <div class="tags"><span>Festival of AI</span><span>LLM APIs</span></div>
+          <a href="../../single-use-software.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="card glass reveal">
+          <p class="card-index">03</p>
+          <h3 class="card-title">Building web products with AI</h3>
+          <p class="card-body">The WARES storefront and Robotics West site, built end to end with AI tooling. This portfolio is live proof of the same method.</p>
+          <div class="tags"><span>HTML/CSS/JS</span><span>AI coding tools</span></div>
+          <a href="../../ai-web-products.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="card glass reveal">
+          <p class="card-index">04</p>
+          <h3 class="card-title">How I work</h3>
+          <p class="card-body">A daily environment of multi-model agent orchestration: cost-aware routing, custom skill libraries, and cross-model review loops.</p>
+          <div class="tags"><span>Agents</span><span>Orchestration</span></div>
+          <a href="../../how-i-work.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== EXPLORE (experience + guides) ===== -->
+    <section class="section">
+      <div class="explore reveal">
+        <a href="../../timeline.html" class="explore-card glass">
+          <h3>Experience</h3>
+          <p>Education and work timeline — the path so far.</p>
+          <span class="explore-go" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="../../guides.html" class="explore-card glass">
+          <h3>Guides</h3>
+          <p>Writing and walkthroughs on building with AI.</p>
+          <span class="explore-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section">
+      <div class="contact glass reveal">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="contact-intro">Always open to new opportunities and interesting projects. Ask a question, or just say hello.</p>
+
+        <form class="contact-form" action="https://formspree.io/f/mkopqyqa" method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Your message…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+
+        <p class="contact-alt">Prefer email? <a href="mailto:harrycassidy@protonmail.com">harrycassidy@protonmail.com</a></p>
+
+        <div class="socials">
+          <a href="https://github.com/Hazzer890" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/harry-cassidy/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="mailto:harrycassidy@protonmail.com" aria-label="Email">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Harry Cassidy &copy; <span id="year"></span></p>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
