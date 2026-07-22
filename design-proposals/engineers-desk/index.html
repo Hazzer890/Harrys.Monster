@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Harry Cassidy — AI strategist and implementation engineer, educator, and egalitarian. A terminal-through-glass portfolio: sessions, manifests and logs.">
+  <meta name="theme-color" content="#0b0f14">
+  <link rel="canonical" href="https://harrys.monster/design-proposals/engineers-desk/">
+
+  <title>Harry Cassidy — harry@monster:~</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/design-proposals/engineers-desk/">
+  <meta property="og:title" content="Harry Cassidy — Engineer, Educator, Egalitarian">
+  <meta property="og:description" content="I build AI systems and teach people to use them. A terminal-through-glass portfolio.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon: h.m monogram (from live index.html) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#about">Skip to content</a>
+
+  <!-- Ambient desk background (JS-driven; static gradient is the base) -->
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Harry Cassidy — home">
+      <span class="brand-mono">h<span class="dot">.</span>m</span>
+      <span class="brand-path">harry@monster</span>
+    </a>
+    <nav class="anchor-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="../../timeline.html">Timeline</a>
+      <a href="../../guides.html">Guides</a>
+      <a href="../../assets/cv.pdf">CV</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button type="button" class="palette-trigger" id="palette-trigger" aria-haspopup="dialog" aria-controls="palette">
+      <span class="kbd">Ctrl</span><span class="kbd">K</span>
+      <span class="palette-trigger-label">Jump to…</span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO WINDOW ===== -->
+    <section class="window window--hero reveal" aria-labelledby="hero-heading">
+      <div class="titlebar">
+        <span class="lights"><i class="l l--r"></i><i class="l l--y"></i><i class="l l--g"></i></span>
+        <span class="titlebar-title">harry@monster: ~</span>
+        <span class="titlebar-meta">zsh — 96×32</span>
+      </div>
+      <div class="terminal">
+        <p class="cmdline">
+          <span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~</span><span class="sigil">$</span></span>
+          <span class="typed" id="typed" data-text="whoami --full">whoami --full</span><span class="caret" id="caret" aria-hidden="true"></span>
+        </p>
+        <div class="cmdout" id="hero-out">
+          <h1 id="hero-heading" class="identity">Harry Cassidy</h1>
+          <p class="identity-role">AI strategist &amp; implementation engineer · educator · egalitarian</p>
+          <p class="identity-tag">&gt; I build AI systems and teach people to use them.</p>
+          <p class="identity-tag identity-tag--dim">&gt; Communication and education will change the world.</p>
+        </div>
+        <p class="cmdline cmdline--idle" aria-hidden="true">
+          <span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~</span><span class="sigil">$</span></span>
+          <span class="hint">press <span class="kbd">Ctrl</span><span class="kbd">K</span> to jump between sessions</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT WINDOW ===== -->
+    <section class="window reveal" id="about" aria-labelledby="about-heading">
+      <div class="titlebar">
+        <span class="lights"><i class="l l--r"></i><i class="l l--y"></i><i class="l l--g"></i></span>
+        <span class="titlebar-title">harry@monster: ~/about</span>
+        <span class="titlebar-meta">cat about.md</span>
+      </div>
+      <div class="terminal">
+        <p class="cmdline"><span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~/about</span><span class="sigil">$</span></span> <span class="cmd-text">cat about.md</span></p>
+        <div class="md-out">
+          <figure class="avatar">
+            <picture>
+              <source srcset="../../assets/images/headshot.webp" type="image/webp">
+              <img src="../../assets/images/headshot.jpg" alt="Portrait of Harry Cassidy" width="120" height="120" loading="lazy">
+            </picture>
+            <figcaption><span class="hash"># </span>~/about/headshot.jpg</figcaption>
+          </figure>
+          <h2 id="about-heading"><span class="hash"># </span>About</h2>
+          <p>I&rsquo;m Harry — an engineer who works at the seam between AI systems and the people who use them. I design, build and ship AI-assisted tools, then teach non-technical professionals how to wield them without fear. Egalitarian by default: the point of good tooling is to widen who gets to build.</p>
+          <h3><span class="hash">## </span>Skills</h3>
+          <ul class="skills">
+            <li>3D Design <span class="muted">(Autodesk, Solidworks, Onshape)</span></li>
+            <li>C &amp; C++</li>
+            <li>Python</li>
+            <li>Microsoft Suite</li>
+            <li>Microcontrollers</li>
+            <li>Git</li>
+            <li>Claude &amp; OpenAI APIs</li>
+            <li>Agentic systems</li>
+            <li>TypeScript</li>
+            <li>AI-assisted analytics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS WINDOW ===== -->
+    <section class="window reveal" id="projects" aria-labelledby="projects-heading">
+      <div class="titlebar">
+        <span class="lights"><i class="l l--r"></i><i class="l l--y"></i><i class="l l--g"></i></span>
+        <span class="titlebar-title">harry@monster: ~/projects</span>
+        <span class="titlebar-meta">ls --detail projects/</span>
+      </div>
+      <div class="terminal">
+        <p class="cmdline"><span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~/projects</span><span class="sigil">$</span></span> <span class="cmd-text">ls --detail projects/</span></p>
+        <h2 id="projects-heading" class="sr-only">Projects</h2>
+        <p class="ls-head" aria-hidden="true">total 4 · drwxr-xr-x · expand any entry for the log</p>
+        <ul class="manifest">
+          <li>
+            <details>
+              <summary>
+                <span class="perm">-rwxr-xr-x</span>
+                <span class="fname">agentic-tuning.md</span>
+                <span class="fmeta">ML · top marks @ Curtin</span>
+                <span class="chevron" aria-hidden="true">▸</span>
+              </summary>
+              <div class="entry-body">
+                <p><strong>Agentic model tuning.</strong> An agentic loop on the Claude API that proposes hyperparameters, kicks off training, reads the metrics back, and iterates — closing the loop on its own experiments. It earned top marks in the ML units at Curtin.</p>
+                <a class="entry-link" href="../../agentic-tuning.html">open agentic-tuning.html <span aria-hidden="true">→</span></a>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>
+                <span class="perm">-rwxr-xr-x</span>
+                <span class="fname">single-use-software.md</span>
+                <span class="fmeta">talk · Festival of AI</span>
+                <span class="chevron" aria-hidden="true">▸</span>
+              </summary>
+              <div class="entry-body">
+                <p><strong>Single-use software.</strong> From my Curtin Festival of AI talk and practice: deterministic, disposable tools built with AI for non-technical professionals — software you spin up for one job and throw away.</p>
+                <a class="entry-link" href="../../single-use-software.html">open single-use-software.html <span aria-hidden="true">→</span></a>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>
+                <span class="perm">-rwxr-xr-x</span>
+                <span class="fname">ai-web-products.md</span>
+                <span class="fmeta">build · WARES · Robotics West</span>
+                <span class="chevron" aria-hidden="true">▸</span>
+              </summary>
+              <div class="entry-body">
+                <p><strong>Building web products with AI.</strong> The WARES storefront and the Robotics West site, built end-to-end with AI tooling — from scaffolding to shipped product.</p>
+                <a class="entry-link" href="../../ai-web-products.html">open ai-web-products.html <span aria-hidden="true">→</span></a>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>
+                <span class="perm">-rwxr-xr-x</span>
+                <span class="fname">how-i-work.md</span>
+                <span class="fmeta">process · multi-model</span>
+                <span class="chevron" aria-hidden="true">▸</span>
+              </summary>
+              <div class="entry-body">
+                <p><strong>How I work.</strong> Daily multi-model agent orchestration: cost-aware routing between models, custom skill libraries, and cross-model review loops so nothing ships unchecked.</p>
+                <a class="entry-link" href="../../how-i-work.html">open how-i-work.html <span aria-hidden="true">→</span></a>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== ELSEWHERE / DESTINATIONS WINDOW ===== -->
+    <section class="window reveal" id="elsewhere" aria-labelledby="elsewhere-heading">
+      <div class="titlebar">
+        <span class="lights"><i class="l l--r"></i><i class="l l--y"></i><i class="l l--g"></i></span>
+        <span class="titlebar-title">harry@monster: ~</span>
+        <span class="titlebar-meta">ls ~/</span>
+      </div>
+      <div class="terminal">
+        <p class="cmdline"><span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~</span><span class="sigil">$</span></span> <span class="cmd-text">ls ~/</span></p>
+        <h2 id="elsewhere-heading" class="sr-only">Elsewhere</h2>
+        <ul class="dirlist">
+          <li><a href="../../timeline.html"><span class="dir">timeline/</span><span class="dir-desc">the experience log — where I&rsquo;ve been</span></a></li>
+          <li><a href="../../guides.html"><span class="dir">guides/</span><span class="dir-desc">write-ups: GitHub, SSH at Curtin, MSP430</span></a></li>
+          <li><a href="../../assets/cv.pdf"><span class="file">cv.pdf</span><span class="dir-desc">download the full CV <span aria-hidden="true">↓</span></span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT WINDOW ===== -->
+    <section class="window reveal" id="contact" aria-labelledby="contact-heading">
+      <div class="titlebar">
+        <span class="lights"><i class="l l--r"></i><i class="l l--y"></i><i class="l l--g"></i></span>
+        <span class="titlebar-title">harry@monster: ~/contact</span>
+        <span class="titlebar-meta">./say-hello.sh</span>
+      </div>
+      <div class="terminal">
+        <p class="cmdline"><span class="prompt">harry@monster<span class="sep">:</span><span class="cwd">~/contact</span><span class="sigil">$</span></span> <span class="cmd-text">./say-hello.sh</span></p>
+        <h2 id="contact-heading"><span class="hash"># </span>Start a session</h2>
+        <p class="contact-lead">Drop a line and I&rsquo;ll reply. Prefer email? <a href="mailto:harrycassidy@protonmail.com">harrycassidy@protonmail.com</a></p>
+        <form class="prompt-form" action="https://formspree.io/f/mkopqyqa" method="POST">
+          <label class="field">
+            <span class="field-label"><span class="sigil">$</span> name</span>
+            <input type="text" name="name" autocomplete="name" required placeholder="Ada Lovelace">
+          </label>
+          <label class="field">
+            <span class="field-label"><span class="sigil">$</span> email</span>
+            <input type="email" name="email" autocomplete="email" required placeholder="ada@example.com">
+          </label>
+          <label class="field">
+            <span class="field-label"><span class="sigil">$</span> message</span>
+            <textarea name="message" rows="4" required placeholder="Tell me what you're building…"></textarea>
+          </label>
+          <button type="submit" class="send-btn">send <span aria-hidden="true">↵</span></button>
+        </form>
+        <p class="socials">
+          <a href="https://github.com/Hazzer890" rel="me noopener">GitHub</a>
+          <span class="sep-dot" aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/harry-cassidy/" rel="me noopener">LinkedIn</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><span class="prompt-min">harry@monster<span class="sep">:</span>~<span class="sigil">$</span></span> exit &mdash; &copy; 2026 Harry Cassidy</p>
+  </footer>
+
+  <!-- ===== COMMAND PALETTE (JS-enhanced) ===== -->
+  <div class="palette-overlay" id="palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="palette">
+      <input type="text" id="palette-input" class="palette-input" placeholder="Type a destination…" aria-label="Filter destinations" autocomplete="off">
+      <ul class="palette-list" id="palette-list" role="listbox" aria-label="Destinations">
+        <li role="option" data-target="#about"><span class="p-cmd">cd</span> ~/about<span class="p-hint">About</span></li>
+        <li role="option" data-target="#projects"><span class="p-cmd">cd</span> ~/projects<span class="p-hint">Projects</span></li>
+        <li role="option" data-target="../../timeline.html"><span class="p-cmd">open</span> timeline<span class="p-hint">Experience</span></li>
+        <li role="option" data-target="../../guides.html"><span class="p-cmd">open</span> guides<span class="p-hint">Write-ups</span></li>
+        <li role="option" data-target="../../assets/cv.pdf"><span class="p-cmd">get</span> cv.pdf<span class="p-hint">Download</span></li>
+        <li role="option" data-target="#contact"><span class="p-cmd">cd</span> ~/contact<span class="p-hint">Contact</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <noscript>
+    <style>
+      #palette-trigger { display: none; }
+      .caret { display: none; }
+    </style>
+  </noscript>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
