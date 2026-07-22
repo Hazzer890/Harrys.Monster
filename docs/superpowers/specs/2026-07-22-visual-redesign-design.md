@@ -36,3 +36,11 @@ All four share the liquid-glass / immersive-story DNA; they differ in the identi
 - Four demo pages render cleanly with no console errors at desktop and mobile widths.
 - Each is visually distinct and clearly traceable to its stated direction.
 - Winning design ships site-wide with no content loss and working fallbacks.
+
+## Winner (decided 2026-07-22)
+
+Hybrid, Liquid Glass base:
+- **Base:** liquid-glass proposal (dark base, frosted refraction glass system, floating glass nav, cursor tilt).
+- **Background:** immersive-story tech — scroll- and pointer-reactive canvas (flow-field/particles) layered with the gradient blobs, so the backdrop tells the story as you scroll.
+- **One terminal window** borrowed from engineers-desk (single glass terminal; placement decided during design).
+- **Non-linearity:** layout asymmetry (offset/overlapping panels, off-grid placements) + scroll choreography (pinned/directional entrances, sections that don't just stack).
