@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Deterministic, disposable software built with AI: a Curtin Festival of AI talk and a working practice.">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#0a0e1a">
   <link rel="canonical" href="https://harrys.monster/single-use-software.html">
   <title>Single-use software | Harry Cassidy</title>
 
@@ -18,42 +18,140 @@
   <!-- Favicon: h.m monogram -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='JetBrains Mono,ui-monospace,monospace' font-size='30' font-weight='700' fill='%23fafafa'>h<tspan fill='%23dbeafe'>.</tspan>m</text></svg>">
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Case-study reading treatment — scoped to this page type; shared CSS untouched -->
+  <style>
+    .case-main {
+      max-width: var(--maxw);
+      margin: clamp(64px, 10vw, 120px) auto 0;
+      padding: 0 24px;
+    }
+    .case-head { max-width: 640px; margin-bottom: clamp(30px, 5vw, 52px); }
+    .case-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.1rem, 6vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin: 0 0 22px;
+    }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .case-title {
+        background: linear-gradient(180deg, #ffffff 22%, #b6c6ff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    /* Reading panel: wide glass, comfortable measure, right-shifted for asymmetry */
+    .case-body {
+      max-width: 740px;
+      margin-left: auto;
+      padding: clamp(28px, 4.5vw, 56px);
+    }
+    .case-body h2 {
+      position: relative;
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+      font-weight: 600;
+      color: var(--ink);
+      padding-left: 18px;
+      margin: 2em 0 0.55em;
+    }
+    .case-body h2:first-child { margin-top: 0; }
+    .case-body h2::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.18em; bottom: 0.18em;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--accent-2);
+    }
+    .case-body p {
+      color: var(--ink-soft);
+      font-size: 1.02rem;
+      max-width: 66ch;
+      margin: 0 0 1.15em;
+    }
+    .case-body p:last-child { margin-bottom: 0; }
+    .case-back { display: inline-flex; margin-top: clamp(30px, 5vw, 48px); }
+    @media (max-width: 900px) {
+      .case-body { margin-left: 0; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- SVG filter defs (shared background mount) -->
+  <svg class="glass-defs" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="2" result="softNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Background mount: flow-field canvas + drifting gradient blobs -->
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="backdrop" aria-hidden="true">
+    <span class="blob blob--indigo"></span>
+    <span class="blob blob--cyan"></span>
+    <span class="blob blob--magenta"></span>
+    <span class="grain"></span>
+  </div>
+
+  <!-- ===== HEADER / NAV ===== -->
   <header class="header">
-    <nav class="nav container">
+    <nav class="nav" aria-label="Primary">
       <a href="index.html" class="nav-logo">Harry Cassidy</a>
+
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="timeline.html" class="nav-link">Experience</a></li>
         <li><a href="guides.html" class="nav-link">Guides</a></li>
-        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#projects" class="nav-link active">Projects</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
+
+      <a href="assets/cv.pdf" class="nav-cta" download>CV</a>
+
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </nav>
   </header>
+
   <main class="case-main">
-    <p class="case-kicker">Case study · Talk</p>
-    <h1 class="case-title">Single-use software</h1>
-    <div class="case-meta">
-      <span class="tech-pill">Curtin Festival of AI</span>
-      <span class="tech-pill">Python</span>
-      <span class="tech-pill">LLM APIs</span>
-      <span class="tech-pill">Data analysis</span>
+    <div class="case-head" data-reveal="left">
+      <p class="eyebrow"><span class="dot"></span>Case study &middot; Talk</p>
+      <h1 class="case-title">Single-use software</h1>
+      <div class="case-meta">
+        <span class="tech-pill">Curtin Festival of AI</span>
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">LLM APIs</span>
+        <span class="tech-pill">Data analysis</span>
+      </div>
     </div>
-    <div class="case-body">
+
+    <div class="case-body glass" data-reveal="right">
       <h2>The problem</h2>
       <p>Professionals meet problems every week that a small program would solve: reformat this data, cross-check these lists, chart this trend. Software was always too expensive to commission for one job, so people do these tasks by hand, or skip them.</p>
       <h2>The idea</h2>
@@ -63,11 +161,16 @@
       <h2>The practice</h2>
       <p>I use the method constantly. The most recent run: a series of single-use analysis tools for surfacing and visualising trends in moderate-sized datasets. Each took minutes to build and answered a question that would otherwise have stayed open.</p>
     </div>
-    <a href="index.html#projects" class="case-back">&larr; All work</a>
+
+    <a href="index.html#projects" class="case-back btn btn-ghost">&larr; All work</a>
   </main>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container"><p>Harry Cassidy &copy; <span id="year"></span></p></div>
   </footer>
+
+  <script src="js/background.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
