@@ -524,7 +524,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 }
 
 @media (max-width: 860px) {
-  .guide-layout { grid-template-columns: 1fr; }
+  .guide-layout { grid-template-columns: minmax(0, 1fr); }
   .guide-toc { position: static; }
   .mental-grid, .two-col { grid-template-columns: 1fr; }
 }
