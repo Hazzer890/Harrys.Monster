@@ -27,6 +27,20 @@
   --term-green: #7ee787;
   --term-blue: #6cb6ff;
   --term-amber: #ffb454;
+  --danger: #ff8a8a;
+
+  /* Semantic surface tints (single source for the reading vocabulary) */
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.05);
+  --code-bg: rgba(8, 12, 24, 0.6);
+
+  /* Shared name/heading gradient (hero-name + case-title + 404 code) */
+  --name-gradient: linear-gradient(180deg, #ffffff 20%, #b6c6ff 100%);
+
+  /* One reading-panel standard for guides + case studies */
+  --reading-measure: 66ch;
+  --reading-pad: clamp(28px, 4vw, 56px);
 
   /* Type */
   --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;

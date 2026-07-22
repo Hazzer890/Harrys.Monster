@@ -51,10 +51,16 @@
     }
   }
 
-  /* ---- Scroll spy: highlight the nav link for the section in view ---- */
+  /* ---- Scroll spy: highlight the nav link for the section in view ----
+     Only on pages whose nav actually has same-page (#hash) links — i.e. index.
+     Interior pages link out to index.html#… and keep a static .active pill, so
+     running the spy there would just clear it as unrelated sections scroll by. */
   var spySections = document.querySelectorAll('main section[id]');
   var navLinks = document.querySelectorAll('.nav-link');
-  if (spySections.length && navLinks.length && 'IntersectionObserver' in window) {
+  var hasHashNav = Array.prototype.some.call(navLinks, function (link) {
+    return (link.getAttribute('href') || '').charAt(0) === '#';
+  });
+  if (hasHashNav && spySections.length && navLinks.length && 'IntersectionObserver' in window) {
     var spy = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;

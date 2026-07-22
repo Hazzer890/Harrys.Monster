@@ -30,68 +30,6 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
 
-  <!-- Case-study reading treatment — scoped to this page type; shared CSS untouched -->
-  <style>
-    .case-main {
-      max-width: var(--maxw);
-      margin: clamp(64px, 10vw, 120px) auto 0;
-      padding: 0 24px;
-    }
-    .case-head { max-width: 640px; margin-bottom: clamp(30px, 5vw, 52px); }
-    .case-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.1rem, 6vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      margin: 0 0 22px;
-    }
-    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-      .case-title {
-        background: linear-gradient(180deg, #ffffff 22%, #b6c6ff 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-    }
-    .case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
-    /* Reading panel: wide glass, comfortable measure, right-shifted for asymmetry */
-    .case-body {
-      max-width: 740px;
-      margin-left: auto;
-      padding: clamp(28px, 4.5vw, 56px);
-    }
-    .case-body h2 {
-      position: relative;
-      font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 2.6vw, 1.55rem);
-      font-weight: 600;
-      color: var(--ink);
-      padding-left: 18px;
-      margin: 2em 0 0.55em;
-    }
-    .case-body h2:first-child { margin-top: 0; }
-    .case-body h2::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 0.18em; bottom: 0.18em;
-      width: 3px;
-      border-radius: 2px;
-      background: var(--accent-2);
-    }
-    .case-body p {
-      color: var(--ink-soft);
-      font-size: 1.02rem;
-      max-width: 66ch;
-      margin: 0 0 1.15em;
-    }
-    .case-body p:last-child { margin-bottom: 0; }
-    .case-back { display: inline-flex; margin-top: clamp(30px, 5vw, 48px); }
-    @media (max-width: 900px) {
-      .case-body { margin-left: 0; }
-    }
-  </style>
 </head>
 <body>
 

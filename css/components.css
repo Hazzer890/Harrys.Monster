@@ -262,7 +262,7 @@
 }
 .form-status { min-height: 1.4em; color: var(--ink-soft); font-size: 0.9rem; }
 .form-status.success { color: var(--term-green); }
-.form-status.error { color: #ff8a8a; }
+.form-status.error { color: var(--danger); }
 
 .contact-alt { margin: 24px 0 0; color: var(--ink-mute); font-size: 0.92rem; }
 .contact-alt a { color: var(--accent-2); }
@@ -316,8 +316,8 @@
 .tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
 
 /* ============================================================
-   Interim interior-page floor (until Tasks 2-4 re-shell them):
-   keeps timeline/guide/case pages legible on the dark base.
+   Long-form reading floor — shared base for guide + case pages.
+   Element defaults + the box shared by every callout/panel class.
    ============================================================ */
 h1, h2, h3, h4 { line-height: 1.15; letter-spacing: -0.02em; }
 main p a, .guide-content a, .case-body a { color: var(--accent-2); }
@@ -326,7 +326,7 @@ main p a:hover, .guide-content a:hover, .case-body a:hover { text-decoration: un
 pre, code, kbd {
   font-family: var(--font-mono);
   font-size: 0.88em;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-3);
   border: 1px solid var(--glass-brd);
   border-radius: 8px;
 }
@@ -339,25 +339,257 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 
 .callout,
 .guide-toc,
-.timeline-content,
 .cheatsheet,
 .mental-model,
 .col-card,
 .scenario {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-2);
   border: 1px solid var(--glass-brd);
   border-radius: 14px;
   padding: 18px 20px;
   margin: 18px 0;
 }
-.timeline-item { margin: 0 0 28px; padding-left: 22px; border-left: 2px solid var(--glass-brd); }
-.timeline-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-2); }
-.timeline-dot { display: none; }
-.project-card, .guide-card {
-  background: var(--glass-fill-strong);
-  border: 1px solid var(--glass-brd);
-  border-radius: var(--radius);
-  padding: 24px;
-  margin: 0 0 20px;
+
+/* ============================================================
+   Guide article vocabulary (was the 3 guide pages' inline <style>)
+   Calm long-form reading on the shared glass system.
+   ============================================================ */
+.timeline-hero { margin-top: clamp(40px, 7vw, 88px); }
+.guide-hero-panel {
+  width: min(100%, 840px);
+  padding: clamp(28px, 4vw, 52px);
+  border-radius: var(--radius-lg);
 }
-.project-link, .guide-card-cta { color: var(--accent-2); }
+.timeline-hero .section-title { font-size: clamp(2rem, 5vw, 3.1rem); margin-bottom: 16px; }
+.timeline-hero .contact-intro {
+  max-width: 62ch;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+
+/* Meta chips */
+.guide-meta { display: flex; flex-wrap: wrap; gap: 12px; }
+.guide-meta-item {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 10px 16px;
+  border: 1px solid var(--glass-brd);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.guide-meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent-2);
+}
+.guide-meta-value { font-size: 0.9rem; color: var(--ink); }
+
+/* Two-column reading layout */
+.guide-layout {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+.guide-toc { position: sticky; top: 96px; margin: 0; font-size: 0.9rem; }
+.guide-toc-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-mute); margin-bottom: 12px;
+}
+.guide-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: toc; }
+.guide-toc li { counter-increment: toc; }
+.guide-toc a {
+  display: block; padding: 5px 10px; border-radius: 8px;
+  color: var(--ink-soft); transition: color 0.2s, background 0.2s;
+}
+.guide-toc a::before {
+  content: counter(toc, decimal-leading-zero) "  ";
+  font-family: var(--font-mono); font-size: 0.78em; color: var(--accent-2);
+}
+.guide-toc a:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); text-decoration: none; }
+.guide-toc code { background: none; border: none; padding: 0; color: inherit; }
+
+/* The wide glass reading panel */
+.guide-content { padding: var(--reading-pad); border-radius: var(--radius-lg); }
+.guide-content > section { scroll-margin-top: 96px; }
+.guide-content > section + section { margin-top: clamp(40px, 6vw, 68px); }
+.section-num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem; letter-spacing: 0.06em; color: var(--accent-2);
+  margin-bottom: 10px;
+}
+.guide-content h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.2; margin: 0 0 18px; }
+.guide-content h3 { font-size: 1.12rem; font-weight: 600; line-height: 1.3; color: var(--ink); margin: 28px 0 10px; }
+.guide-content p { color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; max-width: var(--reading-measure); }
+.guide-content ul, .guide-content ol { color: var(--ink-soft); line-height: 1.7; margin: 0 0 18px; padding-left: 22px; max-width: var(--reading-measure); }
+.guide-content li { margin: 0 0 8px; }
+.guide-content p > strong, .guide-content li > strong { color: var(--ink); }
+.guide-content img, .guide-content video {
+  display: block; max-width: 100%; height: auto;
+  margin: 22px 0; border-radius: 14px; border: 1px solid var(--glass-brd);
+}
+.guide-content :not(pre) > code { color: var(--accent-2); }
+
+/* Code blocks — plain, deliberately NOT terminal chrome */
+.guide-content pre {
+  position: relative; margin: 18px 0; padding: 34px 18px 18px;
+  line-height: 1.65; background: var(--code-bg);
+}
+.guide-content pre[data-label]::before {
+  content: attr(data-label);
+  position: absolute; top: 0; left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-mute); padding: 6px 12px;
+  border-bottom: 1px solid var(--glass-brd);
+  border-right: 1px solid var(--glass-brd);
+  border-bottom-right-radius: 10px;
+  background: var(--surface-1);
+}
+.tok-cmt { color: var(--ink-mute); font-style: italic; }
+.tok-cmd { color: var(--term-green); }
+.tok-str { color: var(--term-amber); }
+.tok-flag { color: var(--accent-3); }
+.tok-hi { color: var(--danger); }
+
+/* Callouts — accent left border by type (base box from the floor above) */
+.callout { color: var(--ink-soft); padding-left: 20px; border-left: 3px solid var(--accent); }
+.callout-tip  { border-left-color: var(--term-green); }
+.callout-warn { border-left-color: var(--term-amber); }
+.callout-label {
+  display: block; font-family: var(--font-mono);
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--ink); margin-bottom: 6px;
+}
+
+/* Two-column cards */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+.col-card { margin: 0; }
+.col-card-head { font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.col-card-good { border-color: color-mix(in srgb, var(--term-green) 40%, transparent); }
+.col-card-bad { border-color: color-mix(in srgb, var(--danger) 40%, transparent); }
+.col-card ul { margin: 0; padding-left: 20px; max-width: none; }
+.col-card p { margin: 0; max-width: none; }
+
+/* Mental model + workflow grids */
+.mental-model-title, .workflow-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; letter-spacing: 0.04em; color: var(--accent-2); margin-bottom: 14px;
+}
+.mental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mental-cell {
+  padding: 14px; border: 1px solid var(--glass-brd);
+  border-radius: 12px; background: var(--surface-1);
+}
+.mental-cell-head { font-weight: 600; color: var(--ink); margin-bottom: 6px; font-size: 0.95rem; }
+.mental-cell-body { color: var(--ink-soft); font-size: 0.9rem; }
+.workflow-steps { display: flex; flex-wrap: wrap; gap: 10px; }
+.workflow-step {
+  flex: 1 1 130px; padding: 12px; border: 1px solid var(--glass-brd);
+  border-radius: 12px; background: var(--surface-1);
+}
+.workflow-step-cmd { font-family: var(--font-mono); font-size: 0.82rem; color: var(--term-green); margin-bottom: 4px; }
+.workflow-step-desc { font-size: 0.82rem; color: var(--ink-soft); }
+
+/* Cheat sheet */
+.cheatsheet h3 { margin: 18px 0 8px; font-size: 1rem; }
+.cheatsheet h3:first-child { margin-top: 0; }
+.cheat-row {
+  display: grid; grid-template-columns: minmax(140px, 40%) 1fr; gap: 12px;
+  padding: 7px 0; border-top: 1px solid var(--glass-brd);
+}
+.cheat-cmd { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-2); }
+.cheat-desc { color: var(--ink-soft); font-size: 0.88rem; }
+
+/* Scenarios */
+.scenario-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-3);
+}
+.scenario-q { font-weight: 600; color: var(--ink); margin: 6px 0 8px; }
+.scenario-a { color: var(--ink-soft); font-size: 0.92rem; }
+
+/* Tables */
+.guide-content table { margin: 18px 0; font-size: 0.92rem; }
+.guide-content thead th { background: var(--surface-3); color: var(--ink); font-weight: 600; }
+.guide-content td { color: var(--ink-soft); vertical-align: top; }
+
+/* Ornament divider */
+.ornament {
+  text-align: center; color: var(--ink-mute);
+  letter-spacing: 0.8em; font-size: 0.9rem;
+  margin: clamp(36px, 5vw, 56px) 0; opacity: 0.6;
+}
+
+@media (max-width: 860px) {
+  .guide-layout { grid-template-columns: 1fr; }
+  .guide-toc { position: static; }
+  .mental-grid, .two-col { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Case-study reading treatment (was the 4 case pages' inline <style>)
+   One wide right-shifted glass panel; shared reading measure + pad.
+   ============================================================ */
+.case-main {
+  max-width: var(--maxw);
+  margin: clamp(64px, 10vw, 120px) auto 0;
+  padding: 0 24px;
+}
+.case-head { max-width: 640px; margin-bottom: clamp(30px, 5vw, 52px); }
+.case-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 22px;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .case-title {
+    background: var(--name-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+.case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.case-body {
+  max-width: 740px;
+  margin-left: auto;
+  padding: var(--reading-pad);
+}
+.case-body h2 {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  padding-left: 18px;
+  margin: 2em 0 0.55em;
+}
+.case-body h2:first-child { margin-top: 0; }
+.case-body h2::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.18em; bottom: 0.18em;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--accent-2);
+}
+.case-body p {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: var(--reading-measure);
+  margin: 0 0 1.15em;
+}
+.case-body p:last-child { margin-bottom: 0; }
+.case-back { display: inline-flex; margin-top: clamp(30px, 5vw, 48px); }
+@media (max-width: 900px) {
+  .case-body { margin-left: 0; }
+}

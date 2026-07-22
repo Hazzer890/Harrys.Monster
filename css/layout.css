@@ -204,7 +204,7 @@ body {
 }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero-name {
-    background: linear-gradient(180deg, #ffffff 20%, #b6c6ff 100%);
+    background: var(--name-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -292,6 +292,10 @@ body {
   display: grid;
   gap: 26px;
 }
+/* Hub pages (guides/timeline) put the list straight under .section — cap its
+   width so single-column cards keep a readable measure. Index nests the list
+   inside .projects-layout, so it is unaffected. */
+.section > .projects-list { max-width: 840px; }
 .project-wrap:nth-child(odd)  { margin-right: clamp(0px, 6vw, 72px); }
 .project-wrap:nth-child(even) { margin-left: clamp(0px, 6vw, 72px); }
 
@@ -321,3 +325,6 @@ body {
   font-size: 0.85rem;
   font-family: var(--font-mono);
 }
+/* Footer already provides the gutter + max-width; neutralise the inner
+   .container so the text isn't double-inset. */
+.footer .container { max-width: none; padding: 0; }
