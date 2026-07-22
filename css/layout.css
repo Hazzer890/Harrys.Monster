@@ -130,11 +130,11 @@ body {
   background: var(--glass-fill-strong);
   border: 1px solid var(--glass-brd);
   box-shadow:
-    inset 0 1px 0 0 var(--glass-rim),
-    inset 0 0 0 1px var(--surface-2),
-    inset 0 -10px 26px -14px var(--surface-3),
-    0 10px 30px -10px var(--shadow-soft),
-    0 2px 6px -2px var(--shadow-soft);
+    inset 0 1px 1px 0 var(--glass-rim),
+    inset 0 -1px 1px 0 var(--glass-rim-2),
+    inset 0 0 0 1px var(--surface-1),
+    0 12px 40px -12px var(--shadow-soft),
+    0 3px 10px -6px var(--shadow-soft);
 }
 /* Liquid specular sheen — bright gloss curving across the top of the bar */
 .nav::before {
@@ -154,8 +154,8 @@ body {
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .nav {
     background: var(--glass-fill);
-    -webkit-backdrop-filter: blur(26px) saturate(200%);
-    backdrop-filter: blur(26px) saturate(200%) url(#glass-distortion);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    backdrop-filter: blur(30px) saturate(190%) url(#glass-distortion);
   }
 }
 .nav-logo {

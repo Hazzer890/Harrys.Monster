@@ -41,6 +41,7 @@
   --glass-fill-strong: rgba(255, 255, 255, 0.55);
   --glass-brd: rgba(23, 34, 77, 0.12);
   --glass-rim: rgba(255, 255, 255, 0.9);
+  --glass-rim-2: rgba(255, 255, 255, 0.4);
 
   --accent: #3b5bdb;
   --accent-2: #0e7490;
@@ -87,6 +88,7 @@
   --glass-fill-strong: rgba(18, 24, 44, 0.46);
   --glass-brd: rgba(255, 255, 255, 0.14);
   --glass-rim: rgba(255, 255, 255, 0.55);
+  --glass-rim-2: rgba(255, 255, 255, 0.14);
 
   --accent: #6d8bff;
   --accent-2: #34e2e2;
