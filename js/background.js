@@ -50,13 +50,8 @@
   };
   var noise = new Noise(Math.random());
 
-  /* ---- Theme-aware line colour (main.js calls __setFieldTheme on toggle) ---- */
-  var THEME_LINE = {
-    dark: 'rgba(130, 160, 255, 0.18)',
-    light: 'rgba(59, 91, 219, 0.24)'
-  };
-  var lineColor = THEME_LINE[document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'];
-  window.__setFieldTheme = function (t) { lineColor = THEME_LINE[t === 'dark' ? 'dark' : 'light']; };
+  /* ---- Line colour ---- */
+  var lineColor = 'rgba(59, 91, 219, 0.24)';
 
   /* ---- Tuned wave params (React Bits' "nice" preset) ---- */
   var cfg = {
