@@ -68,10 +68,10 @@
 
   /* Ambient background field */
   --bg-glow-1: #dbe4ff;
-  --bg-glow-2: #f2e2ff;
+  --bg-glow-2: #ffe7d4;
   --blob-1: #6d8bff;
-  --blob-2: #34c7d6;
-  --blob-3: #c26bff;
+  --blob-2: #ff9a4d;
+  --blob-3: #5b8bff;
   --blob-opacity: 0.34;
 }
 
@@ -110,9 +110,9 @@
   --shadow-strong: rgba(0, 0, 0, 0.8);
 
   --bg-glow-1: #101a3a;
-  --bg-glow-2: #170f30;
+  --bg-glow-2: #2e1a0c;
   --blob-1: #4256ff;
-  --blob-2: #12c7d6;
-  --blob-3: #b13cff;
+  --blob-2: #ff8636;
+  --blob-3: #3f6bff;
   --blob-opacity: 0.55;
 }
