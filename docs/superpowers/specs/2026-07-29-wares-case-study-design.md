@@ -27,7 +27,12 @@ as a design case study. Link it from the index projects section.
 - `~/Documents/WARES/Shipping Labels/` and `~/Downloads/WARES_ShipToPit_DDU.*`
   — shipping-label designs
 - `~/Documents/WARES/KitbotInstructions2026/` — instructions microsite
-- https://warobotics.education — live WordPress site
+  (kitbot.warobotics.education)
+- `~/Documents/claudeTest/` — docs.warobotics.education Jekyll site
+- https://warobotics.education — current live WordPress site
+- https://staging.warobotics.education — theme rework in progress. The case
+  study screenshots the staging theme as the current state of the brand's web
+  presence; the old live site can appear as a before/after if useful.
 
 ## Plan
 
@@ -47,6 +52,13 @@ as a design case study. Link it from the index projects section.
    case-study sections. Add a project card linking to it on `index.html`.
 5. **Verify.** Preview locally in the browser; check responsive layout and
    basic accessibility (alt text, contrast, heading order).
+6. **Update pass (after the reworked site ships).** When the staging theme
+   goes live and Harry supplies more brand content, refresh the page:
+   re-screenshot warobotics.education on the new theme, drop new material
+   into the applications grid, and extend the outcome section. To keep this
+   cheap, the build in step 4 makes the applications section an additive
+   grid: each application is one self-contained figure (image + caption), so
+   an update is copy-a-block-and-swap-the-image, no restructuring.
 
 ## Out of scope
 
