@@ -72,12 +72,11 @@ git commit -m "Add approved WARES case study copy"
 
 **Files:**
 - Create: `assets/wares/logo-red.png`, `logo-cream.png`, `logo-mono.png` (from `~/Documents/WARES/logos/WARES Logos-0{1,2,4}.png`)
-- Create: `assets/wares/bumpers-1.webp`, `bumpers-2.webp` (best two of `~/Documents/WARES/BUMPERS/*.webp` — pick the sharpest showing the logo on a robot)
 - Create: `assets/wares/shipping-label.png` (from `~/Downloads/WARES_ShipToPit_DDU.png`)
 - Create: `assets/wares/site-kitbot.webp`, `site-docs.webp`, `site-store.webp` (fresh screenshots)
 
 **Interfaces:**
-- Produces: the eight files above; Task 3's HTML references them by these exact names.
+- Produces: the six files above; Task 3's HTML references them by these exact names. (Bumper photos were cut by Harry during Task 1 review — they are not brand work.)
 
 - [ ] **Step 1: Copy and resize stills with PIL**
 
@@ -92,10 +91,6 @@ jobs = [
     ("/home/harry/Documents/WARES/logos/WARES Logos-04.png", "assets/wares/logo-mono.png", "PNG"),
     ("/home/harry/Downloads/WARES_ShipToPit_DDU.png", "assets/wares/shipping-label.png", "PNG"),
 ]
-# ponytail: pick bumper shots by eye afterwards; start with the two largest files
-bumpers = sorted(Path("/home/harry/Documents/WARES/BUMPERS").glob("*.webp"),
-                 key=lambda p: p.stat().st_size, reverse=True)[:2]
-jobs += [(str(p), f"assets/wares/bumpers-{i+1}.webp", "WEBP") for i, p in enumerate(bumpers)]
 for src, dst, fmt in jobs:
     im = Image.open(src)
     im.thumbnail((1600, 1600))
@@ -104,9 +99,7 @@ for src, dst, fmt in jobs:
 EOF
 ```
 
-- [ ] **Step 2: Open the two bumper picks and confirm by eye they clearly show the WARES logo in use** (Read tool on the two `assets/wares/bumpers-*.webp`). If a rejected candidate is better, swap it in by editing the `bumpers` line and rerunning.
-
-- [ ] **Step 3: Screenshot the three live sites**
+- [ ] **Step 2: Screenshot the three live sites**
 
 ```bash
 npx -y playwright screenshot --viewport-size=1440,900 "https://staging.warobotics.education" assets/wares/site-store.png
@@ -124,7 +117,7 @@ rm assets/wares/site-*.png
 
 (If `docs.` or `kitbot.` subdomains fail to resolve, screenshot the local copies instead: serve `~/Documents/WARES/KitbotInstructions2026` with `python3 -m http.server 8902` and screenshot `http://localhost:8902`; skip the docs shot and drop its figure from Task 3.)
 
-- [ ] **Step 4: Check sizes and commit** — every file in `assets/wares/` should be under ~400 KB (`du -h assets/wares/*`). Re-save with `quality=70` any that exceed it.
+- [ ] **Step 3: Check sizes and commit** — every file in `assets/wares/` should be under ~400 KB (`du -h assets/wares/*`). Re-save with `quality=70` any that exceed it.
 
 ```bash
 git add assets/wares
@@ -198,8 +191,6 @@ git commit -m "Add WARES case study web assets"
     <!-- To add an application later (spec step 6): copy one <figure> block below,
          swap src/alt/caption. Nothing else needs touching. -->
     <div class="wares-grid">
-      <figure><img src="assets/wares/bumpers-1.webp" alt="WARES logo on FRC robot bumpers" loading="lazy"><figcaption>{{caption: bumpers}}</figcaption></figure>
-      <figure><img src="assets/wares/bumpers-2.webp" alt="WARES-branded bumpers on a competition robot" loading="lazy"><figcaption>{{caption: bumpers}}</figcaption></figure>
       <figure><img src="assets/wares/shipping-label.png" alt="WARES ship-to-pit shipping label design" loading="lazy"><figcaption>{{caption: shipping}}</figcaption></figure>
       <figure><img src="assets/wares/site-store.webp" alt="warobotics.education storefront in the WARES brand" loading="lazy"><figcaption>{{caption: store}}</figcaption></figure>
       <figure><img src="assets/wares/site-kitbot.webp" alt="Kitbot build instructions microsite" loading="lazy"><figcaption>{{caption: kitbot}}</figcaption></figure>
