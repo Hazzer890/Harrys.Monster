@@ -201,14 +201,59 @@ body {
 .nav-toggle { display: none; }
 
 /* ---------- Hero: offset panel + overlapping terminal ---------- */
+/* Fills the viewport below the sticky nav and centres the composition, so
+   nothing below the hero is visible until you scroll. The extra bottom
+   padding balances the terminal's overhang past the panel. */
 .hero {
   position: relative;
   max-width: var(--maxw);
-  margin: clamp(56px, 9vw, 100px) auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  min-height: calc(100svh - 80px);
+  display: flex;
+  align-items: center;
+}
+.hero-stage { position: relative; width: 100%; }
+/* Scroll cue: label over a hairline track with a light travelling down it */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--ink-mute);
+  transition: color 0.2s;
+}
+.scroll-cue:hover { color: var(--ink); }
+.scroll-cue-line {
+  position: relative;
+  width: 2px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--glass-brd);
+}
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  animation: scroll-cue 2.2s var(--ease) infinite;
+}
+@keyframes scroll-cue {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(250%); }
 }
 .hero-panel {
-  width: min(72%, 760px);
+  width: min(91%, 975px);
+  top: 42px;
   padding: clamp(36px, 5vw, 64px);
   border-radius: var(--radius-lg);
 }
@@ -242,7 +287,7 @@ body {
    hero→about section boundary. Parallax wrapper; window inside. */
 .hero-terminal {
   position: absolute;
-  right: 24px;
+  right: 0;
   bottom: clamp(-120px, -9vw, -64px);
   width: min(44%, 470px);
   z-index: 3;
@@ -251,12 +296,12 @@ body {
    overlaps its lower edge (higher z-index) for the stacked-glass look. */
 .hero-photo {
   position: absolute;
-  top: 0;
-  right: 24px;
+  top: 10px;
+  right: 36px;
   width: min(33%, 344px);
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 25 / 24;
   z-index: 2;
-  border-radius: var(--radius-lg);
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--glass-brd);
   box-shadow:
@@ -266,20 +311,22 @@ body {
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ---------- About: single full-width panel ---------- */
-#about { margin-top: clamp(150px, 18vw, 220px); }
 .about-layout { position: relative; }
 .about-panel { padding: clamp(28px, 4vw, 48px); }
 
-/* ---------- Projects: pinned rail + staggered cards ---------- */
+/* ---------- Projects: irregular mosaic — the heading is one tile in it ----------
+   The cards are direct grid items (the list wrapper goes `display: contents`),
+   so each one picks its own span and the rows stagger instead of stacking in a
+   single right-hand column. */
 .projects-layout {
   display: grid;
-  grid-template-columns: minmax(250px, 330px) 1fr;
-  gap: clamp(28px, 4.5vw, 72px);
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(22px, 2.8vw, 38px);
   align-items: start;
 }
 .projects-rail {
-  position: sticky;
-  top: 110px;
+  grid-column: 1 / span 2;
+  padding-top: clamp(8px, 2vw, 28px);
 }
 .projects-rail .section-title { font-size: clamp(2rem, 4.6vw, 3rem); }
 .projects-rail-note {
@@ -299,12 +346,21 @@ body {
   display: grid;
   gap: 26px;
 }
+/* Inside the mosaic the wrapper is transparent, so the cards themselves land
+   in .projects-layout's grid. */
+.projects-layout > .projects-list { display: contents; }
+.projects-layout .project-wrap:nth-child(1) { grid-column: 3 / span 4; }
+.projects-layout .project-wrap:nth-child(2) { grid-column: 1 / span 3; }
+.projects-layout .project-wrap:nth-child(3) { grid-column: 4 / span 3; margin-top: clamp(0px, 5vw, 64px); }
+.projects-layout .project-wrap:nth-child(4) { grid-column: 2 / span 3; margin-top: clamp(0px, 2.5vw, 30px); }
+.projects-layout .project-wrap:nth-child(5) { grid-column: 4 / span 3; margin-top: clamp(0px, 1.5vw, 18px); }
+
 /* Hub pages (guides/timeline) put the list straight under .section — cap its
-   width so single-column cards keep a readable measure. Index nests the list
-   inside .projects-layout, so it is unaffected. */
+   width so single-column cards keep a readable measure, and keep the old
+   left/right stagger there. */
 .section > .projects-list { max-width: 840px; }
-.project-wrap:nth-child(odd)  { margin-right: clamp(0px, 6vw, 72px); }
-.project-wrap:nth-child(even) { margin-left: clamp(0px, 6vw, 72px); }
+.section > .projects-list > .project-wrap:nth-child(odd)  { margin-right: clamp(0px, 6vw, 72px); }
+.section > .projects-list > .project-wrap:nth-child(even) { margin-left: clamp(0px, 6vw, 72px); }
 
 /* ---------- Explore: asymmetric pair, second card drops low ---------- */
 .explore {
