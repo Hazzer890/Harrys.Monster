@@ -3,13 +3,21 @@
    ============================================================ */
 
 @media (max-width: 1024px) {
-  .project-wrap:nth-child(odd)  { margin-right: 0; }
-  .project-wrap:nth-child(even) { margin-left: 0; }
+  /* Mosaic unwinds: heading on top, cards back to one plain column */
+  .projects-layout { grid-template-columns: 1fr; }
+  .projects-layout > .projects-list { display: grid; gap: 26px; }
+  /* :nth-child keeps this at the same specificity as the mosaic spans above,
+     so load order decides — without it the spans leak into the narrow layout. */
+  .projects-layout .project-wrap:nth-child(n) { grid-column: auto; margin-top: 0; }
+  .section > .projects-list > .project-wrap:nth-child(odd)  { margin-right: 0; }
+  .section > .projects-list > .project-wrap:nth-child(even) { margin-left: 0; }
 }
 
 @media (max-width: 900px) {
   /* Hero: photo + terminal drop below the panel and stack in flow */
-  .hero-panel { width: 100%; }
+  .hero { min-height: 0; padding-bottom: 0; margin-top: clamp(56px, 9vw, 100px); }
+  .scroll-cue { display: none; } /* hero isn't full-height here, nothing to cue */
+  .hero-panel { width: 100%; top: 0; }
   .hero-photo {
     position: static;
     width: min(100%, 300px);
@@ -20,12 +28,8 @@
     width: min(100%, 520px);
     margin: 24px 0 -48px auto;
   }
-  #about { margin-top: clamp(120px, 16vw, 160px); }
   .about-panel { padding: clamp(28px, 5vw, 40px); }
 
-  /* Projects: rail unpins and sits above the cards */
-  .projects-layout { grid-template-columns: 1fr; }
-  .projects-rail { position: static; }
   .projects-rail-note { max-width: none; }
 
   .explore { grid-template-columns: 1fr; }
@@ -97,6 +101,7 @@
   .js .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
   .tilt { transform: none !important; }
   .js .caret { animation: none !important; }
+  .scroll-cue-line::after { animation: none !important; }
   .glass--hero {
     backdrop-filter: blur(26px) saturate(180%);
     -webkit-backdrop-filter: blur(26px) saturate(180%);

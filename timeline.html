@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Harry Cassidy's experience and education timeline.">
+  <meta name="description" content="Who Harry Cassidy is: about, skills, and an experience and education timeline.">
   <meta name="theme-color" content="#f5f7fc">
   <link rel="canonical" href="https://harrys.monster/timeline.html">
-  <title>Experience | Harry Cassidy</title>
+  <title>Who am I? | Harry Cassidy</title>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://harrys.monster/timeline.html">
-  <meta property="og:title" content="Experience | Harry Cassidy">
+  <meta property="og:title" content="Who am I? | Harry Cassidy">
   <meta property="og:description" content="Education and work timeline of Harry Cassidy.">
   <meta name="twitter:card" content="summary">
 
@@ -35,10 +35,32 @@
   <!-- SVG filter: liquid-glass refraction on the hero panel backdrop -->
   <svg class="glass-defs" aria-hidden="true" focusable="false" width="0" height="0">
     <defs>
-      <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+      <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
         <feGaussianBlur in="noise" stdDeviation="3" result="softNoise"/>
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!-- Chromatic aberration: each channel bends by a different amount,
+             then the three are recombined. -->
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="18" xChannelSelector="R" yChannelSelector="G" result="bendR"/>
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="13" xChannelSelector="R" yChannelSelector="G" result="bendG"/>
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="8"  xChannelSelector="R" yChannelSelector="G" result="bendB"/>
+        <feColorMatrix in="bendR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="onlyR"/>
+        <feColorMatrix in="bendG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="onlyG"/>
+        <feColorMatrix in="bendB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="onlyB"/>
+        <feBlend in="onlyR" in2="onlyG" mode="screen" result="bentRG"/>
+        <feBlend in="bentRG" in2="onlyB" mode="screen" result="bent"/>
+
+        <!-- Edge refraction: a band along the rim bends much harder, the way
+             a thick lens does where it curves away. -->
+        <feMorphology in="SourceAlpha" operator="erode" radius="18" result="core"/>
+        <feComposite in="SourceAlpha" in2="core" operator="out" result="rim"/>
+        <feGaussianBlur in="rim" stdDeviation="7" result="rimSoft"/>
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="38" xChannelSelector="R" yChannelSelector="G" result="bendEdge"/>
+        <feComposite in="bendEdge" in2="rimSoft" operator="in" result="edgeOnly"/>
+        <feMerge>
+          <feMergeNode in="bent"/>
+          <feMergeNode in="edgeOnly"/>
+        </feMerge>
       </filter>
     </defs>
   </svg>
@@ -59,8 +81,7 @@
 
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="index.html#about" class="nav-link">About</a></li>
-        <li><a href="timeline.html" class="nav-link active">Experience</a></li>
+        <li><a href="timeline.html" class="nav-link active">Who am I?</a></li>
         <li><a href="guides.html" class="nav-link">Guides</a></li>
         <li><a href="index.html#projects" class="nav-link">Projects</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
@@ -79,8 +100,41 @@
 
     <!-- ===== TIMELINE PAGE HERO ===== -->
     <section class="section">
-      <h1 class="hero-name reveal">Experience</h1>
+      <h1 class="hero-name reveal">Who am I?</h1>
       <p class="contact-intro reveal reveal--late">My journey so far — education, work, and everything in between.</p>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section">
+      <div class="about-layout">
+        <div class="about-panel glass" data-reveal="right">
+          <div class="section-head">
+            <span class="section-index">01</span>
+            <h2 class="section-title">About Me</h2>
+          </div>
+          <p>
+            Hello! I'm Harry, I'm a passionate engineer, educator, and egalitarian dedicated to making technology accessible and inclusive for everyone.
+            My interest in engineering started when I was young, and I cannot remember a time before I wanted to change the world with engineering.
+            I have had a passion for understanding how things work and sharing that my whole life.
+          </p>
+          <p>
+            I'm always eager to learn new skills and improve my craft.
+            Here are some skills I've been working with:
+          </p>
+          <div class="skills-list">
+            <span class="skill-pill">3D Design (Autodesk Suite, Solidworks, Onshape)</span>
+            <span class="skill-pill">C &amp; C++</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Microsoft Suite</span>
+            <span class="skill-pill">Microcontrollers</span>
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">Claude &amp; OpenAI APIs</span>
+            <span class="skill-pill">Agentic systems</span>
+            <span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">AI-assisted analytics</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== TIMELINE: offset glass panels riding the asymmetric grid ===== -->

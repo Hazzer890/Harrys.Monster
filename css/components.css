@@ -37,17 +37,22 @@
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.9) 0%,
+    rgba(120, 214, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.9) 7%,
     rgba(255, 255, 255, 0.12) 24%,
     rgba(255, 255, 255, 0) 50%,
     rgba(255, 255, 255, 0.12) 76%,
-    rgba(255, 255, 255, 0.55) 100%);
+    rgba(255, 255, 255, 0.55) 93%,
+    rgba(246, 150, 232, 0.8) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.8;
+  opacity: 0.9;
 }
+
+/* Hero panel reads a touch more solid than the other glass surfaces */
+.glass--hero { background: rgba(255, 255, 255, 0.46); }
 
 /* Genuine refraction wobble on the hero panel where supported */
 @supports (backdrop-filter: blur(1px)) {
@@ -196,6 +201,16 @@
   font-size: 0.92rem;
   transition: color 0.2s;
 }
+/* The card is the click target: the link stretches over the whole panel, so
+   there is still exactly one link per card and it keeps its own text. */
+.card { position: relative; }
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.card:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
 .card-link span { display: inline-block; transition: transform 0.25s var(--ease); }
 .card-link:hover { color: var(--accent-2); }
 .card-link:hover span { transform: translateX(5px); }

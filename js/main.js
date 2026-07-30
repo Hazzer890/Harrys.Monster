@@ -75,18 +75,22 @@
   }
 
   /* ---- Pointer tilt on glass panels — fine pointers, motion allowed ---- */
+  var clampHalf = function (n) { return Math.max(-0.5, Math.min(0.5, n)); };
   var finePointer = window.matchMedia('(pointer: fine)').matches;
   if (!reduceMotion && finePointer) {
     document.querySelectorAll('.glass--hero, .card, .explore-card').forEach(function (panel) {
       panel.classList.add('tilt');
-      panel.addEventListener('mousemove', function (ev) {
+      // Hero tracks the cursor anywhere on the page; cards only while hovered.
+      var hero = panel.classList.contains('glass--hero');
+      (hero ? document : panel).addEventListener('mousemove', function (ev) {
         var r = panel.getBoundingClientRect();
-        var px = (ev.clientX - r.left) / r.width - 0.5;
-        var py = (ev.clientY - r.top) / r.height - 0.5;
-        var max = 5; // degrees
+        var px = clampHalf((ev.clientX - r.left) / r.width - 0.5);
+        var py = clampHalf((ev.clientY - r.top) / r.height - 0.5);
+        var max = hero ? 3 : 5; // degrees
         panel.style.setProperty('--ry', (px * max).toFixed(2) + 'deg');
         panel.style.setProperty('--rx', (-py * max).toFixed(2) + 'deg');
       });
+      if (hero) return;
       panel.addEventListener('mouseleave', function () {
         panel.style.setProperty('--rx', '0deg');
         panel.style.setProperty('--ry', '0deg');
@@ -115,6 +119,21 @@
       if (!pTicking) { pTicking = true; requestAnimationFrame(updateParallax); }
     }, { passive: true });
     updateParallax();
+  }
+
+  /* ---- Scroll cue fades out over the first screenful ---- */
+  var cue = document.querySelector('.scroll-cue');
+  if (cue) {
+    var cTicking = false;
+    var updateCue = function () {
+      cTicking = false;
+      var y = window.scrollY || document.documentElement.scrollTop;
+      cue.style.opacity = Math.max(0, 1 - y / 260).toFixed(2);
+    };
+    window.addEventListener('scroll', function () {
+      if (!cTicking) { cTicking = true; requestAnimationFrame(updateCue); }
+    }, { passive: true });
+    updateCue();
   }
 
   /* ---- Contact form: AJAX submit with inline status ---- */
