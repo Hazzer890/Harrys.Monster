@@ -22,20 +22,6 @@ body {
   border-radius: 6px;
 }
 
-/* ---------- Inner-page header band ----------
-   Indigo strip behind the floating nav. responsive.css adds the lighthouse top
-   on wide viewports, where there is room for it beside the nav pill.
-   index.html opts out with <body class="home">. */
-body:not(.home)::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 148px;
-  z-index: -1;
-  background: var(--accent);
-}
-body { position: relative; z-index: 0; }
-
 /* ---------- Containers + sections ---------- */
 .container {
   width: 100%;
@@ -141,7 +127,7 @@ body { position: relative; z-index: 0; }
 }
 
 /* ---------- Hero: photo, centred halftone lighthouse, name + actions ----------
-   Name, tower, actions and links are grid items, never absolutely positioned,
+   Name, tower and actions are grid items, never absolutely positioned,
    so they cannot overlap each other however short the viewport gets — the hero
    grows past 100svh instead. Only the sky photo is a positioned layer. */
 .hero {
@@ -193,17 +179,6 @@ body { position: relative; z-index: 0; }
   width: auto; max-width: none;
   mask-image: linear-gradient(to bottom, #000 88%, transparent);
 }
-.hero-links {
-  grid-area: 2 / 1 / 3 / -1;
-  justify-self: start;
-  margin: 0;
-  display: flex; flex-wrap: wrap; gap: 14px;
-  font-size: 0.8rem;
-}
-/* Small white text on a photo: the shadow is what keeps it readable on the
-   brightest part of the sky, so no opacity on top of it. */
-.hero-links a { color: #fff; text-shadow: 0 1px 10px rgba(0, 40, 110, 0.8); }
-.hero-links a:hover { text-decoration: underline; }
 /* The global indigo ring all but vanishes against the sky photo. */
 .hero :focus-visible { outline-color: #fff; }
 

@@ -4,6 +4,8 @@ harrys.monster · design spec · v1.1, 21 Sep 2026
 
 Changed from v1.0: the hero was redesigned partway through the build on the owner's instruction, so the dotted wordmark, the tagline and the match13 left/right placement are gone and the nav logo became the monster icon on its own. This version describes what shipped rather than what was proposed.
 
+Changed after v1.1 shipped: the hero's GitHub, LinkedIn and email links and the inner-page header band were dropped on the owner's instruction; the halftone tower SVG is now used on index.html only.
+
 ## Goal
 
 Remove the rendering lag on phones and low-end machines, cut initial load, and bring the look up to date. The site stays light mode only. The reference is the match13.com home page, and the hero should sit as close to it as we can get.
@@ -27,13 +29,13 @@ match13 has none of this. Its home page is one static `.webp`, static SVG graphi
 | Animated background | Canvas, blobs and grain deleted. `js/background.js` deleted. |
 | Hero graphic | Halftone Wadjemup lighthouse, a portrait tower built from SVG circles, derived from a photo. |
 | Hero background | Full-bleed free-licence photo, sky over ocean. |
-| Hero content | Plain `<h1>` with the name, three buttons, and GitHub, LinkedIn and email links. No tagline and no dotted wordmark. Terminal and mission line deleted. Headshot and description move to the first section below the hero. |
+| Hero content | Plain `<h1>` with the name and three buttons. No tagline and no dotted wordmark. Terminal and mission line deleted. Headshot and description move to the first section below the hero; the contact section further down keeps the social links. |
 | Nav | Centred solid white pill, floating and sticky, CV link inside it. The logo is the monster icon on its own, with `aria-label="Harry Cassidy, home"` and the inner SVG hidden from the accessibility tree, on all 12 pages. |
 | Surfaces | White cards, hairline border, radius about 16px, shadow on hover only. |
 | Fonts | System sans and system mono. Google Fonts links removed from all 12 pages. |
 | Colour | Current off-white, navy ink, indigo accent. Cyan and magenta accents retired. |
 | Motion | Hover transitions only. Reveals, parallax, tilt, caret and scroll cue deleted. |
-| Inner pages | Flat retheme plus a 148px indigo header band. The band sits behind the floating nav, the page title starts below it on the flat background so the ink colour stays readable. Above 900px the band carries the lantern and the top of the tower at the right, clear of the nav pill; at 900px and below it is plain indigo and the SVG is not requested at all. |
+| Inner pages | Flat retheme, no header band. The pill nav floats directly over the off-white page background; the page title sits in normal flow below it. The halftone tower SVG is not requested on inner pages. |
 | Cleanup | Delete `design-proposals/`, unused tokens, the glass SVG filter from every page. |
 | Out of scope | SSH guide videos, guide code block styling, analytics snippet, page copy other than the removed mission line. |
 
@@ -44,9 +46,8 @@ Photo fills the viewport and the pill nav floats top centre. Everything over the
 - The name sits left, set right-aligned against the tower, in white with a soft shadow.
 - The halftone lighthouse is centred, sized by height (62svh) so the width follows from its aspect ratio, and sits low in the block. A mask fades the dots out at its base so the tower dissolves into the sky instead of ending on a ruled line.
 - The three buttons sit right, level with the tower's mid-height.
-- GitHub, LinkedIn and email links sit small at the bottom-left, in white with the same kind of shadow so they hold up over the brightest part of the sky.
 
-At 900px and below the hero restacks to one column: name, then buttons, then the tower at 44svh in the slack row, then the links.
+At 900px and below the hero restacks to one column: name, then buttons, then the tower at 44svh in the slack row.
 
 "Follows match13" now applies to the halftone technique, not to the placement.
 
@@ -57,12 +58,12 @@ Approach B: SVG circles, the same technique as match13.
 - `tools/halftone.py` takes a source photo, samples luminance on a grid, and writes one `<circle>` per cell with radius proportional to brightness (the dots are white). Output is a static `.svg`. The script runs once on a dev machine and its output is committed, the site has no build step. Photo is the only mode.
 - The source photo is a white tower against a dark sky, the reverse of what a luminance threshold expects, so it gets a chroma preprocessing pass first (`pre = 128 - R + B` per pixel) that makes the sky bright and the tower dark. The formula and the exact generator command are recorded in `assets/images/CREDITS.md`.
 - The generated grid covers the tower and the ground it stands on. Only the tower is ever shown, so the committed file is cropped to it: circles below the base dropped, `viewBox="46 0 29 88"`, 1,406 circles. Radii rounded to two decimals.
-- The tower SVG is referenced as a file (`<img>` on index, `background-image` on the inner-page band) so one cached download serves all 12 pages and the circles stay out of each page's DOM.
+- The tower SVG is referenced as a file (`<img>` on index.html's hero only) so the circles stay out of the page's DOM.
 
 ## Files
 
 - Changed: `css/variables.css`, `css/components.css`, `css/layout.css`, `css/responsive.css`. Mostly deletions.
-- Changed: all 12 HTML pages. Each loses the font links, the SVG filter, the canvas and blob markup, and gains the header band and the icon-only nav logo. `index.html` gets the new hero.
+- Changed: all 12 HTML pages. Each loses the font links, the SVG filter, the canvas and blob markup, and gains the icon-only nav logo. `index.html` gets the new hero.
 - Changed: `js/main.js`, reduced to the nav toggle and scroll-spy.
 - Deleted: `js/background.js`, `design-proposals/`.
 - Added: `tools/halftone.py` and `tools/test_halftone.py`, `assets/images/hero-sky.webp` (plus a phone-width variant), `assets/images/halftone-coast.svg`.

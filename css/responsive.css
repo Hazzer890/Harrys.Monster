@@ -2,15 +2,6 @@
    Responsive + motion preferences
    ============================================================ */
 
-/* The band shows the lantern and the top of the tower, sized so it reads as a
-   lighthouse rather than a smudge. Below this the nav pill fills the width and
-   there is nowhere to put it, so the band is plain indigo. */
-@media (min-width: 901px) {
-  body:not(.home)::before {
-    background: var(--accent) url("../assets/images/halftone-coast.svg?v=6") right 8% top 0 / auto 340px no-repeat;
-  }
-}
-
 @media (max-width: 1024px) {
   /* Mosaic unwinds: heading on top, cards back to one plain column */
   .projects-layout { grid-template-columns: 1fr; }
@@ -27,14 +18,13 @@
      the slack row so it sits low without ever reaching the other two. */
   .hero {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto 1fr;
     align-content: stretch;
     row-gap: clamp(16px, 3vw, 26px);
   }
   .hero .hero-name { grid-area: 1 / 1; justify-self: start; text-align: left; }
   .hero-actions { grid-area: 2 / 1; }
   .hero-coast { grid-area: 3 / 1; height: 44svh; justify-self: center; }
-  .hero-links { grid-area: 4 / 1; }
 
   .about { flex-direction: column; align-items: flex-start; }
   .about-photo { flex-basis: auto; width: min(100%, 260px); }
