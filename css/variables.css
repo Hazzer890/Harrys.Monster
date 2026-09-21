@@ -52,4 +52,7 @@
 
   /* Drop shadows */
   --shadow-strong: rgba(30, 41, 90, 0.16);
+
+  /* Soft halo under the white text that sits straight on the sea-and-sky photo */
+  --shadow-text: 0 2px 18px rgba(0, 40, 110, 0.5);
 }

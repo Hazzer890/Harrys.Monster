@@ -9,9 +9,50 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--bg);
+  background: #0d4f8d; /* the photo's own top colour, so there is never a white flash */
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+/* ---------- The pinned sea-and-sky photo ----------
+   One decorative portrait photo behind every page, sky on top and sea below.
+   At scroll 0 it shows its lower part, and it slides DOWN as the page scrolls
+   UP, so more and more sky comes into view. This is the site's only motion
+   besides hover transitions, and where the browser supports scroll-driven
+   animations it costs no JS and no main-thread work: one transform on the
+   compositor. js/main.js carries the same numbers for browsers that don't.
+
+   Two tunables, both here:
+     --sky-start   where the photo sits at scroll 0 (larger = more sea showing)
+     --sky-travel  how far you scroll to complete the move (larger = slower) */
+.bg-sky {
+  --sky-h: max(150vw, 170svh);
+  --sky-start: calc(var(--sky-h) * 0.265 - 40svh); /* horizon ~60% down the viewport */
+  --sky-travel: 420svh;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 100vw;
+  height: var(--sky-h);
+  object-fit: cover;
+  object-position: center bottom;
+  pointer-events: none;
+  transform: translateY(var(--sky-start));
+}
+@supports (animation-timeline: scroll()) {
+  .bg-sky {
+    animation: sky-reveal linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 var(--sky-travel);
+  }
+  @keyframes sky-reveal {
+    to { transform: translateY(calc(var(--sky-h) - 100svh)); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Pinned at the start position in both paths (main.js checks this too). */
+  .bg-sky { animation: none; transform: translateY(var(--sky-start)); }
 }
 
 ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--ink); }
@@ -126,12 +167,11 @@ body {
   margin: 0 0 18px;
 }
 
-/* ---------- Hero: photo, centred halftone lighthouse, name + actions ----------
+/* ---------- Hero: centred halftone lighthouse, name + actions ----------
    Name, tower and actions are grid items, never absolutely positioned,
    so they cannot overlap each other however short the viewport gets — the hero
-   grows past 100svh instead. Only the sky photo is a positioned layer. */
+   grows past 100svh instead. The sky behind it is the page-wide .bg-sky photo. */
 .hero {
-  position: relative;
   min-height: 100svh;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -139,26 +179,15 @@ body {
   align-items: center; /* name + actions level with the tower's mid-height */
   column-gap: clamp(20px, 3vw, 56px);
   padding: 104px clamp(24px, 4vw, 64px) 60px; /* keeps the tower lifted off the bottom edge */
-  background: #2f7fe0; /* shows until the photo decodes */
   color: #fff;
 }
-.hero-sky {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-/* The photo is positioned, so it would otherwise paint over the grid items. */
-.hero > *:not(.hero-sky) { position: relative; z-index: 1; }
 
 .hero .hero-name {
   grid-area: 1 / 1;
   justify-self: end;
   text-align: right;
   margin: 0;
-  color: #fff;
   font-size: clamp(2.2rem, 5.4vw, 4.2rem);
-  text-shadow: 0 2px 18px rgba(0, 40, 110, 0.5);
 }
 .hero-actions {
   grid-area: 1 / 3;
@@ -178,8 +207,6 @@ body {
   width: auto; max-width: none;
   mask-image: linear-gradient(to bottom, #000 88%, transparent);
 }
-/* The global indigo ring all but vanishes against the sky photo. */
-.hero :focus-visible { outline-color: #fff; }
 
 /* ---------- About: headshot + intro ---------- */
 .about {
@@ -278,3 +305,31 @@ body {
 /* Footer already provides the gutter + max-width; neutralise the inner
    .container so the text isn't double-inset. */
 .footer .container { max-width: none; padding: 0; }
+
+/* ---------- Text that sits straight on the photo ----------
+   The photo is bright, and what is behind a given element changes as the page
+   scrolls, so only display type is left out on it: white, with the soft halo
+   the hero name has always used. Everything at body size sits on a surface
+   instead — a white card, or the footer's own plate below. */
+.hero-name,
+.case-title {
+  color: #fff;
+  text-shadow: var(--shadow-text);
+}
+/* One line of small mono type, too little to deserve a card and too small to
+   read over bright water. A navy plate carries it instead. */
+.footer p {
+  display: inline-block;
+  color: #fff;
+  background: rgba(11, 42, 90, 0.62);
+  border-radius: 999px;
+  padding: 7px 18px;
+}
+
+/* The heading tile of the Projects mosaic: a card like the rest of the mosaic,
+   because its note and count are body size. */
+.projects-rail.glass { padding: clamp(24px, 3vw, 34px); }
+/* The global indigo ring all but vanishes against the photo. */
+.hero :focus-visible,
+.case-back:focus-visible { outline-color: #fff; }
+

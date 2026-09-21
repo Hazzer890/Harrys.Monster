@@ -2,8 +2,20 @@
 
 | File | Source | Author | Licence |
 |---|---|---|---|
-| hero-sky.webp, hero-sky-800.webp | https://unsplash.com/photos/blue-sky-and-white-clouds-crAfJNZRKRE | Kseniia Ilinykh | Unsplash License |
+| sea-sky.webp, sea-sky-800.webp | https://unsplash.com/photos/blue-sky-and-white-clouds-crAfJNZRKRE | Kseniia Ilinykh | Unsplash License |
 | halftone-coast.svg (derived from) | https://www.pexels.com/photo/the-wadjemup-lighthouse-in-rottnest-island-australia-6604878/ | Happy Donut | Pexels Licence |
+
+## How sea-sky.webp was made
+
+The Unsplash download is a 2400x3600 portrait. Both files are plain Pillow
+resizes of it at WebP quality 62, which is the lowest quality that leaves no
+visible banding in the flat sky:
+
+```
+im = Image.open("sky-src.jpg").convert("RGB")
+im.resize((1600, 2400), Image.LANCZOS).save("sea-sky.webp", quality=62, method=6)
+im.resize((800, 1200), Image.LANCZOS).save("sea-sky-800.webp", quality=62, method=6)
+```
 
 ## How halftone-coast.svg was made
 

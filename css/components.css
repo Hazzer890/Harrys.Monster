@@ -396,8 +396,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0 0 22px;
+  margin: 0 0 22px; /* colour comes from the on-photo block in layout.css */
 }
 .case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 .case-body {
@@ -436,3 +435,22 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 @media (max-width: 900px) {
   .case-body { margin-left: 0; }
 }
+
+/* ============================================================
+   Surfaces once the page background became a photo
+   ============================================================ */
+
+/* A lone intro paragraph that is its own card, used where a page's lede sits on
+   the photo rather than inside a panel (guides, timeline, wares). */
+p.glass {
+  padding: clamp(18px, 2.5vw, 24px) clamp(20px, 3vw, 28px);
+  width: min(100%, 62ch);
+}
+
+/* The --surface-* tints are 3-7% navy: right inside a white card, but over the
+   photo they read as sea rather than as a chip. These are the only tinted boxes
+   that sit outside a card. */
+.guide-toc,
+.case-meta .tech-pill,
+.case-back.btn-ghost { background: var(--card); }
+.case-back.btn-ghost:hover { background: var(--bg-2); }

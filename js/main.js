@@ -2,6 +2,29 @@
 (function () {
   'use strict';
 
+  /* ---- Pinned photo: fallback where CSS scroll timelines are missing ----
+     Firefox and Zen only. The numbers mirror .bg-sky in css/layout.css:
+     TRAVEL is --sky-travel (420svh), the rest is --sky-h and --sky-start.
+     Browsers with the CSS path, and anyone asking for reduced motion, run none
+     of this — the CSS already has the photo moving, or pinned. */
+  var sky = document.querySelector('.bg-sky');
+  if (sky && !CSS.supports('animation-timeline: scroll()') &&
+      !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var TRAVEL = 4.2, pending = false;
+    var drawSky = function () {
+      pending = false;
+      var vh = innerHeight, h = Math.max(innerWidth * 1.5, vh * 1.7);
+      var start = h * 0.265 - vh * 0.4;
+      var at = start + (h - vh - start) * Math.min(1, scrollY / (vh * TRAVEL));
+      sky.style.transform = 'translateY(' + at.toFixed(1) + 'px)';
+    };
+    addEventListener('scroll', function () {
+      if (!pending) { pending = true; requestAnimationFrame(drawSky); }
+    }, { passive: true });
+    addEventListener('resize', drawSky);
+    drawSky();
+  }
+
   /* ---- Footer year ---- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
