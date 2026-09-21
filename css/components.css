@@ -1,66 +1,18 @@
 /* ============================================================
-   Components — glass system, terminal chrome, cards, forms
+   Components — cards, buttons, forms, reading styles
    ============================================================ */
 
-/* ---------- Glass panel (base of everything) ---------- */
+/* ---------- Card surface ----------
+   Class is still called .glass so 13 pages of markup did not need editing. */
 .glass {
   position: relative;
-  background: var(--glass-fill);
-  border: 1px solid var(--glass-brd);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  /* Apple-style edge bevel: bright top specular, faint bottom light,
-     then a soft diffuse float shadow. */
-  box-shadow:
-    inset 0 1px 1px 0 var(--glass-rim),
-    inset 0 -1px 1px 0 var(--glass-rim-2),
-    inset 0 0 0 1px var(--surface-1),
-    0 14px 44px -14px var(--shadow-soft),
-    0 4px 14px -8px var(--shadow-soft);
+  transition: box-shadow 0.2s;
 }
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass {
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    backdrop-filter: blur(30px) saturate(180%);
-  }
-}
-/* Fallback when backdrop-filter is unsupported: opaque-enough fill */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass { background: var(--glass-fill-strong); }
-}
-
-/* Specular edge light: a clean white rim, brightest where light enters
-   (top-left) and exits (bottom-right) — the lens-bevel of liquid glass. */
-.glass::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg,
-    rgba(120, 214, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.9) 7%,
-    rgba(255, 255, 255, 0.12) 24%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0.12) 76%,
-    rgba(255, 255, 255, 0.55) 93%,
-    rgba(246, 150, 232, 0.8) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.9;
-}
-
-/* Hero panel reads a touch more solid than the other glass surfaces */
-.glass--hero { background: rgba(255, 255, 255, 0.46); }
-
-/* Genuine refraction wobble on the hero panel where supported */
-@supports (backdrop-filter: blur(1px)) {
-  .glass--hero {
-    -webkit-backdrop-filter: blur(36px) saturate(190%);
-    backdrop-filter: blur(36px) saturate(190%) url(#glass-distortion);
-  }
-}
+a.glass:hover,
+.card.glass:hover { box-shadow: 0 10px 30px -14px var(--shadow-strong); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -73,85 +25,17 @@
   font-weight: 500;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s;
+  transition: background 0.2s;
 }
-.btn-primary {
-  color: var(--btn-solid-ink);
-  background: var(--btn-solid);
-  box-shadow: 0 8px 24px -8px rgba(109, 139, 255, 0.8);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(109, 139, 255, 0.9); }
+.btn-primary { color: var(--btn-solid-ink); background: var(--btn-solid); }
+.btn-primary:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
 .btn-ghost,
 .btn-outline {
   color: var(--ink);
   background: var(--surface-2);
   border-color: var(--glass-brd);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
-.btn-ghost:hover,
-.btn-outline:hover { background: var(--surface-hover); transform: translateY(-2px); }
-
-/* ---------- Terminal window (engineers-desk chrome — the ONE) ---------- */
-.terminal-window {
-  background: var(--term-bg);
-  border: 1px solid var(--glass-brd);
-  border-radius: 14px;
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-    0 30px 70px -22px rgba(0, 0, 0, 0.8),
-    0 0 60px -30px rgba(52, 226, 226, 0.35);
-  overflow: hidden;
-}
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .terminal-window {
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    backdrop-filter: blur(20px) saturate(150%);
-  }
-}
-.titlebar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 11px 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-  border-bottom: 1px solid var(--glass-brd);
-}
-.lights { display: inline-flex; gap: 7px; }
-.l { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-.l--r { background: #ff5f57; }
-.l--y { background: #febc2e; }
-.l--g { background: #28c840; }
-.titlebar-title {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--code-ink-mute);
-  letter-spacing: 0.2px;
-}
-.terminal {
-  padding: clamp(16px, 2.5vw, 24px);
-  font-family: var(--font-mono);
-  font-size: 0.86rem;
-  line-height: 1.7;
-}
-.prompt { color: var(--term-green); white-space: nowrap; }
-.prompt .sep { color: var(--code-ink-mute); }
-.prompt .cwd { color: var(--term-blue); }
-.prompt .sigil { color: var(--term-amber); margin: 0 0.5ch 0 0.3ch; }
-.cmd-text { color: var(--code-ink); }
-.cmdline { margin: 0 0 2px; word-break: break-word; }
-.cmdout { margin: 10px 0 16px; color: var(--code-ink-soft); }
-.cmdout strong { color: var(--code-ink); font-weight: 500; }
-.caret {
-  display: inline-block;
-  width: 9px;
-  height: 1.05em;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  background: var(--term-amber);
-}
-.js .caret { animation: blink 1.05s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+.btn-ghost:hover, .btn-outline:hover { background: var(--surface-hover); }
 
 /* ---------- Skills ---------- */
 .skills-list {
@@ -175,11 +59,11 @@
   padding: clamp(24px, 3vw, 34px);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+  transition: box-shadow 0.2s;
 }
 .card-index {
   font-family: var(--font-mono);
-  color: var(--accent-2);
+  color: var(--accent);
   font-size: 0.85rem;
   margin: 0 0 14px;
 }
@@ -212,7 +96,7 @@
 }
 .card:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
 .card-link span { display: inline-block; transition: transform 0.25s var(--ease); }
-.card-link:hover { color: var(--accent-2); }
+.card-link:hover { color: var(--accent); }
 .card-link:hover span { transform: translateX(5px); }
 
 /* ---------- Explore cards (experience / guides) ---------- */
@@ -220,7 +104,6 @@
   display: block;
   padding: 30px;
   position: relative;
-  transition: transform 0.3s var(--ease);
 }
 .explore-card h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px; }
 .explore-card p { color: var(--ink-soft); margin: 0 0 18px; font-size: 0.95rem; }
@@ -228,7 +111,7 @@
   position: absolute;
   top: 26px; right: 28px;
   font-size: 1.4rem;
-  color: var(--accent-2);
+  color: var(--accent);
   transition: transform 0.25s var(--ease);
 }
 .explore-card:hover .explore-go { transform: translate(4px, -4px); }
@@ -259,16 +142,16 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--accent-2);
+  border-color: var(--accent);
   background: var(--surface-hover);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 30%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 .form-status { min-height: 1.4em; color: var(--ink-soft); font-size: 0.9rem; }
 .form-status.success { color: var(--term-green); }
 .form-status.error { color: var(--danger); }
 
 .contact-alt { margin: 24px 0 0; color: var(--ink-mute); font-size: 0.92rem; }
-.contact-alt a { color: var(--accent-2); }
+.contact-alt a { color: var(--accent); }
 .contact-alt a:hover { text-decoration: underline; }
 
 .contact-socials { display: flex; gap: 14px; margin-top: 24px; }
@@ -280,50 +163,16 @@
   color: var(--ink-soft);
   border: 1px solid var(--glass-brd);
   background: var(--surface-2);
-  transition: color 0.2s, transform 0.2s, background 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
-.social-link:hover { color: var(--ink); transform: translateY(-2px); background: var(--surface-hover); }
-
-/* ============================================================
-   Motion vocabulary — everything JS-gated on html.js;
-   content is fully visible with zero JS.
-   ============================================================ */
-
-/* On-load rise for the hero (fill-mode backwards ON PURPOSE:
-   `both` retains transform ownership and kills pointer tilt). */
-.js .reveal { animation: rise 0.6s var(--ease) backwards; }
-@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-.js .reveal--late { animation-delay: 0.18s; }
-
-/* Scroll-choreographed entrances (IntersectionObserver adds .in).
-   Directional: default up, or from the left/right. */
-.js [data-reveal] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-}
-.js [data-reveal="left"]  { transform: translateX(-48px); }
-.js [data-reveal="right"] { transform: translateX(48px); }
-.js [data-reveal].in { opacity: 1; transform: none; }
-
-/* Interior pages still use .fade-in — same treatment */
-.js .fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.js .fade-in.in,
-.js .fade-in.visible { opacity: 1; transform: none; }
-
-/* Pointer tilt (JS sets --rx/--ry on fine pointers only) */
-.tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+.social-link:hover { color: var(--ink); background: var(--surface-hover); }
 
 /* ============================================================
    Long-form reading floor — shared base for guide + case pages.
    Element defaults + the box shared by every callout/panel class.
    ============================================================ */
 h1, h2, h3, h4 { line-height: 1.15; letter-spacing: -0.02em; }
-main p a, .guide-content a, .case-body a { color: var(--accent-2); }
+main p a, .guide-content a, .case-body a { color: var(--accent); }
 main p a:hover, .guide-content a:hover, .case-body a:hover { text-decoration: underline; }
 
 pre, code, kbd {
@@ -383,7 +232,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 .guide-meta-label {
   font-family: var(--font-mono);
   font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--accent-2);
+  color: var(--accent);
 }
 .guide-meta-value { font-size: 0.9rem; color: var(--ink); }
 
@@ -408,7 +257,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 }
 .guide-toc a::before {
   content: counter(toc, decimal-leading-zero) "  ";
-  font-family: var(--font-mono); font-size: 0.78em; color: var(--accent-2);
+  font-family: var(--font-mono); font-size: 0.78em; color: var(--accent);
 }
 .guide-toc a:hover { color: var(--ink); background: var(--surface-2); text-decoration: none; }
 .guide-toc code { background: none; border: none; padding: 0; color: inherit; }
@@ -420,7 +269,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 .section-num {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.78rem; letter-spacing: 0.06em; color: var(--accent-2);
+  font-size: 0.78rem; letter-spacing: 0.06em; color: var(--accent);
   margin-bottom: 10px;
 }
 .guide-content h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.2; margin: 0 0 18px; }
@@ -433,7 +282,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   display: block; max-width: 100%; height: auto;
   margin: 22px 0; border-radius: 14px; border: 1px solid var(--glass-brd);
 }
-.guide-content :not(pre) > code { color: var(--accent-2); }
+.guide-content :not(pre) > code { color: var(--accent); }
 
 /* Code blocks — plain, deliberately NOT terminal chrome */
 .guide-content pre {
@@ -479,7 +328,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 /* Mental model + workflow grids */
 .mental-model-title, .workflow-title {
   font-family: var(--font-mono);
-  font-size: 0.8rem; letter-spacing: 0.04em; color: var(--accent-2); margin-bottom: 14px;
+  font-size: 0.8rem; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 14px;
 }
 .mental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .mental-cell {
@@ -503,13 +352,13 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   display: grid; grid-template-columns: minmax(140px, 40%) 1fr; gap: 12px;
   padding: 7px 0; border-top: 1px solid var(--glass-brd);
 }
-.cheat-cmd { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-2); }
+.cheat-cmd { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
 .cheat-desc { color: var(--ink-soft); font-size: 0.88rem; }
 
 /* Scenarios */
 .scenario-num {
   font-family: var(--font-mono);
-  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-3);
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent);
 }
 .scenario-q { font-weight: 600; color: var(--ink); margin: 6px 0 8px; }
 .scenario-a { color: var(--ink-soft); font-size: 0.92rem; }
@@ -574,7 +423,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   left: 0; top: 0.18em; bottom: 0.18em;
   width: 3px;
   border-radius: 2px;
-  background: var(--accent-2);
+  background: var(--accent);
 }
 .case-body p {
   color: var(--ink-soft);

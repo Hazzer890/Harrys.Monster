@@ -1,25 +1,21 @@
 /* ============================================================
-   Design tokens — hybrid liquid-glass system (light only).
-   Terminal chrome + guide code blocks stay dark (dark code on a
-   light page is the readable convention), so they use the fixed
-   terminal/code palette below.
+   Design tokens — flat light theme. Guide code blocks stay dark.
    ============================================================ */
 :root {
   /* ---- Theme-independent ---- */
-  --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
-  --font-heading: "Space Grotesk", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-body);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --radius: 22px;
-  --radius-lg: 30px;
+  --radius: 16px;
+  --radius-lg: 16px;
   --maxw: 1120px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   --reading-measure: 66ch;
   --reading-pad: clamp(28px, 4vw, 56px);
 
-  /* Fixed dark chrome — terminal window + guide code blocks + their ink/syntax */
-  --term-bg: rgba(12, 16, 30, 0.85);
+  /* Fixed dark chrome — guide code blocks + their ink/syntax */
   --code-bg: #0b1020;
   --code-ink: #e6ebf5;
   --code-ink-soft: #b9c3da;
@@ -36,15 +32,12 @@
   --ink-soft: #3f4a68;
   --ink-mute: #6b7590;
 
-  --glass-fill: rgba(255, 255, 255, 0.34);
-  --glass-fill-strong: rgba(255, 255, 255, 0.55);
-  --glass-brd: rgba(23, 34, 77, 0.12);
-  --glass-rim: rgba(255, 255, 255, 0.9);
-  --glass-rim-2: rgba(255, 255, 255, 0.4);
+  --card: #ffffff;
+  --line: rgba(23, 34, 77, 0.12);
+  --glass-brd: var(--line); /* legacy name, ~40 rules use it */
+  --btn-solid: var(--accent);
 
   --accent: #3b5bdb;
-  --accent-2: #0e7490;
-  --accent-3: #a21caf;
 
   /* Semantic status (theme-aware — distinct from the fixed terminal palette) */
   --ok: #15803d;
@@ -57,19 +50,9 @@
   --surface-3: rgba(23, 34, 77, 0.07);
   --surface-hover: rgba(23, 34, 77, 0.09);
 
-  /* Solid accent button (primary + nav CTA) */
-  --btn-solid: linear-gradient(135deg, #3b5bdb, #5b78e8);
   --btn-solid-ink: #ffffff;
 
   /* Drop shadows */
   --shadow-soft: rgba(30, 41, 90, 0.10);
   --shadow-strong: rgba(30, 41, 90, 0.16);
-
-  /* Ambient background field */
-  --bg-glow-1: #dbe4ff;
-  --bg-glow-2: #ffe7d4;
-  --blob-1: #6d8bff;
-  --blob-2: #ff9a4d;
-  --blob-3: #5b8bff;
-  --blob-opacity: 0.34;
 }

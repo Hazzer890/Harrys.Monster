@@ -2,11 +2,6 @@
 (function () {
   'use strict';
 
-  var root = document.documentElement;
-  root.classList.add('js'); // CSS gates all hidden/animated states on html.js
-
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   /* ---- Footer year ---- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
@@ -25,30 +20,6 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
-  }
-
-  /* ---- Scroll-choreographed reveals (index [data-reveal] + interior .fade-in) ---- */
-  var revealables = document.querySelectorAll('[data-reveal], .fade-in');
-  function revealAll() {
-    revealables.forEach(function (el) { el.classList.add('in'); });
-  }
-  if (revealables.length) {
-    if ('IntersectionObserver' in window && !reduceMotion) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.14, rootMargin: '0px 0px 12% 0px' });
-      revealables.forEach(function (el) { io.observe(el); });
-      // Safety net: static captures and screenshotters never scroll, so
-      // reveal anything the observer hasn't caught shortly after load.
-      window.addEventListener('load', function () { setTimeout(revealAll, 1100); });
-    } else {
-      revealAll();
-    }
   }
 
   /* ---- Scroll spy: highlight the nav link for the section in view ----
@@ -72,68 +43,6 @@
       });
     }, { rootMargin: '-30% 0px -55% 0px' });
     spySections.forEach(function (s) { spy.observe(s); });
-  }
-
-  /* ---- Pointer tilt on glass panels — fine pointers, motion allowed ---- */
-  var clampHalf = function (n) { return Math.max(-0.5, Math.min(0.5, n)); };
-  var finePointer = window.matchMedia('(pointer: fine)').matches;
-  if (!reduceMotion && finePointer) {
-    document.querySelectorAll('.glass--hero, .card, .explore-card').forEach(function (panel) {
-      panel.classList.add('tilt');
-      // Hero tracks the cursor anywhere on the page; cards only while hovered.
-      var hero = panel.classList.contains('glass--hero');
-      (hero ? document : panel).addEventListener('mousemove', function (ev) {
-        var r = panel.getBoundingClientRect();
-        var px = clampHalf((ev.clientX - r.left) / r.width - 0.5);
-        var py = clampHalf((ev.clientY - r.top) / r.height - 0.5);
-        var max = hero ? 3 : 5; // degrees
-        panel.style.setProperty('--ry', (px * max).toFixed(2) + 'deg');
-        panel.style.setProperty('--rx', (-py * max).toFixed(2) + 'deg');
-      });
-      if (hero) return;
-      panel.addEventListener('mouseleave', function () {
-        panel.style.setProperty('--rx', '0deg');
-        panel.style.setProperty('--ry', '0deg');
-      });
-    });
-  }
-
-  /* ---- Light parallax drift ([data-parallax="factor"] wrappers) ---- */
-  var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  if (!reduceMotion && parallaxEls.length) {
-    var pTicking = false;
-    var wideView = window.matchMedia('(min-width: 901px)'); // parallax els are static below this
-    var updateParallax = function () {
-      pTicking = false;
-      if (!wideView.matches) {
-        parallaxEls.forEach(function (el) { el.style.transform = ''; });
-        return;
-      }
-      var y = window.scrollY || document.documentElement.scrollTop;
-      parallaxEls.forEach(function (el) {
-        var f = parseFloat(el.getAttribute('data-parallax')) || 0;
-        el.style.transform = 'translateY(' + (-y * f).toFixed(1) + 'px)';
-      });
-    };
-    window.addEventListener('scroll', function () {
-      if (!pTicking) { pTicking = true; requestAnimationFrame(updateParallax); }
-    }, { passive: true });
-    updateParallax();
-  }
-
-  /* ---- Scroll cue fades out over the first screenful ---- */
-  var cue = document.querySelector('.scroll-cue');
-  if (cue) {
-    var cTicking = false;
-    var updateCue = function () {
-      cTicking = false;
-      var y = window.scrollY || document.documentElement.scrollTop;
-      cue.style.opacity = Math.max(0, 1 - y / 260).toFixed(2);
-    };
-    window.addEventListener('scroll', function () {
-      if (!cTicking) { cTicking = true; requestAnimationFrame(updateCue); }
-    }, { passive: true });
-    updateCue();
   }
 
   /* ---- Contact form: AJAX submit with inline status ---- */
