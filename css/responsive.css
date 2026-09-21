@@ -3,9 +3,6 @@
    ============================================================ */
 
 @media (max-width: 1024px) {
-  /* Wordmark drops clear of the copy block once the two share a column */
-  .hero-name { top: 54%; }
-
   /* Mosaic unwinds: heading on top, cards back to one plain column */
   .projects-layout { grid-template-columns: 1fr; }
   .projects-layout > .projects-list { display: grid; gap: 26px; }
@@ -17,11 +14,18 @@
 }
 
 @media (max-width: 900px) {
-  /* Hero restacks: copy under the nav, wordmark across the middle, tower
-     bottom-right and a little shorter so it clears the wordmark. */
-  .hero-copy { top: 104px; left: 24px; right: 24px; max-width: none; }
-  .hero-name { left: 24px; right: 24px; top: auto; bottom: 52%; width: auto; }
-  .hero-coast { --coast-h: 61svh; right: -5svh; }
+  /* Hero restacks to one column: name, actions, then the tower, which takes
+     the slack row so it sits low without ever reaching the other two. */
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    align-content: stretch;
+    row-gap: clamp(16px, 3vw, 26px);
+  }
+  .hero .hero-name { grid-area: 1 / 1; justify-self: start; text-align: left; }
+  .hero-actions { grid-area: 2 / 1; }
+  .hero-coast { grid-area: 3 / 1; --t: 44svh; justify-self: center; }
+  .hero-links { grid-area: 4 / 1; }
 
   .about { flex-direction: column; align-items: flex-start; }
   .about-photo { flex-basis: auto; width: min(100%, 260px); }
@@ -76,6 +80,9 @@
   .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .nav-link { display: block; border-radius: 12px; padding: 11px 14px; }
+  /* With the links hidden, space-between would strand the CV pill mid-bar
+     now that the logo is a small mark rather than the full name. */
+  .nav-cta { margin-left: auto; }
 
   .hero-actions .btn { flex: 1 1 auto; }
 }
