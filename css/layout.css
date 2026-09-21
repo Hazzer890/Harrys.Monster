@@ -138,8 +138,7 @@ body {
   align-content: end;  /* the whole block sits low, tower near the bottom */
   align-items: center; /* name + actions level with the tower's mid-height */
   column-gap: clamp(20px, 3vw, 56px);
-  row-gap: 20px;
-  padding: 104px clamp(24px, 4vw, 64px) 20px;
+  padding: 104px clamp(24px, 4vw, 64px) 60px; /* keeps the tower lifted off the bottom edge */
   background: #2f7fe0; /* shows until the photo decodes */
   color: #fff;
 }
