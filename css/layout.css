@@ -131,7 +131,91 @@ body { position: relative; z-index: 0; }
 .nav-cta:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
 .nav-toggle { display: none; }
 
-/* ---------- About: single full-width panel ---------- */
+/* ---------- Home: nav floats over the hero photo ---------- */
+.home .header { position: fixed; left: 0; right: 0; }
+
+/* ---------- Hero: photo + halftone lighthouse + dotted wordmark (after match13) ----------
+   The lighthouse is portrait (viewBox 84x109), so it is sized by HEIGHT and
+   pinned bottom-right; the wordmark sits to its left, level with the tower. */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #2f7fe0; /* shows until the photo decodes */
+  color: #fff;
+}
+.hero-sky {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* The SVG's ground strip starts at y 88.5 of 109; dropping the bottom 18.8%
+   below the fold leaves the tower standing on the viewport edge, with no cut
+   edge where the ground would otherwise stop short of the left of the screen.
+   Visible tower height is then 0.771 x --coast-h, the one knob here. The
+   negative right offset absorbs the empty margin right of the tower in the
+   SVG, so the tower itself sits near the edge. */
+.hero-coast {
+  --coast-h: 78svh;
+  position: absolute; right: -6svh; bottom: calc(var(--coast-h) * -0.188);
+  height: var(--coast-h); width: auto;
+}
+.hero-copy {
+  position: absolute;
+  left: clamp(24px, 4vw, 64px);
+  top: 30%;
+  max-width: 470px;
+}
+.hero-tagline {
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 24px;
+  text-shadow: 0 1px 12px rgba(0, 40, 110, 0.55);
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero .btn-ghost { background: #fff; border-color: transparent; color: var(--ink); }
+.hero .btn-ghost:hover { background: var(--bg-2); }
+/* The tower's left edge sits ~24svh in from the right, so offsetting the
+   wordmark in svh too keeps the gap constant as the viewport changes shape. */
+.hero-name {
+  position: absolute;
+  right: 26svh;
+  top: 46%;
+  width: min(44vw, 600px);
+  margin: 0;
+}
+.hero-wordmark { display: block; width: 100%; height: auto; }
+.hero-links {
+  position: absolute;
+  left: clamp(24px, 4vw, 64px); bottom: 16px;
+  margin: 0;
+  display: flex; gap: 14px;
+  font-size: 0.8rem;
+}
+.hero-links a { color: #fff; opacity: 0.85; }
+.hero-links a:hover { opacity: 1; text-decoration: underline; }
+/* The global indigo ring all but vanishes against the sky photo. */
+.hero :focus-visible { outline-color: #fff; }
+
+/* ---------- About: headshot + intro ---------- */
+.about {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 5vw, 56px);
+}
+.about-photo {
+  flex: 0 0 min(34%, 260px);
+  aspect-ratio: 25 / 24;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-intro { font-size: clamp(1.1rem, 2.2vw, 1.4rem); color: var(--ink-soft); max-width: 36ch; margin: 0; }
+
+/* ---------- About: single full-width panel (timeline.html) ---------- */
 .about-layout { position: relative; }
 .about-panel { padding: clamp(28px, 4vw, 48px); }
 

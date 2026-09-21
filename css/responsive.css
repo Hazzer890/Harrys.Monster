@@ -3,6 +3,9 @@
    ============================================================ */
 
 @media (max-width: 1024px) {
+  /* Wordmark drops clear of the copy block once the two share a column */
+  .hero-name { top: 54%; }
+
   /* Mosaic unwinds: heading on top, cards back to one plain column */
   .projects-layout { grid-template-columns: 1fr; }
   .projects-layout > .projects-list { display: grid; gap: 26px; }
@@ -14,6 +17,15 @@
 }
 
 @media (max-width: 900px) {
+  /* Hero restacks: copy under the nav, wordmark across the middle, tower
+     bottom-right and a little shorter so it clears the wordmark. */
+  .hero-copy { top: 104px; left: 24px; right: 24px; max-width: none; }
+  .hero-name { left: 24px; right: 24px; top: auto; bottom: 52%; width: auto; }
+  .hero-coast { --coast-h: 61svh; right: -5svh; }
+
+  .about { flex-direction: column; align-items: flex-start; }
+  .about-photo { flex-basis: auto; width: min(100%, 260px); }
+
   .about-panel { padding: clamp(28px, 5vw, 40px); }
 
   .projects-rail-note { max-width: none; }
