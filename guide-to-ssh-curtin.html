@@ -18,17 +18,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
   <!-- Styles -->
-  <link rel="stylesheet" href="css/reset.css?v=5">
-  <link rel="stylesheet" href="css/variables.css?v=5">
-  <link rel="stylesheet" href="css/layout.css?v=5">
-  <link rel="stylesheet" href="css/components.css?v=5">
-  <link rel="stylesheet" href="css/responsive.css?v=5">
+  <link rel="stylesheet" href="css/reset.css?v=6">
+  <link rel="stylesheet" href="css/variables.css?v=6">
+  <link rel="stylesheet" href="css/layout.css?v=6">
+  <link rel="stylesheet" href="css/components.css?v=6">
+  <link rel="stylesheet" href="css/responsive.css?v=6">
 
 <script>
 (function(){var A='https://analytics.harrys.monster/e',v;
@@ -58,48 +53,6 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 })();
 </script></head>
 <body>
-
-  <!-- SVG filter: liquid-glass refraction (shared background mount) -->
-  <svg class="glass-defs" aria-hidden="true" focusable="false" width="0" height="0">
-    <defs>
-      <filter id="glass-distortion" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
-        <feGaussianBlur in="noise" stdDeviation="3" result="softNoise"/>
-
-        <!-- Chromatic aberration: each channel bends by a different amount,
-             then the three are recombined. -->
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="18" xChannelSelector="R" yChannelSelector="G" result="bendR"/>
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="13" xChannelSelector="R" yChannelSelector="G" result="bendG"/>
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="8"  xChannelSelector="R" yChannelSelector="G" result="bendB"/>
-        <feColorMatrix in="bendR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="onlyR"/>
-        <feColorMatrix in="bendG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="onlyG"/>
-        <feColorMatrix in="bendB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="onlyB"/>
-        <feBlend in="onlyR" in2="onlyG" mode="screen" result="bentRG"/>
-        <feBlend in="bentRG" in2="onlyB" mode="screen" result="bent"/>
-
-        <!-- Edge refraction: a band along the rim bends much harder, the way
-             a thick lens does where it curves away. -->
-        <feMorphology in="SourceAlpha" operator="erode" radius="18" result="core"/>
-        <feComposite in="SourceAlpha" in2="core" operator="out" result="rim"/>
-        <feGaussianBlur in="rim" stdDeviation="7" result="rimSoft"/>
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="38" xChannelSelector="R" yChannelSelector="G" result="bendEdge"/>
-        <feComposite in="bendEdge" in2="rimSoft" operator="in" result="edgeOnly"/>
-        <feMerge>
-          <feMergeNode in="bent"/>
-          <feMergeNode in="edgeOnly"/>
-        </feMerge>
-      </filter>
-    </defs>
-  </svg>
-
-  <!-- Background mount: flow-field canvas + drifting gradient blobs -->
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="backdrop" aria-hidden="true">
-    <span class="blob blob--indigo"></span>
-    <span class="blob blob--cyan"></span>
-    <span class="blob blob--magenta"></span>
-    <span class="grain"></span>
-  </div>
 
   <!-- ===== HEADER / NAV ===== -->
   <header class="header">
@@ -170,14 +123,14 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
           <article class="guide-content glass">
 
-            <section id="why" class="fade-in">
+            <section id="why">
               <span class="section-num">§ 01</span>
               <h2>Why bother?</h2>
               <p>The CS lab machines come pre-loaded with the compilers, libraries, and marker scripts your unit coordinator expects. Your editor, your keyboard shortcuts, your machine, but every file and command lives on Curtin's hardware.</p>
 
             </section>
 
-            <section id="prereqs" class="fade-in">
+            <section id="prereqs">
               <span class="section-num">§ 02</span>
               <h2>Prerequisites</h2>
               <p>You'll need three things before any of this works:</p>
@@ -188,7 +141,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
               </ul>
             </section>
 
-            <section id="vpn" class="fade-in">
+            <section id="vpn">
               <span class="section-num">§ 03</span>
               <h2>VPN setup</h2>
               <p>The lab machines aren't reachable from the open internet — you have to enter Curtin's network first via VPN. The official, supported instructions live inside Curtin's own help system rather than on a public page, so the link rots if I copy it here.</p>
@@ -206,7 +159,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
               </div>
             </section>
 
-            <section id="ssh-basics" class="fade-in">
+            <section id="ssh-basics">
               <span class="section-num">§ 04</span>
               <h2>SSH connection basics</h2>
               <p>SSH (<em>Secure Shell</em>) is the protocol that lets you run commands on a remote machine as if you were sat at its keyboard. Curtin's lab machines all follow the same naming pattern, so once you know the shape of the address, you can target any of them.</p>
@@ -223,7 +176,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
               </div>
             </section>
 
-            <section id="vscode" class="fade-in">
+            <section id="vscode">
               <span class="section-num">§ 05</span>
               <h2>VSCode remote setup</h2>
               <p>Doing everything in a raw terminal is fine, but the whole point of this guide is to keep VSCode as your editor. Microsoft's <em>Remote — SSH</em> extension makes the lab machine appear as if its filesystem were local.</p>
@@ -265,7 +218,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
               </div>
             </section>
 
-            <section id="troubleshooting" class="fade-in">
+            <section id="troubleshooting">
               <span class="section-num">§ 06</span>
               <h2>Troubleshooting</h2>
               <p>The most common failure is the password prompt going weird — it disappears too fast, doesn't accept input, or the connection drops mid-handshake.</p>
@@ -283,7 +236,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
             <div class="ornament">§ § §</div>
 
-            <section id="contact" class="fade-in">
+            <section id="contact">
               <span class="section-num">§ 07</span>
               <h2>Contact</h2>
                 <p>Stuck on a step or spotted something out of date? Reach out via contact form! </p>
@@ -303,8 +256,6 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
       <p>Harry Cassidy &copy; <span id="year">2026</span></p>
     </div>
   </footer>
-
-  <script src="js/background.js?v=5" defer></script>
-  <script src="js/main.js?v=5" defer></script>
+  <script src="js/main.js?v=6" defer></script>
 </body>
 </html>
