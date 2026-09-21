@@ -1,5 +1,7 @@
 # Halftone Retheme Implementation Plan
 
+> **Note, 21 Sep 2026:** the owner changed the hero, wordmark, tagline and nav logo during execution, so parts of this plan describe work that was replaced rather than what shipped. The design spec at v1.1 is the record of the built design.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the animated liquid-glass theme with a static match13-style theme: photo hero with an SVG halftone coast and dotted wordmark on index, flat white surfaces and system fonts everywhere else.
