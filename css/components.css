@@ -29,13 +29,12 @@ a.glass:hover,
 }
 .btn-primary { color: var(--btn-solid-ink); background: var(--btn-solid); }
 .btn-primary:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
-.btn-ghost,
-.btn-outline {
+.btn-ghost {
   color: var(--ink);
   background: var(--surface-2);
   border-color: var(--glass-brd);
 }
-.btn-ghost:hover, .btn-outline:hover { background: var(--surface-hover); }
+.btn-ghost:hover { background: var(--surface-hover); }
 
 /* ---------- Skills ---------- */
 .skills-list {
