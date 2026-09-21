@@ -3,7 +3,7 @@
    ============================================================ */
 
 /* ---------- Card surface ----------
-   Class is still called .glass so 13 pages of markup did not need editing. */
+   Class is still called .glass so 12 pages of markup did not need editing. */
 .glass {
   position: relative;
   background: var(--card);
@@ -146,7 +146,7 @@ a.glass:hover,
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 .form-status { min-height: 1.4em; color: var(--ink-soft); font-size: 0.9rem; }
-.form-status.success { color: var(--term-green); }
+.form-status.success { color: var(--ok); }
 .form-status.error { color: var(--danger); }
 
 .contact-alt { margin: 24px 0 0; color: var(--ink-mute); font-size: 0.92rem; }
@@ -203,7 +203,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 
 /* ============================================================
    Guide article vocabulary (was the 3 guide pages' inline <style>)
-   Calm long-form reading on the shared glass system.
+   Calm long-form reading on the shared card system.
    ============================================================ */
 .timeline-hero { margin-top: clamp(40px, 7vw, 88px); }
 .guide-hero-panel {
@@ -261,7 +261,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 .guide-toc a:hover { color: var(--ink); background: var(--surface-2); text-decoration: none; }
 .guide-toc code { background: none; border: none; padding: 0; color: inherit; }
 
-/* The wide glass reading panel */
+/* The wide reading panel */
 .guide-content { padding: var(--reading-pad); border-radius: var(--radius-lg); }
 .guide-content > section { scroll-margin-top: 96px; }
 .guide-content > section + section { margin-top: clamp(40px, 6vw, 68px); }
@@ -382,7 +382,7 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
 
 /* ============================================================
    Case-study reading treatment (was the 4 case pages' inline <style>)
-   One wide right-shifted glass panel; shared reading measure + pad.
+   One wide right-shifted panel; shared reading measure + pad.
    ============================================================ */
 .case-main {
   max-width: var(--maxw);

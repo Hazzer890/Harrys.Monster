@@ -18,11 +18,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
 
-  <link rel="preload" as="image" type="image/webp" fetchpriority="high"
-        href="assets/images/hero-sky.webp"
-        imagesrcset="assets/images/hero-sky-800.webp 800w, assets/images/hero-sky.webp 1920w"
-        imagesizes="100vw">
-
   <!-- Styles -->
   <link rel="stylesheet" href="css/reset.css?v=6">
   <link rel="stylesheet" href="css/variables.css?v=6">
@@ -91,9 +86,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
       <h1 class="hero-name">Harry Cassidy</h1>
 
-      <div class="hero-coast" aria-hidden="true">
-        <img src="assets/images/halftone-coast.svg?v=6" alt="" decoding="async">
-      </div>
+      <img class="hero-coast" src="assets/images/halftone-coast.svg?v=6" alt="" decoding="async">
 
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -108,18 +101,18 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
       </p>
     </section>
 
-    <!-- ===== ABOUT: headshot + intro (moved down from the hero) ===== -->
+    <!-- ===== ABOUT: headshot + intro ===== -->
     <section class="section about">
       <div class="about-photo">
         <picture>
-          <source type="image/webp" srcset="assets/images/headshot.webp 1x, assets/images/headshot@2x.webp 2x">
-          <img src="assets/images/headshot.jpg" alt="Portrait of Harry Cassidy" width="560" height="640" loading="lazy" decoding="async">
+          <source type="image/webp" srcset="assets/images/headshot.webp">
+          <img src="assets/images/headshot.jpg" alt="Portrait of Harry Cassidy" width="1200" height="1800" loading="lazy" decoding="async">
         </picture>
       </div>
       <p class="about-intro">On this site you will find a collection of my work, achievements, and thoughts.</p>
     </section>
 
-    <!-- ===== PROJECTS: pinned rail + staggered cards ===== -->
+    <!-- ===== PROJECTS: heading tile + mosaic of cards ===== -->
     <section id="projects" class="section">
       <div class="projects-layout">
         <div class="projects-rail">

@@ -28,11 +28,11 @@
 
   --ink: #111832;
   --ink-soft: #3f4a68;
-  --ink-mute: #6b7590;
+  --ink-mute: #67718c; /* 4.54:1 on --bg; #6b7590 fell just short at 4.29:1 */
 
   --card: #ffffff;
   --line: rgba(23, 34, 77, 0.12);
-  --glass-brd: var(--line); /* legacy name, ~40 rules use it */
+  --glass-brd: var(--line); /* legacy name, 16 rules still use it */
   --btn-solid: var(--accent);
 
   --accent: #3b5bdb;
