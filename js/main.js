@@ -3,25 +3,30 @@
   'use strict';
 
   /* ---- Pinned photo: fallback where CSS scroll timelines are missing ----
-     Firefox and Zen only. The numbers mirror .bg-sky in css/layout.css:
-     TRAVEL is --sky-travel (420svh), the rest is --sky-h and --sky-start.
-     Browsers with the CSS path, and anyone asking for reduced motion, run none
-     of this — the CSS already has the photo moving, or pinned. */
+     Firefox and Zen only. The numbers mirror the tunables on .bg-sky in
+     css/layout.css; change them together:
+       TRAVEL        --sky-travel  420svh
+       WIDE, TALL    --sky-h       max(150vw, 170svh)
+       START, LIFT   --sky-start   --sky-h * 0.265 - 40svh
+     Browsers with the CSS path run none of this. Reduced motion pins the photo
+     at the start position here too, and is re-read if the OS setting changes. */
   var sky = document.querySelector('.bg-sky');
-  if (sky && !CSS.supports('animation-timeline: scroll()') &&
-      !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var TRAVEL = 4.2, pending = false;
+  if (sky && !CSS.supports('animation-timeline: scroll()')) {
+    var TRAVEL = 4.2, WIDE = 1.5, TALL = 1.7, START = 0.265, LIFT = 0.4;
+    var still = matchMedia('(prefers-reduced-motion: reduce)'), pending = false;
     var drawSky = function () {
       pending = false;
-      var vh = innerHeight, h = Math.max(innerWidth * 1.5, vh * 1.7);
-      var start = h * 0.265 - vh * 0.4;
-      var at = start + (h - vh - start) * Math.min(1, scrollY / (vh * TRAVEL));
-      sky.style.transform = 'translateY(' + at.toFixed(1) + 'px)';
+      var vh = innerHeight, h = Math.max(innerWidth * WIDE, vh * TALL);
+      var start = h * START - vh * LIFT;
+      var t = still.matches ? 0 : Math.min(1, scrollY / (vh * TRAVEL));
+      sky.style.transform = 'translateY(' + (start + (h - vh - start) * t).toFixed(1) + 'px)';
     };
-    addEventListener('scroll', function () {
+    var queueSky = function () {
       if (!pending) { pending = true; requestAnimationFrame(drawSky); }
-    }, { passive: true });
-    addEventListener('resize', drawSky);
+    };
+    addEventListener('scroll', queueSky, { passive: true });
+    addEventListener('resize', queueSky);
+    still.addEventListener('change', queueSky);
     drawSky();
   }
 

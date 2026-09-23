@@ -53,10 +53,10 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 </script></head>
 <body class="home">
   <!-- Pinned sea-and-sky photo; moves opposite to the scroll (see .bg-sky in layout.css) -->
-  <img class="bg-sky" alt="" fetchpriority="high" width="1600" height="2400" decoding="async"
-       src="assets/images/sea-sky.webp?v=7"
-       srcset="assets/images/sea-sky-800.webp?v=7 800w, assets/images/sea-sky.webp?v=7 1600w"
-       sizes="100vw">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/images/sea-sky-800.webp?v=7">
+    <img class="bg-sky" alt="" fetchpriority="high" width="1600" height="2400" decoding="async" src="assets/images/sea-sky.webp?v=7">
+  </picture>
 
   <!-- ===== HEADER / NAV ===== -->
   <header class="header">
@@ -82,11 +82,11 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
   <main>
 
-    <!-- ===== HERO: photo, centred halftone lighthouse, name + actions ===== -->
+    <!-- ===== HERO: photo, centred halftone palm island, name + actions ===== -->
     <section id="hero" class="hero">
       <h1 class="hero-name">Harry Cassidy</h1>
 
-      <img class="hero-coast" src="assets/images/halftone-coast.svg?v=7" alt="" decoding="async">
+      <img class="hero-island" src="assets/images/halftone-island.svg?v=7" alt="" width="96" height="65" decoding="async">
 
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">View My Work</a>

@@ -33,7 +33,7 @@ body {
   left: 0;
   bottom: 0;
   z-index: -1;
-  width: 100vw;
+  width: 100%;
   height: var(--sky-h);
   object-fit: cover;
   object-position: center bottom;
@@ -167,18 +167,18 @@ body {
   margin: 0 0 18px;
 }
 
-/* ---------- Hero: centred halftone lighthouse, name + actions ----------
-   Name, tower and actions are grid items, never absolutely positioned,
+/* ---------- Hero: centred halftone palm island, name + actions ----------
+   Name, island and actions are grid items, never absolutely positioned,
    so they cannot overlap each other however short the viewport gets — the hero
    grows past 100svh instead. The sky behind it is the page-wide .bg-sky photo. */
 .hero {
   min-height: 100svh;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  align-content: end;  /* the whole block sits low, tower near the bottom */
-  align-items: center; /* name + actions level with the tower's mid-height */
+  align-content: end; /* the whole block sits low, island near the bottom */
+  align-items: start; /* name + actions level with the top of the island */
   column-gap: clamp(20px, 3vw, 56px);
-  padding: 104px clamp(24px, 4vw, 64px) 60px; /* keeps the tower lifted off the bottom edge */
+  padding: 104px clamp(24px, 4vw, 64px) 60px; /* keeps the island lifted off the bottom edge */
   color: #fff;
 }
 
@@ -197,15 +197,14 @@ body {
 .hero .btn-ghost { background: #fff; border-color: transparent; color: var(--ink); }
 .hero .btn-ghost:hover { background: var(--bg-2); }
 
-/* Sized by height; the SVG's 29/88 viewBox gives the width. Without the mask
-   the base is a flat block of dots — the fade lets the tower dissolve into the
-   sky instead of ending on a ruled line. */
-.hero-coast {
+/* Sized by height; the 96/65 viewBox gives the width (about 74svh). The vw cap
+   keeps it under half the width on tall, narrow windows so the side columns
+   still fit the name and buttons. It is the tallest item, so it sets the row. */
+.hero-island {
   grid-area: 1 / 2;
   align-self: end;
-  height: 62svh;
+  height: min(50svh, 31vw);
   width: auto; max-width: none;
-  mask-image: linear-gradient(to bottom, #000 88%, transparent);
 }
 
 /* ---------- About: headshot + intro ---------- */

@@ -6,7 +6,7 @@ Changed from v1.0: the hero was redesigned partway through the build on the owne
 
 Changed after v1.1 shipped: the hero's GitHub, LinkedIn and email links and the inner-page header band were dropped on the owner's instruction; the halftone tower SVG is now used on index.html only.
 
-Changed in v1.2: the hero photo became a single sea-and-sky photo pinned behind all 12 pages, moving opposite to the scroll. That is the one motion exception, and it brought a set of rules about what text may sit on a photo. See "Moving background" below.
+Changed in v1.2: the hero photo became a single sea-and-sky photo pinned behind all 12 pages, moving opposite to the scroll. That is the one motion exception, and it brought a set of rules about what text may sit on a photo. See "Moving background" below. Later in v1.2 the hero graphic became a halftone palm island, with the name and buttons raised level with its top.
 
 ## Goal
 
@@ -29,7 +29,7 @@ match13 has none of this. Its home page is one static `.webp`, static SVG graphi
 |---|---|
 | Glass | Removed everywhere. No `backdrop-filter`, no SVG filter. |
 | Animated background | Canvas, blobs and grain deleted. `js/background.js` deleted. |
-| Hero graphic | Halftone Wadjemup lighthouse, a portrait tower built from SVG circles, derived from a photo. |
+| Hero graphic | Halftone palm island, a wide, short graphic built from SVG circles, derived from an AI-generated reference the owner supplied. |
 | Hero background | Full-bleed free-licence photo, sky over ocean. |
 | Hero content | Plain `<h1>` with the name and three buttons. No tagline and no dotted wordmark. Terminal and mission line deleted. Headshot and description move to the first section below the hero; the contact section further down keeps the social links. |
 | Nav | Centred solid white pill, floating and sticky, CV link inside it. The logo is the monster icon on its own, with `aria-label="Harry Cassidy, home"` and the inner SVG hidden from the accessibility tree, on all 12 pages. |
@@ -45,11 +45,11 @@ match13 has none of this. Its home page is one static `.webp`, static SVG graphi
 
 Photo fills the viewport and the pill nav floats top centre. Everything over the photo is a grid item rather than an absolutely positioned layer, so nothing can overlap however short the viewport gets, the hero just grows past 100svh instead.
 
-- The name sits left, set right-aligned against the tower, in white with a soft shadow.
-- The halftone lighthouse is centred, sized by height (62svh) so the width follows from its aspect ratio, and sits low in the block. A mask fades the dots out at its base so the tower dissolves into the sky instead of ending on a ruled line.
-- The three buttons sit right, level with the tower's mid-height.
+- The name sits left, set right-aligned against the island, in white with a soft shadow.
+- The halftone palm island is centred, sized by height (50svh, capped at 31vw on tall narrow windows) so the width follows from its 96:65 aspect ratio, and sits low in the block. Its base is the bottom edge of the graphic, crisp, with no mask.
+- The name and the three buttons sit level with the top of the island, not its middle.
 
-At 900px and below the hero restacks to one column: name, then buttons, then the tower at 44svh in the slack row.
+At 900px and below the hero restacks to one column: name, then buttons, then the island in the slack row, about 38svh tall and never wider than the column.
 
 "Follows match13" now applies to the halftone technique, not to the placement.
 
@@ -99,6 +99,7 @@ v1.2 on top of that:
 - Deleted: `assets/images/hero-sky.webp` and `hero-sky-800.webp`.
 - Changed: all 12 pages gain the `.bg-sky` image as the first child of `<body>`; `js/main.js` gains the fallback; `css/layout.css` and `css/components.css` gain the photo rules.
 - Asset cache version bumped to v7.
+- Added: `assets/images/halftone-island.svg`, its reference `island-ref.png` and `tools/island.py`. Deleted: `assets/images/halftone-coast.svg`.
 
 ## Images and licensing
 

@@ -189,7 +189,6 @@ table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left; }
 
 .callout,
-.guide-toc,
 .cheatsheet,
 .mental-model,
 .col-card,
@@ -242,7 +241,11 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
 }
-.guide-toc { position: sticky; top: 96px; margin: 0; font-size: 0.9rem; }
+.guide-toc {
+  position: sticky; top: 96px; margin: 0; font-size: 0.9rem;
+  background: var(--card); /* solid: it sits on the photo, not in a card */
+  border: 1px solid var(--glass-brd); border-radius: 14px; padding: 18px 20px;
+}
 .guide-toc-label {
   font-family: var(--font-mono);
   font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
@@ -450,7 +453,6 @@ p.glass {
 /* The --surface-* tints are 3-7% navy: right inside a white card, but over the
    photo they read as sea rather than as a chip. These are the only tinted boxes
    that sit outside a card. */
-.guide-toc,
 .case-meta .tech-pill,
 .case-back.btn-ghost { background: var(--card); }
 .case-back.btn-ghost:hover { background: var(--bg-2); }

@@ -14,7 +14,7 @@
 }
 
 @media (max-width: 900px) {
-  /* Hero restacks to one column: name, actions, then the tower, which takes
+  /* Hero restacks to one column: name, actions, then the island, which takes
      the slack row so it sits low without ever reaching the other two. */
   .hero {
     grid-template-columns: 1fr;
@@ -24,7 +24,8 @@
   }
   .hero .hero-name { grid-area: 1 / 1; justify-self: start; text-align: left; }
   .hero-actions { grid-area: 2 / 1; }
-  .hero-coast { grid-area: 3 / 1; height: 44svh; justify-self: center; }
+  /* About 38svh tall, sized by width so it never outgrows the column. */
+  .hero-island { grid-area: 3 / 1; width: min(100%, 56svh); height: auto; justify-self: center; }
 
   .about { flex-direction: column; align-items: flex-start; }
   .about-photo { flex-basis: auto; width: min(100%, 260px); }
