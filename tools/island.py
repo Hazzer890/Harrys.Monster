@@ -35,5 +35,6 @@ bb = canvas.getbbox(); canvas = canvas.crop((bb[0] - 10, bb[1] - 10, bb[2] + 10,
 tone = Image.new("L", canvas.size, 185)
 ImageDraw.Draw(tone).rectangle([0, canvas.height - island.height, canvas.width, canvas.height], fill=245)
 w, h, circles = halftone(canvas, tone.filter(ImageFilter.GaussianBlur(4)), 96, rmax=0.46, rmin=0.07)
+circles = [c for c in circles if not (c[0] > 85 and c[1] < 12)]  # two stray dots from the source's vignette corner
 open(OUT, "w").write(to_svg(w, h, circles))
 print(len(circles), "circles,", w, "x", h)
