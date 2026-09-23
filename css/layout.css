@@ -313,7 +313,6 @@ body {
 .hero-name,
 .case-title {
   color: #fff;
-  text-shadow: var(--shadow-text);
 }
 /* One line of small mono type, too little to deserve a card and too small to
    read over bright water. A navy plate carries it instead. */
