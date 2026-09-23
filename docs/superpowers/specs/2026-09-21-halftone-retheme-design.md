@@ -69,6 +69,8 @@ This is the only motion on the site besides hover transitions, and it earns the 
 
 The body background is `#0d4f8d`, sampled from the top of the photo, so there is no white flash before it decodes.
 
+Cost, measured on the usual emulated phone (390x844, 6x CPU throttle, Slow 4G): frame rate is unchanged, zero long frames idle or scrolling on both the CSS path and the JS fallback. Load time is not free. The sky becomes the largest thing painted, so LCP on index moved from about 1.0 s with no background to 1.5 to 2.1 s with it, with about 0.5 s of run to run noise on the local server. A preload puts the sky image second in flight after the HTML, which fixes discovery order but not the download itself. On a phone that is a 28 KB file, and GitHub Pages serves it compressed over HTTP/2, so the real cost should be well under the measured one. Still inside the 2.5 s target, with less margin than before.
+
 ### Text on a photo
 
 What sits behind a given element changes as the page scrolls, so the rule is that only display type is left out on the photo. Page titles (`.hero-name`, `.case-title`) are white with the soft halo the hero name has always used, held in `--shadow-text`. Everything at body size sits on a surface instead:
