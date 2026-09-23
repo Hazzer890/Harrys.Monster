@@ -19,8 +19,8 @@
       pending = false;
       var y = still.matches ? 0 : scrollY;
       var wrap = 2 * sky.firstElementChild.getBoundingClientRect().height;
-      sky.style.transform = 'translateY(' + (y * SKY_SPEED % wrap).toFixed(1) + 'px)';
-      var t = 'translateY(' + (y * SEA_SPEED).toFixed(1) + 'px)';
+      sky.style.transform = 'translateY(' + Math.round(y * SKY_SPEED % wrap) + 'px)';
+      var t = 'translateY(' + Math.round(y * SEA_SPEED) + 'px)';
       sea.forEach(function (el) { el.style.transform = t; });
     };
     var queueBg = function () {
