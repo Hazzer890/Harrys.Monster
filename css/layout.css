@@ -43,29 +43,29 @@ body {
    every two copies, so the animation wraps back by two copies and starts again:
    that covers a page of any length with four images. */
 .bg-sky {
-  --sky-h: max(110.25vw, var(--horizon)); /* one copy: the photo's own 2400x2646 shape, never shorter than the horizon */
+  --sky-h: max(108.75vw, var(--horizon)); /* one copy: the photo's own 2400x2610 shape, never shorter than the horizon */
   bottom: calc(100svh - var(--horizon) - var(--sky-h));
   width: 100%;
 }
 .bg-sky i {
   display: block;
   height: var(--sky-h);
-  background: url(../assets/images/sky.webp?v=9) center bottom / cover;
+  background: url(../assets/images/sky.webp?v=10) center bottom / cover;
 }
 .bg-sky i:nth-child(even) { transform: scaleY(-1); }
 
-/* The sea is the photo below the horizon, 2400x954, never shorter than the
+/* The sea is the photo below the horizon, 2400x944, never shorter than the
    gap under the horizon so it cannot run out at the bottom of the viewport. */
 .bg-sea {
   top: var(--horizon);
   width: 100%;
-  height: max(calc(100svh - var(--horizon)), 39.75vw);
-  background: url(../assets/images/sea.webp?v=9) center top / cover;
+  height: max(calc(100svh - var(--horizon)), 39.33vw);
+  background: url(../assets/images/sea.webp?v=10) center top / cover;
 }
 
 @media (max-width: 600px) {
-  .bg-sky i { background-image: url(../assets/images/sky-1000.webp?v=9); }
-  .bg-sea { background-image: url(../assets/images/sea-1000.webp?v=9); }
+  .bg-sky i { background-image: url(../assets/images/sky-1000.webp?v=10); }
+  .bg-sea { background-image: url(../assets/images/sea-1000.webp?v=10); }
 }
 
 /* Base on the horizon, centred, never wider than the viewport. */

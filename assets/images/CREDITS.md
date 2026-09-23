@@ -14,9 +14,10 @@ im = Image.open("sky-src.jpg").convert("RGB")      # 3000x4500
 for w, suffix in ((2400, ""), (1000, "-1000")):
     h = w * 3 // 2
     cut = round(h * 0.735)                           # horizon row
+    sky_cut, sea_cut = cut - 45, cut + 12              # keep the dark horizon edge out of both layers, it doubled at the mirror seam
     big = im.resize((w, h), Image.LANCZOS)
-    big.crop((0, 0, w, cut)).save("sky%s.webp" % suffix, quality=80, method=6)
-    big.crop((0, cut, w, h)).save("sea%s.webp" % suffix, quality=62, method=6)
+    big.crop((0, 0, w, sky_cut)).save("sky%s.webp" % suffix, quality=80, method=6)
+    big.crop((0, sea_cut, w, h)).save("sea%s.webp" % suffix, quality=62, method=6)
 ```
 
 ## How halftone-island.svg was made
