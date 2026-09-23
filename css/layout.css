@@ -14,45 +14,88 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- The pinned sea-and-sky photo ----------
-   One decorative portrait photo behind every page, sky on top and sea below.
-   At scroll 0 it shows its lower part, and it slides DOWN as the page scrolls
-   UP, so more and more sky comes into view. This is the site's only motion
-   besides hover transitions, and where the browser supports scroll-driven
-   animations it costs no JS and no main-thread work: one transform on the
-   compositor. js/main.js carries the same numbers for browsers that don't.
+/* ---------- Moving background: sky and sea ----------
+   Two pinned layers behind every page meet at a horizon line, and each slides
+   DOWN at its own share of the page scroll, so the sea drops away and more sky
+   comes into view. On index the halftone island sits on the horizon and rides
+   with the sea. Where the browser supports scroll-driven animations this is
+   three transforms on the compositor and no JS; js/main.js reads the same
+   speeds for browsers that don't.
 
-   Two tunables, both here:
-     --sky-start   where the photo sits at scroll 0 (larger = more sea showing)
-     --sky-travel  how far you scroll to complete the move (larger = slower) */
-.bg-sky {
-  --sky-h: max(150vw, 170svh);
-  --sky-start: calc(var(--sky-h) * 0.265 - 40svh); /* horizon ~60% down the viewport */
-  --sky-travel: 420svh;
+   The four tunables: */
+:root {
+  --horizon: 72svh;   /* where sky meets sea at scroll 0, from the top */
+  --sky-speed: 0.6;   /* share of the scroll the sky moves (0 pinned, 1 moves with the page) */
+  --sea-speed: 0.35;  /* same for the sea and the island */
+  --island: 35svh;    /* height of the island on index */
+}
+
+.bg-sky, .bg-sea, .hero-island {
   position: fixed;
   left: 0;
-  bottom: 0;
   z-index: -1;
-  width: 100%;
-  height: var(--sky-h);
-  object-fit: cover;
-  object-position: center bottom;
   pointer-events: none;
-  transform: translateY(var(--sky-start));
 }
+
+/* The sky scrolls further than any one photo is tall, so it is a strip of four
+   copies, alternately flipped, so every seam is a mirror and invisible. The
+   third copy from the top sits on the horizon at scroll 0. The strip repeats
+   every two copies, so the animation wraps back by two copies and starts again:
+   that covers a page of any length with four images. */
+.bg-sky {
+  --sky-h: max(110.25vw, var(--horizon)); /* one copy: the photo's own 2400x2646 shape, never shorter than the horizon */
+  bottom: calc(100svh - var(--horizon) - var(--sky-h));
+  width: 100%;
+}
+.bg-sky i {
+  display: block;
+  height: var(--sky-h);
+  background: url(../assets/images/sky.webp?v=9) center bottom / cover;
+}
+.bg-sky i:nth-child(even) { transform: scaleY(-1); }
+
+/* The sea is the photo below the horizon, 2400x954, never shorter than the
+   gap under the horizon so it cannot run out at the bottom of the viewport. */
+.bg-sea {
+  top: var(--horizon);
+  width: 100%;
+  height: max(calc(100svh - var(--horizon)), 39.75vw);
+  background: url(../assets/images/sea.webp?v=9) center top / cover;
+}
+
+@media (max-width: 600px) {
+  .bg-sky i { background-image: url(../assets/images/sky-1000.webp?v=9); }
+  .bg-sea { background-image: url(../assets/images/sea-1000.webp?v=9); }
+}
+
+/* Base on the horizon, centred, never wider than the viewport. */
+.hero-island {
+  right: 0;
+  bottom: calc(100svh - var(--horizon));
+  margin: 0 auto;
+  width: min(100%, calc(var(--island) * 96 / 65)); /* 96:65 viewBox */
+  height: auto;
+}
+
 @supports (animation-timeline: scroll()) {
-  .bg-sky {
-    animation: sky-reveal linear both;
+  .bg-sky, .bg-sea, .hero-island {
+    animation: sea-drift linear both;
     animation-timeline: scroll(root);
-    animation-range: 0 var(--sky-travel);
+    animation-range: 0 10000svh; /* longer than any page, so both paths agree; the sea is off screen long before */
   }
-  @keyframes sky-reveal {
-    to { transform: translateY(calc(var(--sky-h) - 100svh)); }
+  /* 50 wraps of two copies each: over 250,000px of page at 1440 wide and
+     75,000px on a 360x640 phone. The longest page is about 30,000px. */
+  .bg-sky {
+    animation-name: sky-drift;
+    animation-iteration-count: 50;
+    animation-range: 0 calc(50 * 2 * var(--sky-h) / var(--sky-speed));
   }
+  @keyframes sea-drift { to { transform: translateY(calc(10000svh * var(--sea-speed))); } }
+  @keyframes sky-drift { to { transform: translateY(calc(2 * var(--sky-h))); } }
 }
 @media (prefers-reduced-motion: reduce) {
-  /* Pinned at the start position in both paths (main.js checks this too). */
-  .bg-sky { animation: none; transform: translateY(var(--sky-start)); }
+  /* Pinned at the scroll-0 positions in both paths (main.js checks this too). */
+  .bg-sky, .bg-sea, .hero-island { animation: none; }
 }
 
 ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--ink); }
@@ -167,18 +210,18 @@ body {
   margin: 0 0 18px;
 }
 
-/* ---------- Hero: centred halftone palm island, name + actions ----------
-   Name, island and actions are grid items, never absolutely positioned,
-   so they cannot overlap each other however short the viewport gets — the hero
-   grows past 100svh instead. The sky behind it is the page-wide .bg-sky photo. */
+/* ---------- Hero: name and actions either side of the island ----------
+   The island itself is pinned on the horizon (above). The padding puts the
+   name and buttons level with its top at scroll 0, and the middle column is
+   as wide as the island so neither reaches it. */
 .hero {
   min-height: 100svh;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-content: end; /* the whole block sits low, island near the bottom */
-  align-items: start; /* name + actions level with the top of the island */
+  grid-template-columns: 1fr calc(var(--island) * 96 / 65) 1fr;
+  align-content: start;
+  align-items: start;
   column-gap: clamp(20px, 3vw, 56px);
-  padding: 104px clamp(24px, 4vw, 64px) 60px; /* keeps the island lifted off the bottom edge */
+  padding: calc(var(--horizon) - var(--island)) clamp(24px, 4vw, 64px) 60px;
   color: #fff;
 }
 
@@ -196,16 +239,6 @@ body {
 }
 .hero .btn-ghost { background: #fff; border-color: transparent; color: var(--ink); }
 .hero .btn-ghost:hover { background: var(--bg-2); }
-
-/* Sized by height; the 96/65 viewBox gives the width (about 74svh). The vw cap
-   keeps it under half the width on tall, narrow windows so the side columns
-   still fit the name and buttons. It is the tallest item, so it sets the row. */
-.hero-island {
-  grid-area: 1 / 2;
-  align-self: end;
-  height: min(50svh, 31vw);
-  width: auto; max-width: none;
-}
 
 /* ---------- About: headshot + intro ---------- */
 .about {

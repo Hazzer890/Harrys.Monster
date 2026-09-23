@@ -6,7 +6,7 @@ Changed from v1.0: the hero was redesigned partway through the build on the owne
 
 Changed after v1.1 shipped: the hero's GitHub, LinkedIn and email links and the inner-page header band were dropped on the owner's instruction; the halftone tower SVG is now used on index.html only.
 
-Changed in v1.2: the hero photo became a single sea-and-sky photo pinned behind all 12 pages, moving opposite to the scroll. That is the one motion exception, and it brought a set of rules about what text may sit on a photo. See "Moving background" below. Later in v1.2 the hero graphic became a halftone palm island, with the name and buttons raised level with its top.
+Changed in v1.2: the hero photo became a single sea-and-sky photo pinned behind all 12 pages, moving opposite to the scroll. That is the one motion exception, and it brought a set of rules about what text may sit on a photo. See "Moving background" below. Later in v1.2 the hero graphic became a halftone palm island, with the name and buttons raised level with its top. Last in v1.2 the photo was split into a sky layer and a sea layer that move at different speeds, with the island pinned on the horizon between them.
 
 ## Goal
 
@@ -43,23 +43,29 @@ match13 has none of this. Its home page is one static `.webp`, static SVG graphi
 
 ## Hero layout
 
-Photo fills the viewport and the pill nav floats top centre. Everything over the photo is a grid item rather than an absolutely positioned layer, so nothing can overlap however short the viewport gets, the hero just grows past 100svh instead.
+Photo fills the viewport and the pill nav floats top centre.
 
-- The name sits left, set right-aligned against the island, in white with a soft shadow.
-- The halftone palm island is centred, sized by height (50svh, capped at 31vw on tall narrow windows) so the width follows from its 96:65 aspect ratio, and sits low in the block. Its base is the bottom edge of the graphic, crisp, with no mask.
-- The name and the three buttons sit level with the top of the island, not its middle.
+- The halftone palm island is not part of the hero grid. It is pinned with its base on the horizon, centred, `--island` tall (35svh), and moves with the sea (see "Moving background"). Its base is the bottom edge of the graphic, crisp, with no mask.
+- The name sits left, set right-aligned, and the buttons sit right. The hero's top padding is `--horizon` minus `--island`, so at scroll 0 both are level with the top of the island, and the middle grid column is as wide as the island so neither reaches it.
 
-At 900px and below the hero restacks to one column: name, then buttons, then the island in the slack row, about 38svh tall and never wider than the column.
+On portrait screens 900px wide and below the hero restacks to one column: name, then buttons, at the top under the nav. The island stays on the horizon below them, and on short phones it shrinks so its top stays under the stacked buttons, which end about 350px down. Landscape phones keep the side-by-side layout, which already clears the island.
 
 "Follows match13" now applies to the halftone technique, not to the placement.
 
 ## Moving background (v1.2)
 
-One portrait photo of sea and sky, sky over the top 73 per cent, sits pinned behind every page as the first child of `<body>`. At scroll 0 it shows its lower part, the sea and the horizon about 60 per cent down the viewport, and as the page scrolls up the photo slides down, so more and more sky comes into view until the top of the photo is reached. The hero's own `.hero-sky` image is gone, this photo replaces it, which is also why the hero no longer has a background colour of its own.
+The photo is split at its horizon into two layers pinned behind every page, sky above and sea below, as the first children of `<body>`. At scroll 0 they meet at the horizon line. As the page scrolls up each slides down at its own share of the scroll, the sky faster than the sea, so the sea drops away and more sky comes into view. On index the halftone island sits on the horizon and moves with the sea.
 
-Two tunables, both on `.bg-sky` in `css/layout.css`. `--sky-start` is where the photo sits at scroll 0, larger means more sea showing. `--sky-travel` is how far you scroll to finish the move, currently 420svh, larger means slower.
+Four tunables, together on `:root` in `css/layout.css`:
 
-This is the only motion on the site besides hover transitions, and it earns the exception because it costs nothing to run. Where the browser has CSS scroll-driven animations the whole thing is one transform on a scroll timeline, so it runs on the compositor with no JavaScript and no main thread work, which is the opposite of the canvas and blur layers v1.0 removed. Firefox and Zen do not have scroll timelines yet, so `js/main.js` carries a ten line fallback behind `CSS.supports('animation-timeline: scroll()')`: a passive scroll listener writing at most one transform per frame through `requestAnimationFrame`, plus a resize handler. It is the only `requestAnimationFrame` on the site. Browsers with the CSS path run none of it, and under `prefers-reduced-motion: reduce` both paths leave the photo pinned at the start position. The numbers in the fallback mirror the custom properties, so the two paths land on the same pixel, and if you change one you change the other.
+- `--horizon: 72svh`, where sky meets sea at scroll 0, from the top.
+- `--sky-speed: 0.6`, the share of the scroll the sky moves. 0 is pinned, 1 moves with the page.
+- `--sea-speed: 0.35`, the same for the sea and the island.
+- `--island: 35svh`, the height of the island on index.
+
+The sky moves further than one photo is tall, so `.bg-sky` is a strip of four copies, alternately flipped, which makes every seam a mirror. The strip repeats every two copies, so the animation wraps back by two copies and starts again, and four images cover a page of any length. The sea is never shorter than the gap under the horizon, so it cannot run out at the bottom of the viewport. Below 600px wide both layers use the 1000px images.
+
+This is the only motion on the site besides hover transitions, and it earns the exception because it costs nothing to run. Where the browser has CSS scroll-driven animations it is three transforms on a scroll timeline, on the compositor, with no JavaScript. Firefox and Zen do not have scroll timelines yet, so `js/main.js` carries a short fallback behind `CSS.supports('animation-timeline: scroll()')`: a passive scroll listener writing the transforms at most once per frame through `requestAnimationFrame`, plus a resize handler. It is the only `requestAnimationFrame` on the site. It reads the two speeds from the CSS custom properties, so the tunables live in one place. Under `prefers-reduced-motion: reduce` both paths leave everything at its scroll-0 position.
 
 The body background is `#0d4f8d`, sampled from the top of the photo, so there is no white flash before it decodes.
 
@@ -100,6 +106,8 @@ v1.2 on top of that:
 - Changed: all 12 pages gain the `.bg-sky` image as the first child of `<body>`; `js/main.js` gains the fallback; `css/layout.css` and `css/components.css` gain the photo rules.
 - Asset cache version bumped to v7.
 - Added: `assets/images/halftone-island.svg`, its reference `island-ref.png` and `tools/island.py`. Deleted: `assets/images/halftone-coast.svg`.
+- Added: `assets/images/sky.webp` and `sea.webp` (2400 wide) and their 1000-wide `-1000` versions, the same Unsplash photo split at its horizon. Deleted: `sea-sky.webp` and `sea-sky-800.webp`.
+- Asset cache version bumped to v9.
 
 ## Images and licensing
 

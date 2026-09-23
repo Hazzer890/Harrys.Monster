@@ -19,11 +19,11 @@
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/reset.css?v=8">
-  <link rel="stylesheet" href="css/variables.css?v=8">
-  <link rel="stylesheet" href="css/layout.css?v=8">
-  <link rel="stylesheet" href="css/components.css?v=8">
-  <link rel="stylesheet" href="css/responsive.css?v=8">
+  <link rel="stylesheet" href="css/reset.css?v=9">
+  <link rel="stylesheet" href="css/variables.css?v=9">
+  <link rel="stylesheet" href="css/layout.css?v=9">
+  <link rel="stylesheet" href="css/components.css?v=9">
+  <link rel="stylesheet" href="css/responsive.css?v=9">
 
   <style>
     /* WARES case study palette — scoped, no site CSS touched */
@@ -66,11 +66,9 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 })();
 </script></head>
 <body>
-  <!-- Pinned sea-and-sky photo; moves opposite to the scroll (see .bg-sky in layout.css) -->
-  <picture>
-    <source media="(max-width: 600px)" srcset="assets/images/sea-sky-800.webp?v=8">
-    <img class="bg-sky" alt="" width="1600" height="2400" decoding="async" src="assets/images/sea-sky.webp?v=8">
-  </picture>
+  <!-- Pinned sky and sea; each slides down at its own share of the scroll (see layout.css) -->
+  <div class="bg-sky"><i></i><i></i><i></i><i></i></div>
+  <div class="bg-sea"></div>
 
 
   <!-- ===== HEADER / NAV ===== -->
@@ -149,6 +147,6 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
   <footer class="footer">
     <div class="container"><p>Harry Cassidy &copy; <span id="year">2026</span></p></div>
   </footer>
-  <script src="js/main.js?v=8" defer></script>
+  <script src="js/main.js?v=9" defer></script>
 </body>
 </html>

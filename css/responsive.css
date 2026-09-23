@@ -13,20 +13,22 @@
   .section > .projects-list > .project-wrap:nth-child(even) { margin-left: 0; }
 }
 
-@media (max-width: 900px) {
-  /* Hero restacks to one column: name, actions, then the island, which takes
-     the slack row so it sits low without ever reaching the other two. */
+/* Hero restacks on narrow portrait screens: name, then actions, at the top
+   under the nav. The island stays pinned on the horizon below them, shrunk on
+   short phones so its top stays under the stacked buttons (about 350px down).
+   Landscape phones keep the side-by-side layout, which clears the island. */
+@media (max-width: 900px) and (orientation: portrait) {
+  :root { --island: min(35svh, calc(var(--horizon) - 350px)); }
   .hero {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-    align-content: stretch;
     row-gap: clamp(16px, 3vw, 26px);
+    padding-top: 104px;
   }
   .hero .hero-name { grid-area: 1 / 1; justify-self: start; text-align: left; }
   .hero-actions { grid-area: 2 / 1; }
-  /* About 38svh tall, sized by width so it never outgrows the column. */
-  .hero-island { grid-area: 3 / 1; width: min(100%, 56svh); height: auto; justify-self: center; }
+}
 
+@media (max-width: 900px) {
   .about { flex-direction: column; align-items: flex-start; }
   .about-photo { flex-basis: auto; width: min(100%, 260px); }
 

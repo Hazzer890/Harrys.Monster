@@ -2,32 +2,34 @@
 (function () {
   'use strict';
 
-  /* ---- Pinned photo: fallback where CSS scroll timelines are missing ----
-     Firefox and Zen only. The numbers mirror the tunables on .bg-sky in
-     css/layout.css; change them together:
-       TRAVEL        --sky-travel  420svh
-       WIDE, TALL    --sky-h       max(150vw, 170svh)
-       START, LIFT   --sky-start   --sky-h * 0.265 - 40svh
-     Browsers with the CSS path run none of this. Reduced motion pins the photo
-     at the start position here too, and is re-read if the OS setting changes. */
+  /* ---- Moving background: fallback where CSS scroll timelines are missing ----
+     Firefox and Zen only; browsers with the CSS path run none of this. The
+     speeds are read from the tunables in css/layout.css, so they live in one
+     place. The sky wraps back every two copies, as the CSS animation does.
+     Reduced motion pins everything at scroll 0 here too, and is re-read if
+     the OS setting changes. */
   var sky = document.querySelector('.bg-sky');
   if (sky && !CSS.supports('animation-timeline: scroll()')) {
-    var TRAVEL = 4.2, WIDE = 1.5, TALL = 1.7, START = 0.265, LIFT = 0.4;
+    var root = getComputedStyle(document.documentElement);
+    var SKY_SPEED = +root.getPropertyValue('--sky-speed');
+    var SEA_SPEED = +root.getPropertyValue('--sea-speed');
+    var sea = document.querySelectorAll('.bg-sea, .hero-island');
     var still = matchMedia('(prefers-reduced-motion: reduce)'), pending = false;
-    var drawSky = function () {
+    var drawBg = function () {
       pending = false;
-      var vh = innerHeight, h = Math.max(innerWidth * WIDE, vh * TALL);
-      var start = h * START - vh * LIFT;
-      var t = still.matches ? 0 : Math.min(1, scrollY / (vh * TRAVEL));
-      sky.style.transform = 'translateY(' + (start + (h - vh - start) * t).toFixed(1) + 'px)';
+      var y = still.matches ? 0 : scrollY;
+      var wrap = 2 * sky.firstElementChild.getBoundingClientRect().height;
+      sky.style.transform = 'translateY(' + (y * SKY_SPEED % wrap).toFixed(1) + 'px)';
+      var t = 'translateY(' + (y * SEA_SPEED).toFixed(1) + 'px)';
+      sea.forEach(function (el) { el.style.transform = t; });
     };
-    var queueSky = function () {
-      if (!pending) { pending = true; requestAnimationFrame(drawSky); }
+    var queueBg = function () {
+      if (!pending) { pending = true; requestAnimationFrame(drawBg); }
     };
-    addEventListener('scroll', queueSky, { passive: true });
-    addEventListener('resize', queueSky);
-    still.addEventListener('change', queueSky);
-    drawSky();
+    addEventListener('scroll', queueBg, { passive: true });
+    addEventListener('resize', queueBg);
+    still.addEventListener('change', queueBg);
+    drawBg();
   }
 
   /* ---- Footer year ---- */
