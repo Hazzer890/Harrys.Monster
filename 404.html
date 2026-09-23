@@ -11,6 +11,9 @@
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
 
   <!-- Styles -->
+  <!-- The sky is a CSS background, which browsers discover late; preload it so it is the first image in flight. -->
+  <link rel="preload" as="image" href="assets/images/sky.webp?v=10" media="(min-width: 601px)">
+  <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=10" media="(max-width: 600px)">
   <link rel="stylesheet" href="css/reset.css?v=10">
   <link rel="stylesheet" href="css/variables.css?v=10">
   <link rel="stylesheet" href="css/layout.css?v=10">
