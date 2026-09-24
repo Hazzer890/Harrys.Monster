@@ -44,7 +44,7 @@
       var isOpen = header.classList.toggle('nav-open');
       toggle.setAttribute('aria-expanded', isOpen);
     });
-    document.querySelectorAll('.nav-link').forEach(function (link) {
+    document.querySelectorAll('a.nav-link, .nav-tile').forEach(function (link) {
       link.addEventListener('click', function () {
         header.classList.remove('nav-open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -52,12 +52,76 @@
     });
   }
 
+  /* ---- Nav dropdowns: one open at a time. With a mouse on desktop they open on
+     hover and close when the pointer moves to another top-row item or leaves the
+     pill; click (and Enter/Space)
+     toggles everywhere else. Outside click or Escape closes. ---- */
+  var drops = document.querySelectorAll('.nav-drop');
+  var hoverNav = window.matchMedia('(hover: hover) and (min-width: 641px)');
+  function setDrop(b, open) {
+    b.setAttribute('aria-expanded', open);
+    document.getElementById(b.getAttribute('aria-controls')).parentNode.classList.toggle('open', open);
+  }
+  function closeDrops(except) {
+    drops.forEach(function (b) { if (b !== except) setDrop(b, false); });
+  }
+  drops.forEach(function (b) {
+    b.addEventListener('mouseenter', function () {
+      if (!hoverNav.matches) return;
+      closeDrops(b);
+      setDrop(b, true);
+    });
+    b.addEventListener('click', function (e) {
+      // A mouse click on a menu hover already opened shouldn't shut it again
+      var open = (hoverNav.matches && e.detail > 0) || b.getAttribute('aria-expanded') !== 'true';
+      closeDrops(b);
+      setDrop(b, open);
+    });
+  });
+  // Hovering anything else in the top row (plain links, logo, CV) closes them
+  document.querySelectorAll('a.nav-link, .nav-logo, .nav-cta').forEach(function (el) {
+    el.addEventListener('mouseenter', function () {
+      if (hoverNav.matches) closeDrops();
+    });
+  });
+  var navEl = document.querySelector('.nav');
+  if (navEl) navEl.addEventListener('mouseleave', function () {
+    if (hoverNav.matches) closeDrops();
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav')) closeDrops();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrops();
+  });
+
+  /* ---- Nav hover chip: slides to the hovered link, fades in fresh on entry ---- */
+  var nav = document.querySelector('.nav');
+  if (nav && window.matchMedia('(hover: hover)').matches) {
+    var glide = document.createElement('span');
+    glide.className = 'nav-glide';
+    nav.appendChild(glide);
+    nav.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('mouseenter', function () {
+        // Coming from hidden, jump into place rather than slide from the last link
+        glide.style.transition = glide.style.opacity === '1' ? '' : 'opacity 0.15s';
+        glide.style.width = link.offsetWidth + 'px';
+        glide.style.height = link.offsetHeight + 'px';
+        glide.style.transform = 'translate(' + link.offsetLeft + 'px,' + link.offsetTop + 'px)';
+        glide.style.opacity = '1';
+      });
+    });
+    function hideGlide() { glide.style.opacity = '0'; }
+    nav.addEventListener('mouseleave', hideGlide);
+    nav.querySelectorAll('.nav-menu').forEach(function (m) { m.addEventListener('mouseenter', hideGlide); });
+  }
+
   /* ---- Scroll spy: highlight the nav link for the section in view ----
      Only on pages whose nav actually has same-page (#hash) links — i.e. index.
      Interior pages link out to index.html#… and keep a static .active pill, so
      running the spy there would just clear it as unrelated sections scroll by. */
   var spySections = document.querySelectorAll('main section[id]');
-  var navLinks = document.querySelectorAll('.nav-link');
+  var navLinks = document.querySelectorAll('a.nav-link');
   var hasHashNav = Array.prototype.some.call(navLinks, function (link) {
     return (link.getAttribute('href') || '').charAt(0) === '#';
   });

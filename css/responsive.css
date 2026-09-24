@@ -81,7 +81,16 @@
   .nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .nav-link { display: block; border-radius: 12px; padding: 11px 14px; }
+  .nav-item { display: block; }
+  .nav-glide { display: none; }
+  .nav-link { display: block; width: 100%; margin: 0; text-align: left; border-radius: 12px; padding: 11px 14px; }
+  .nav-menu, #menu-guides { grid-template-columns: 1fr; gap: 6px; }
+  .nav-menu { padding: 0; }
+  .open > .nav-menu { padding: 10px 0; }
+  /* Compact rows in the sheet: icon beside the label, corners matching the link chips */
+  .nav-tile { flex-direction: row; gap: 10px; padding: 10px 12px; border-radius: 12px; text-align: left; }
+  .nav-tile-icon { flex: none; width: 30px; height: 30px; }
+  .nav-tile-icon svg { width: 15px; height: 15px; }
   /* With the links hidden, space-between would strand the CV pill mid-bar
      now that the logo is a small mark rather than the full name. */
   .nav-cta { margin-left: auto; }

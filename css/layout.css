@@ -156,23 +156,23 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 8px 10px 8px 20px;
-  border-radius: 999px;
+  flex-wrap: wrap;
+  padding: 8px; /* even on all sides so the tiles and CV sit square in the curve */
+  border-radius: 30px; /* at least half the one-row height (55px): a full pill, and the same corners when a menu grows it */
   background: var(--card);
   box-shadow: 0 6px 24px -8px var(--shadow-strong);
 }
 .nav-logo {
   display: inline-flex;
   align-items: center;
+  margin: 0 12px;
   color: var(--accent);
 }
 .nav-mark { display: block; width: 26px; height: auto; }
-.nav-links {
-  display: flex;
-  gap: 4px;
-  margin: 0 4px;
-}
+/* On desktop the list and dropdown items dissolve so each link, button and
+   menu is a flex item of .nav: an open menu wraps to a full-width row below the
+   links and the pill grows around it. */
+.nav-links, .nav-item { display: contents; }
 .nav-link {
   display: inline-block;
   color: var(--ink-soft);
@@ -181,8 +181,102 @@ body {
   border-radius: 999px;
   transition: color 0.2s, background 0.2s;
 }
-.nav-link:hover { color: var(--ink); background: var(--surface-2); }
-.nav-link.active { color: var(--ink); background: var(--surface-hover); }
+.nav-drop { font: inherit; font-size: 0.9rem; border: 0; background: none; cursor: pointer; }
+.nav-caret { width: 9px; height: 6px; margin-left: 6px; vertical-align: middle; transition: rotate 0.2s; }
+.nav-link:hover, .nav-drop[aria-expanded="true"] { color: var(--ink); background: var(--surface-2); }
+.nav-drop[aria-expanded="true"] .nav-caret { rotate: 180deg; }
+.nav-link.active { color: var(--accent); }
+/* Spacing via margins, not flex gap: sizing the pill would otherwise count a
+   gap beside each hidden drawer and leave a sliver after the CV button. */
+.nav-link { margin: 0 1px; }
+/* One shared hover chip that slides between links (js/main.js moves it). It
+   sits under the links; where it runs, the per-link hover fill is dropped. */
+.nav-link { position: relative; z-index: 1; }
+.nav-glide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease), width 0.3s var(--ease), opacity 0.15s;
+}
+@media (hover: hover) and (min-width: 641px) {
+  .nav-link:hover { background: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-glide { transition: opacity 0.15s !important; }
+}
+.nav-drawer {
+  width: 0; /* take the pill's width, never widen it */
+  min-width: 100%;
+  order: 1;
+  /* One grid row animating 0fr -> 1fr grows the pill to the menu's real
+     height. Visibility flips after the close so hidden tiles leave the tab order. */
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.34s var(--ease), visibility 0s 0.34s;
+}
+.nav-drawer.open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.34s var(--ease);
+}
+.nav-menu {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 6px; /* with the pill's 8px, tiles sit 14px in from its edge */
+  transition: padding 0.34s var(--ease);
+}
+.open > .nav-menu { padding: 10px 6px 6px; }
+#menu-guides { grid-template-columns: repeat(2, 1fr); }
+.nav-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px;
+  border-radius: 16px; /* concentric with the pill: its 30px minus the 14px inset */
+  background: #e8edf4;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+.nav-tile:hover { background: #dbe2ec; }
+/* Tiles drop in one after another as the drawer opens */
+.nav-tile { opacity: 0; transform: translateY(-10px) scale(0.96); transition: opacity 0.15s, transform 0.15s, background 0.2s; }
+.open .nav-tile { opacity: 1; transform: none; transition: opacity 0.3s, transform 0.4s var(--ease), background 0.2s; }
+.open .nav-tile:nth-child(2) { transition-delay: 0.04s; }
+.open .nav-tile:nth-child(3) { transition-delay: 0.08s; }
+.open .nav-tile:nth-child(4) { transition-delay: 0.12s; }
+.open .nav-tile:nth-child(5) { transition-delay: 0.16s; }
+.open .nav-tile:nth-child(6) { transition-delay: 0.2s; }
+.open .nav-tile:hover { transition-delay: 0s; }
+.nav-tile[aria-current] { box-shadow: inset 0 0 0 2px #4a6796; }
+.nav-tile-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #4a6796;
+  color: #fff;
+}
+.nav-tile-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .nav-cta {
   font-family: var(--font-mono);
   font-size: 0.82rem;
@@ -192,6 +286,7 @@ body {
   padding: 9px 16px;
   border-radius: 999px;
   white-space: nowrap;
+  margin-left: 12px;
   transition: background 0.2s;
 }
 .nav-cta:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
