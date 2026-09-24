@@ -52,7 +52,7 @@ body {
   display: block;
   height: var(--sky-h);
   margin-top: -1px; /* copies overlap by a pixel so fractional layout cannot open a seam */
-  background: url(../assets/images/sky.webp?v=11) center bottom / cover;
+  background: url(../assets/images/sky.webp?v=12) center bottom / cover;
 }
 .bg-sky i:nth-child(even) { transform: scaleY(-1); }
 
@@ -62,18 +62,18 @@ body {
   top: calc(var(--horizon) - 1px); /* overlaps the sky by a pixel, the sea paints on top */
   width: 100%;
   height: max(calc(100svh - var(--horizon)), 39.33vw);
-  background: url(../assets/images/sea.webp?v=11) center top / cover;
+  background: url(../assets/images/sea.webp?v=12) center top / cover;
 }
 
 @media (max-width: 600px) {
-  .bg-sky i { background-image: url(../assets/images/sky-1000.webp?v=11); }
-  .bg-sea { background-image: url(../assets/images/sea-1000.webp?v=11); }
+  .bg-sky i { background-image: url(../assets/images/sky-1000.webp?v=12); }
+  .bg-sea { background-image: url(../assets/images/sea-1000.webp?v=12); }
 }
 
 /* Base on the horizon, centred, never wider than the viewport. */
 .hero-island {
   right: 0;
-  bottom: calc(100svh - var(--horizon));
+  bottom: calc(100svh - var(--horizon) - var(--island) * 9 / 65); /* the disc (bottom 9 of 65 rows) sits in the water, its top on the horizon */
   margin: 0 auto;
   width: min(100%, calc(var(--island) * 96 / 65)); /* 96:65 viewBox */
   height: auto;
@@ -223,7 +223,7 @@ body {
   align-content: start;
   align-items: start;
   column-gap: clamp(20px, 3vw, 56px);
-  padding: calc(var(--horizon) - var(--island)) clamp(24px, 4vw, 64px) 60px;
+  padding: calc(var(--horizon) - var(--island) * 56 / 65) clamp(24px, 4vw, 64px) 60px; /* name and buttons level with the island top */
   color: #fff;
 }
 
