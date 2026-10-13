@@ -1,0 +1,195 @@
+/* Box test page: the two surviving card styles. Throwaway. */
+.opt { isolation: isolate; }
+.opt-label {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 6px 14px;
+  font: 600 0.85rem/1.4 var(--font-mono);
+  color: #fff;
+  background: #16244f;
+  border-radius: 999px;
+}
+.opt-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  max-width: 920px;
+}
+@media (max-width: 760px) { .opt-row { grid-template-columns: 1fr; } }
+.chip { margin: 0; padding: 20px 24px; color: var(--ink-soft); }
+.box { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; transition: transform 0.2s var(--ease), box-shadow 0.2s; }
+.box::before, .box::after { pointer-events: none; }
+
+/* ---- Quick-load glass: no backdrop-filter, translucent gradient + gradient rim ---- */
+.gl .box { border-radius: 24px; transition: transform 0.4s var(--spring), box-shadow 0.3s; }
+.gl .box::before { /* gradient rim: bright top-left and bottom-right, fading through the sides */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.15) 35%, rgba(255,255,255,.05) 60%, rgba(255,255,255,.6));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.gl .card:hover { transform: scale(1.015); }
+.gl4 .box {
+  background: linear-gradient(160deg, rgba(255,255,255,.78), rgba(255,255,255,.58) 45%, rgba(235,244,255,.7));
+  box-shadow: inset 0 1px 0 #fff, inset 0 -8px 20px -10px rgba(120,160,220,.35), 0 20px 40px -24px rgba(0,20,60,.45);
+}
+.gl4 .tech-pill { background: rgba(255,255,255,.55); border-color: rgba(255,255,255,.9); }
+
+/* ================= Card anatomy: Space Grotesk titles + footer bar options ================= */
+.box .card-title { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1.45rem; letter-spacing: -0.03em; }
+.group-head { font-size: clamp(2rem, 4vw, 2.6rem); margin: 0 0 28px; }
+.opt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px 32px; max-width: 1100px; }
+
+/* Shared footer: full-bleed strip pinned to the card bottom */
+.ft { --pad: clamp(24px, 3vw, 34px); overflow: hidden; }
+.ft .card-body { margin-bottom: 22px; }
+.ft .card-link {
+  display: flex; align-items: center; gap: 12px;
+  margin: auto calc(-1 * var(--pad)) calc(-1 * var(--pad));
+  padding: 14px var(--pad);
+  font: 500 .85rem/1.2 "Space Grotesk", var(--font-body);
+  color: var(--ink-soft);
+  transition: background .25s, color .25s;
+}
+.ft .card-link > :first-child { margin-right: auto; }
+.ft .arr { display: inline-block; transition: transform .25s var(--ease); }
+.ft:hover .arr { transform: translateX(5px); }
+
+/* ---------- Fill bar family: hairline strip, accent fills along it on hover ---------- */
+[class*="fb"] .card-link { border-top: 1px solid rgba(255, 255, 255, .9); }
+.fb1 .card-link { background: linear-gradient(var(--accent), var(--accent)) 0 0 / 0 3px no-repeat; transition: background-size .5s var(--ease), color .25s; }
+.fb1:hover .card-link { background-size: 100% 3px; color: var(--ink); }
+
+
+/* ---------- Inset pill family: a pill floating inside the card bottom ---------- */
+/* Pill 4: icon chip leads; pill lifts and the chip turns blue on hover */
+.ip4 .card-link { padding: 8px 20px 8px 8px; gap: 12px; background: rgba(255, 255, 255, .6); box-shadow: inset 0 0 0 1px #fff; transition: transform .3s var(--spring), box-shadow .3s; }
+.ip4 .card-link > :first-child { margin-right: 0; }
+.ip4 .card-body { flex-grow: 1; }
+.ip4 .card-link > :nth-child(2) { margin-right: auto; }
+.ip4 .ico { width: var(--chip); height: var(--chip); border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--accent); transition: background .25s, color .25s; }
+.ip4 .ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ip4 .mute { color: var(--ink-mute); }
+.ip4:hover .card-link { transform: translateY(-2px); box-shadow: inset 0 0 0 1px #fff, 0 10px 20px -12px rgba(0, 20, 60, .5); }
+.ip4:hover .ico { background: var(--accent); color: #fff; }
+
+/* ---------- Card list: glass + icon-chip pill; the odd card has a pig perched on it ---------- */
+.card-list { row-gap: 72px; align-items: stretch; margin-top: 64px; }
+.card-list .card { height: 100%; }
+.pigc { overflow: visible; }
+.pigc.box { background: linear-gradient(160deg, rgba(255, 241, 246, .86), rgba(255, 226, 237, .64) 45%, rgba(255, 238, 245, .74)); }
+.pigc .pig { position: absolute; width: 104px; right: 26px; top: -60px; overflow: visible; pointer-events: none; transition: transform .5s var(--spring); }
+.pigc .wing { transform-box: fill-box; transform-origin: 10% 90%; }
+.pigc:hover .pig { transform: translate(8px, -16px) rotate(-8deg); }
+.pigc:hover .wing { animation: pig-flap .28s ease-in-out infinite alternate; }
+@keyframes pig-flap { to { transform: rotate(-28deg) scaleY(.8); } }
+.pigc .ico { color: #d6336c; }
+.pigc:hover .ico { background: #d6336c; color: #fff; }
+
+
+/* Concentric corners: chip, pill and card share one centre at each corner.
+   pill radius = chip radius + pill padding; card radius = pill radius + gap. */
+.ip4 {
+  --chip: 34px;              /* icon chip diameter */
+  --ring: 8px;               /* pill padding around the chip */
+  --gap: 10px;               /* pill inset from the card edge */
+  --pill-r: calc(var(--chip) / 2 + var(--ring));
+  border-radius: calc(var(--pill-r) + var(--gap));
+}
+.gl .ip4.box { border-radius: calc(var(--pill-r) + var(--gap)); }
+.ip4 .card-link {
+  margin: auto calc(-1 * var(--pad) + var(--gap)) calc(-1 * var(--pad) + var(--gap));
+  min-height: calc(var(--pill-r) * 2);
+  border-radius: 999px;
+  color: var(--ink);
+}
+
+/* ================= Bento: glass tiles, capsule pill, concentric corners =================
+   After Ruben's unused portfolio bento: mixed tile shapes, filter chips, pointer tilt.
+   No colour covers, no halftone dots; the tile is the glass card. */
+.chips { display: flex; gap: 8px; margin: 0 0 56px; }
+.chip {
+  padding: 8px 16px; border-radius: 999px; border: 0; cursor: pointer;
+  font: 500 .9rem "Space Grotesk", var(--font-body);
+  color: var(--ink); background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 0 1px #fff;
+  transition: background .2s, color .2s;
+}
+.chip[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: none; }
+.chip[aria-pressed="false"]:hover { background: #fff; }
+
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 210px; grid-auto-flow: dense; gap: 20px; max-width: 1100px; }
+@media (max-width: 900px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 190px; } }
+.tile[data-shape="2x2"] { grid-column: span 2; grid-row: span 2; }
+.tile[data-shape="2x1"] { grid-column: span 2; }
+.tile[data-shape="1x2"] { grid-row: span 2; }
+.tile[hidden] { display: none; }
+
+.tile {
+  /* concentric: pill radius = chip radius + ring; tile radius = pill radius + gap */
+  --chip: 34px; --ring: 8px; --gap: 10px;
+  --pill-r: calc(var(--chip) / 2 + var(--ring));
+  --r: calc(var(--pill-r) + var(--gap));
+  --pad: 22px;
+  position: relative; display: block; border-radius: var(--r); color: var(--ink);
+  box-shadow: 0 20px 40px -24px rgba(0, 20, 60, .45);
+}
+.tile[data-shape="2x2"] { --pad: 30px; }
+.tile:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* Glass surface, clipped on its own so a perched pig can sit outside the tile */
+.cover {
+  position: absolute; inset: 0; border-radius: var(--r); overflow: hidden;
+  background: linear-gradient(160deg, rgba(255,255,255,.8), rgba(255,255,255,.6) 45%, rgba(235,244,255,.72));
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.7), inset 0 -8px 20px -10px rgba(120,160,220,.35);
+}
+.pigc .cover { background: linear-gradient(160deg, rgba(255,241,246,.86), rgba(255,226,237,.64) 45%, rgba(255,238,245,.74)); }
+.cover-ico {
+  position: absolute; left: 12%; top: 10%; width: 46%; height: 46%; max-width: 160px;
+  fill: none; stroke: rgba(23, 34, 77, .12); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+  transform: perspective(60rem) scale(var(--zoom, 1))
+    translate(calc(var(--mx, 0) * -2%), calc(var(--my, 0) * -2%))
+    rotateX(calc(var(--my, 0) * -4deg)) rotateY(calc(var(--mx, 0) * 4deg));
+  transition: transform .35s var(--ease);
+}
+.tile[data-shape="2x1"] .cover-ico { left: auto; right: 12%; top: 12%; width: 30%; height: 52%; }
+.tile[data-shape="1x1"] .cover-ico { left: auto; right: 10%; top: 10%; width: 30%; height: 30%; }
+.tile:hover { --zoom: 1.06; }
+
+.tile-text {
+  position: absolute; left: 0; right: 0; bottom: calc(var(--pill-r) * 2 + var(--gap)); z-index: 2;
+  padding: 0 var(--pad) 14px; display: flex; flex-direction: column; gap: 6px;
+}
+.tile-title { font: 600 1.2rem/1.15 "Space Grotesk", var(--font-body); letter-spacing: -.02em; }
+.tile[data-shape="2x2"] .tile-title { font-size: 1.9rem; max-width: 14ch; }
+.tile[data-shape="2x1"] .tile-title { font-size: 1.45rem; }
+.tile-body { color: var(--ink-soft); font-size: .88rem; line-height: 1.4; max-width: 46ch; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tile[data-shape="1x1"] .tile-body { display: none; }
+.tile[data-shape="1x2"] .tile-body { -webkit-line-clamp: 4; }
+
+/* Capsule pill, inset by --gap so its ends share the tile corners' centres */
+.tile-bar {
+  position: absolute; left: var(--gap); right: var(--gap); bottom: var(--gap); z-index: 2;
+  height: calc(var(--pill-r) * 2); padding: 0 20px 0 var(--ring);
+  display: flex; align-items: center; gap: 12px; border-radius: 999px;
+  font: 500 .85rem "Space Grotesk", var(--font-body); color: var(--ink);
+  background: rgba(255, 255, 255, .62); box-shadow: inset 0 0 0 1px #fff;
+  transition: transform .3s var(--spring, cubic-bezier(.34,1.56,.64,1)), box-shadow .3s, background .25s;
+}
+.tile-bar .ico { width: var(--chip); height: var(--chip); border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--accent); transition: background .25s, color .25s; }
+.tile-bar svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tile-bar .mute { margin-left: auto; color: var(--ink-mute); }
+.tile:hover .tile-bar { transform: translateY(-2px); background: #fff; box-shadow: inset 0 0 0 1px #fff, 0 10px 20px -12px rgba(0, 20, 60, .5); }
+.tile:hover .tile-bar .ico { background: var(--accent); color: #fff; }
+
+/* Pig tiles: perched on the top edge, pink chip */
+.tile.pigc .pig { position: absolute; z-index: 3; width: 92px; right: 40px; top: -54px; pointer-events: none; overflow: visible; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.tile.pigc .wing { transform-box: fill-box; transform-origin: 10% 90%; }
+.tile.pigc:hover .pig { transform: translate(8px, -16px) rotate(-8deg); }
+.tile.pigc:hover .wing { animation: pig-flap .28s ease-in-out infinite alternate; }
+.tile.pigc .tile-bar .ico { color: #d6336c; }
+.tile.pigc:hover .tile-bar .ico { background: #d6336c; color: #fff; }
+
+::view-transition-group(*) { animation-duration: .4s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+@media (prefers-reduced-motion: reduce) { .cover-ico { transition: none; transform: none; } }

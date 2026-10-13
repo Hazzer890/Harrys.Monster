@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Practical guides by Harry Cassidy — collected field notes for students and engineers shipping work.">
+  <meta name="theme-color" content="#f5f7fc">
+  <link rel="canonical" href="https://harrys.monster/guides.html">
+  <title>Box test | Harry Cassidy</title>
+  <meta name="robots" content="noindex">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/guides.html">
+  <meta property="og:title" content="Guides | Harry Cassidy">
+  <meta property="og:description" content="Practical guides by Harry Cassidy — collected field notes for students and engineers shipping work.">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+
+  <!-- Styles -->
+  <!-- The sky is a CSS background, which browsers discover late; preload it so it is the first image in flight. -->
+  <link rel="preload" as="image" href="assets/images/sky.webp?v=13" media="(min-width: 601px)">
+  <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=13" media="(max-width: 600px)">
+  <link rel="stylesheet" href="css/reset.css?v=14">
+  <link rel="stylesheet" href="css/variables.css?v=14">
+  <link rel="stylesheet" href="css/layout.css?v=15">
+  <link rel="stylesheet" href="css/components.css?v=14">
+  <link rel="stylesheet" href="css/responsive.css?v=14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/testpage.css">
+</head>
+<body>
+  <!-- Pinned sky and sea; each slides down at its own share of the scroll (see layout.css) -->
+  <div class="bg-sky"><i></i><i></i><i></i><i></i></div>
+  <div class="bg-sea"></div>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav-logo" aria-label="Harry Cassidy, home"><svg class="nav-mark" viewBox="0 0 24 18" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 11.19c5.65 0 8.61-6.28 5.98-10.64-.17-.29.15-.69.43-.51C21.77 2.19 24 5.99 24 10.26c0 2.91-1 5.5-2.76 7.58l-3.11-1.07c.6-.56 1.12-1.2 1.55-1.9.98-1.6-1.22-2.59-2.92-1.78-1.44.69-3.05 1.08-4.75 1.08s-3.31-.39-4.75-1.08c-1.69-.81-3.89.17-2.92 1.78.42.69.94 1.33 1.55 1.9l-3.13 1.08C1 15.76 0 13.18 0 10.26 0 5.99 2.23 2.19 5.59.04c.28-.18.6.22.43.51C3.39 4.9 6.35 11.19 12 11.19z"/></svg></a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="timeline.html" class="nav-link">Who am I?</a></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop active" aria-expanded="false" aria-controls="menu-guides">Guides<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-guides">
+            <a href="guide-to-github.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span>GitHub</a>
+            <a href="guide-to-msp430.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chip"/></svg></span>MSP430</a>
+            <a href="guide-to-ssh-curtin.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#terminal"/></svg></span>SSH at Curtin</a>
+            <a href="guides.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#book"/></svg></span>All guides</a>
+          </div></div></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-projects">Projects<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-projects">
+            <a href="agentic-tuning.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span>Agentic tuning</a>
+            <a href="single-use-software.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#box"/></svg></span>Single-use software</a>
+            <a href="ai-web-products.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#globe"/></svg></span>Web products with AI</a>
+            <a href="how-i-work.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#compass"/></svg></span>How I work</a>
+            <a href="wares.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span>WARES</a>
+            <a href="index.html#projects" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#grid"/></svg></span>All projects</a>
+          </div></div></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="assets/cv.pdf" class="nav-cta" download>CV</a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h1 class="hero-name">Box test</h1>
+    </section>
+    <section class="section bento-sec">
+      <h2 class="hero-name group-head">Bento: glass tiles + capsule pill</h2>
+      <div class="chips" role="group" aria-label="Filter">
+        <button type="button" class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button type="button" class="chip" aria-pressed="false" data-filter="guides">Guides</button>
+        <button type="button" class="chip" aria-pressed="false" data-filter="projects">Projects</button>
+      </div>
+      <div class="bento">
+        <a href="guide-to-github.html" class="tile" data-shape="2x2" data-cat="guides" style="view-transition-name: tile-1">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#branch"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">The Small-Group GitHub Guide</span>
+            <span class="tile-body">Stop emailing project_final_v3.zip around. A practical Git workflow for student teams shipping work together.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span><span>Read guide</span><span class="mute">30 min</span></span>
+        </a>
+        <a href="guide-to-msp430.html" class="tile pigc" data-shape="1x1" data-cat="guides" style="view-transition-name: tile-2">
+          <svg class="pig" viewBox="0 0 130 90" aria-hidden="true"><path d="M20 50c-9 0-11-9-5-10s6 7 0 7" fill="none" stroke="#e0708f" stroke-width="3" stroke-linecap="round"/><g fill="#f08aa8"><rect x="34" y="60" width="9" height="16" rx="4"/><rect x="48" y="62" width="9" height="15" rx="4"/><rect x="74" y="62" width="9" height="15" rx="4"/><rect x="88" y="60" width="9" height="16" rx="4"/></g><ellipse cx="64" cy="50" rx="42" ry="26" fill="#f9b4c8"/><circle cx="100" cy="40" r="20" fill="#f9b4c8"/><path d="M90 24l4-15 11 12z" fill="#f08aa8"/><ellipse cx="117" cy="45" rx="9" ry="8" fill="#f08aa8"/><circle cx="114.5" cy="44" r="1.8" fill="#b54a6b"/><circle cx="120" cy="44" r="1.8" fill="#b54a6b"/><circle cx="104" cy="34" r="2.4" fill="#111832"/><g class="wing"><path d="M58 32C50 10 68 2 88 6c-6 4-4 8-9 10 1 4-4 6-8 7 0 4-6 6-13 9z" fill="#fff" stroke="#c9dcf2" stroke-width="2" stroke-linejoin="round"/></g></svg><span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#chip"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">Guide to Using the MSP430</span>
+            <span class="tile-body">From a fresh laptop to a blinking LED with Code Composer Studio and the Arduino IDE.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#chip"/></svg></span><span>Read guide</span><span class="mute">10 min</span></span>
+        </a>
+        <a href="guide-to-ssh-curtin.html" class="tile" data-shape="1x2" data-cat="guides" style="view-transition-name: tile-3">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#terminal"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">SSH into Curtin CS Labs</span>
+            <span class="tile-body">Drive a lab machine from your own laptop: same compilers, same files, no trip to building 314.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#terminal"/></svg></span><span>Read guide</span><span class="mute">10 min</span></span>
+        </a>
+        <a href="agentic-tuning.html" class="tile" data-shape="2x1" data-cat="projects" style="view-transition-name: tile-4">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#sliders"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">Agentic model tuning</span>
+            <span class="tile-body">An agentic loop on the Claude API that proposes hyperparameters, runs training, reads the metrics and iterates.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="single-use-software.html" class="tile" data-shape="1x2" data-cat="projects" style="view-transition-name: tile-5">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#box"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">Single-use software</span>
+            <span class="tile-body">Disposable tools built with AI so non-technical professionals get trustworthy software in minutes.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#box"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="ai-web-products.html" class="tile" data-shape="1x1" data-cat="projects" style="view-transition-name: tile-6">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#globe"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">Building web products with AI</span>
+            <span class="tile-body">The WARES storefront and Robotics West site, built end to end with AI coding tools.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#globe"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="how-i-work.html" class="tile" data-shape="2x1" data-cat="projects" style="view-transition-name: tile-7">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#compass"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">How I work</span>
+            <span class="tile-body">Multi-model agent orchestration: cost-aware routing, custom skill libraries, cross-model review loops.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#compass"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="wares.html" class="tile" data-shape="2x1" data-cat="projects" style="view-transition-name: tile-8">
+          <span class="cover" aria-hidden="true"><svg class="cover-ico"><use href="assets/icons.svg#users"/></svg></span>
+          <span class="tile-text">
+            <span class="tile-title">WARES</span>
+            <span class="tile-body">Brand identity for a robotics education supplier, built from scratch on a $0 budget.</span>
+          </span>
+          <span class="tile-bar"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+      </div>
+    </section>
+    <section class="section gl gl4">
+      <h2 class="hero-name group-head">Glass + inset pill, a pig or two in the mix (previous)</h2>
+      <div class="opt-grid card-list">
+        <a href="guide-to-github.html" class="card box ft ip4">
+          <h3 class="card-title">The Small-Group GitHub Guide</h3>
+          <p class="card-body">Stop emailing project_final_v3.zip around. A practical Git workflow for student teams shipping work together.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span><span>Read guide</span><span class="mute">30 min</span></span>
+        </a>
+        <a href="guide-to-msp430.html" class="card box ft ip4 pigc">
+          <svg class="pig" viewBox="0 0 130 90" aria-hidden="true"><path d="M20 50c-9 0-11-9-5-10s6 7 0 7" fill="none" stroke="#e0708f" stroke-width="3" stroke-linecap="round"/><g fill="#f08aa8"><rect x="34" y="60" width="9" height="16" rx="4"/><rect x="48" y="62" width="9" height="15" rx="4"/><rect x="74" y="62" width="9" height="15" rx="4"/><rect x="88" y="60" width="9" height="16" rx="4"/></g><ellipse cx="64" cy="50" rx="42" ry="26" fill="#f9b4c8"/><circle cx="100" cy="40" r="20" fill="#f9b4c8"/><path d="M90 24l4-15 11 12z" fill="#f08aa8"/><ellipse cx="117" cy="45" rx="9" ry="8" fill="#f08aa8"/><circle cx="114.5" cy="44" r="1.8" fill="#b54a6b"/><circle cx="120" cy="44" r="1.8" fill="#b54a6b"/><circle cx="104" cy="34" r="2.4" fill="#111832"/><g class="wing"><path d="M58 32C50 10 68 2 88 6c-6 4-4 8-9 10 1 4-4 6-8 7 0 4-6 6-13 9z" fill="#fff" stroke="#c9dcf2" stroke-width="2" stroke-linejoin="round"/></g></svg>
+          <h3 class="card-title">Guide to Using the MSP430</h3>
+          <p class="card-body">From a fresh laptop to a blinking LED: drivers via Code Composer Studio, then uploading .ino sketches from the Arduino IDE.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#chip"/></svg></span><span>Read guide</span><span class="mute">10 min</span></span>
+        </a>
+        <a href="guide-to-ssh-curtin.html" class="card box ft ip4">
+          <h3 class="card-title">SSH into Curtin CS Labs with VSCode</h3>
+          <p class="card-body">Drive a Computer Science lab machine from your own laptop: same compilers, same files, no trip to building 314.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#terminal"/></svg></span><span>Read guide</span><span class="mute">10 min</span></span>
+        </a>
+        <a href="agentic-tuning.html" class="card box ft ip4">
+          <h3 class="card-title">Agentic model tuning</h3>
+          <p class="card-body">An agentic loop on the Claude API that proposes hyperparameters, runs training, reads the metrics and iterates.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="single-use-software.html" class="card box ft ip4">
+          <h3 class="card-title">Single-use software</h3>
+          <p class="card-body">Deterministic, disposable tools built with AI so non-technical professionals get trustworthy software in minutes.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#box"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+        <a href="how-i-work.html" class="card box ft ip4 pigc">
+          <svg class="pig" viewBox="0 0 130 90" aria-hidden="true"><path d="M20 50c-9 0-11-9-5-10s6 7 0 7" fill="none" stroke="#e0708f" stroke-width="3" stroke-linecap="round"/><g fill="#f08aa8"><rect x="34" y="60" width="9" height="16" rx="4"/><rect x="48" y="62" width="9" height="15" rx="4"/><rect x="74" y="62" width="9" height="15" rx="4"/><rect x="88" y="60" width="9" height="16" rx="4"/></g><ellipse cx="64" cy="50" rx="42" ry="26" fill="#f9b4c8"/><circle cx="100" cy="40" r="20" fill="#f9b4c8"/><path d="M90 24l4-15 11 12z" fill="#f08aa8"/><ellipse cx="117" cy="45" rx="9" ry="8" fill="#f08aa8"/><circle cx="114.5" cy="44" r="1.8" fill="#b54a6b"/><circle cx="120" cy="44" r="1.8" fill="#b54a6b"/><circle cx="104" cy="34" r="2.4" fill="#111832"/><g class="wing"><path d="M58 32C50 10 68 2 88 6c-6 4-4 8-9 10 1 4-4 6-8 7 0 4-6 6-13 9z" fill="#fff" stroke="#c9dcf2" stroke-width="2" stroke-linejoin="round"/></g></svg>
+          <h3 class="card-title">How I work</h3>
+          <p class="card-body">A daily environment of multi-model agent orchestration: cost-aware routing, custom skill libraries, and cross-model review loops.</p>
+          <span class="card-link"><span class="ico"><svg aria-hidden="true"><use href="assets/icons.svg#compass"/></svg></span><span>Case study</span><span class="mute"></span></span>
+        </a>
+      </div>
+    </section>
+    <section class="section gl gl4">
+      <h2 class="hero-name group-head">Kept for later: fill bar</h2>
+      <div class="opt-grid">
+        <div class="cell">
+          <span class="opt-label">Fill bar</span>
+          <a href="guide-to-github.html" class="card box ft fb1">
+            <h3 class="card-title">The Small-Group GitHub Guide</h3>
+            <p class="card-body">Stop emailing project_final_v3.zip around. A practical Git workflow for student teams shipping work together.</p>
+            <span class="card-link"><span>Read the guide</span><span>30 min</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Harry Cassidy &copy; <span id="year">2026</span></p>
+    </div>
+  </footer>
+  <script src="js/main.js?v=20" defer></script>
+  <script>
+    // Bento: filter chips (tiles morph with a view transition where supported) and a pointer-follow tilt
+    const tiles = [...document.querySelectorAll('.tile')];
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+      const apply = () => {
+        document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+        tiles.forEach(t => t.hidden = c.dataset.filter !== 'all' && t.dataset.cat !== c.dataset.filter);
+      };
+      document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches ? document.startViewTransition(apply) : apply();
+    }));
+    tiles.forEach(t => {
+      t.addEventListener('pointermove', e => {
+        const r = t.getBoundingClientRect();
+        t.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 2 - 1).toFixed(3));
+        t.style.setProperty('--my', ((e.clientY - r.top) / r.height * 2 - 1).toFixed(3));
+      });
+      t.addEventListener('pointerleave', () => { t.style.setProperty('--mx', 0); t.style.setProperty('--my', 0); });
+    });
+  </script>
+</body>
+</html>
