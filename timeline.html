@@ -13,7 +13,8 @@
   <meta property="og:url" content="https://harrys.monster/timeline.html">
   <meta property="og:title" content="Who am I? | Harry Cassidy">
   <meta property="og:description" content="Education and work timeline of Harry Cassidy.">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://harrys.monster/assets/images/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
@@ -24,7 +25,7 @@
   <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=13" media="(max-width: 600px)">
   <link rel="stylesheet" href="css/reset.css?v=14">
   <link rel="stylesheet" href="css/variables.css?v=14">
-  <link rel="stylesheet" href="css/layout.css?v=14">
+  <link rel="stylesheet" href="css/layout.css?v=16">
   <link rel="stylesheet" href="css/components.css?v=14">
   <link rel="stylesheet" href="css/responsive.css?v=14">
 <script>
@@ -67,6 +68,20 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="timeline.html" class="nav-link active">Who am I?</a></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-monsters">Monsters<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-monsters">
+            <a href="https://analytics.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chart"/></svg></span>analytics</a>
+            <a href="https://dl.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#download"/></svg></span>dl</a>
+            <a href="https://dope.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#pill"/></svg></span>dope</a>
+            <a href="https://eggs.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#egg"/></svg></span>eggs</a>
+            <a href="https://facecutout.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#face"/></svg></span>facecutout</a>
+            <a href="https://grace.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#heart"/></svg></span>grace</a>
+            <a href="https://metadata.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>metadata</a>
+            <a href="https://mp3.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#music"/></svg></span>mp3</a>
+            <a href="https://pdf.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#file"/></svg></span>pdf</a>
+            <a href="https://send.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#plane"/></svg></span>send</a>
+            <a href="https://timetable.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#calendar"/></svg></span>timetable</a>
+          </div></div></li>
         <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-guides">Guides<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-drawer"><div class="nav-menu" id="menu-guides">
             <a href="guide-to-github.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span>GitHub</a>
@@ -112,13 +127,13 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
             <h2 class="section-title">About Me</h2>
           </div>
           <p>
-            Hello! I'm Harry, I'm a passionate engineer, educator, and egalitarian dedicated to making technology accessible and inclusive for everyone.
-            My interest in engineering started when I was young, and I cannot remember a time before I wanted to change the world with engineering.
-            I have had a passion for understanding how things work and sharing that my whole life.
+            Hi, I'm Harry. I can't remember a time I didn't want to change the world with engineering, and these days that looks like robots, data, and helping other people build both.
+            I'm at my best helping someone else get to their best or chewing on a problem nobody has solved yet, and the good days are both at once.
+            I've led a student robotics team for ten seasons, mentor a second one, and tutor about 80 students a semester in mechatronics labs.
           </p>
           <p>
-            I'm always eager to learn new skills and improve my craft.
-            Here are some skills I've been working with:
+            I build software and hardware, a lot of it with AI in the loop these days, and I don't always know how to solve the problem in front of me, troubleshooting it is the fun part.
+            Here's what I've been working with:
           </p>
           <div class="skills-list">
             <span class="skill-pill">3D Design (Autodesk Suite, Solidworks, Onshape)</span>
@@ -186,9 +201,9 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <p>Harry Cassidy &copy; <span id="year">2026</span></p>
+      <p>Harry Cassidy &copy; <span id="year">2026</span> <span class="footer-note">This site collects just a little data :)</span></p>
     </div>
   </footer>
-  <script src="js/main.js?v=14" defer></script>
+  <script src="js/main.js?v=20" defer></script>
 </body>
 </html>

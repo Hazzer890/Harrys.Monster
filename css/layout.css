@@ -235,6 +235,7 @@ body {
 }
 .open > .nav-menu { padding: 10px 6px 6px; }
 #menu-guides { grid-template-columns: repeat(2, 1fr); }
+#menu-monsters { grid-template-columns: repeat(4, 1fr); }
 .nav-tile {
   display: flex;
   flex-direction: column;
@@ -257,6 +258,7 @@ body {
 .open .nav-tile:nth-child(4) { transition-delay: 0.12s; }
 .open .nav-tile:nth-child(5) { transition-delay: 0.16s; }
 .open .nav-tile:nth-child(6) { transition-delay: 0.2s; }
+.open .nav-tile:nth-child(n+7) { transition-delay: 0.24s; }
 .open .nav-tile:hover { transition-delay: 0s; }
 .nav-tile[aria-current] { box-shadow: inset 0 0 0 2px #4a6796; }
 .nav-tile-icon {
@@ -322,12 +324,23 @@ body {
   color: #fff;
 }
 
+/* Home name only: Terminal Grotesque Open (OFL, basic Latin subset, see
+   assets/fonts/). It has one weight, so no faux bold. */
+@font-face {
+  font-family: "Terminal Grotesque Open";
+  src: url("../assets/fonts/terminal-grotesque-open.woff2") format("woff2");
+  font-display: swap;
+}
 .hero .hero-name {
   grid-area: 1 / 1;
   justify-self: end;
   text-align: right;
   margin: 0;
+  font-family: "Terminal Grotesque Open", var(--font-heading);
+  font-weight: 400;
+  font-synthesis: none;
   font-size: clamp(2.2rem, 5.4vw, 4.2rem);
+  text-shadow: 0 2px 14px rgba(10, 30, 70, 0.45);
 }
 .hero-actions {
   grid-area: 1 / 3;
@@ -461,3 +474,10 @@ body {
 .hero :focus-visible,
 .case-back:focus-visible { outline-color: #fff; }
 
+
+/* Footer data note: beside the name, or on its own line on narrow screens */
+.footer-note::before { content: "· "; }
+@media (max-width: 600px) {
+  .footer-note { display: block; text-wrap: balance; }
+  .footer-note::before { content: none; }
+}

@@ -85,6 +85,7 @@
   .nav-glide { display: none; }
   .nav-link { display: block; width: 100%; margin: 0; text-align: left; border-radius: 12px; padding: 11px 14px; }
   .nav-menu, #menu-guides { grid-template-columns: 1fr; gap: 6px; }
+  #menu-monsters { grid-template-columns: 1fr 1fr; }
   .nav-menu { padding: 0; }
   .open > .nav-menu { padding: 10px 0; }
   /* Compact rows in the sheet: icon beside the label, corners matching the link chips */

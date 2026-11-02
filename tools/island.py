@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Palm island halftone for the index hero, from the owner's reference image.
 Usage: python3 tools/island.py assets/images/island-ref.png assets/images/halftone-island.svg"""
+import random
 import sys
 from PIL import Image, ImageDraw, ImageFilter
 from halftone import halftone, to_svg
@@ -34,7 +35,13 @@ bb = canvas.getbbox(); canvas = canvas.crop((bb[0] - 10, bb[1] - 10, bb[2] + 10,
 # tone: fronds mid, island brighter at the base
 tone = Image.new("L", canvas.size, 185)
 ImageDraw.Draw(tone).rectangle([0, canvas.height - island.height, canvas.width, canvas.height], fill=245)
-w, h, circles = halftone(canvas, tone.filter(ImageFilter.GaussianBlur(4)), 96, rmax=0.46, rmin=0.07)
-circles = [c for c in circles if not (c[0] > 85 and c[1] < 12)]  # two stray dots from the source's vignette corner
-open(OUT, "w").write(to_svg(w, h, circles))
+# A coarse 64-column grid for fewer, bigger dots, scaled up to the 96x65 viewBox
+# the CSS and js/main.js are sized for. rmax 0.5 lets the fullest dots just touch.
+COLS = 64; K = 96 / COLS
+w, h, circles = halftone(canvas, tone.filter(ImageFilter.GaussianBlur(4)), COLS, rmax=0.5, rmin=0.076)
+# Seeded jitter of +-25% on each dot, capped where neighbours would touch
+rng = random.Random(4788)
+circles = [(x * K, y * K, round(min(r * rng.uniform(0.75, 1.25), 0.5) * K, 2)) for x, y, r in circles]
+circles = [c for c in circles if not (c[0] > 85 and c[1] < 12)]  # stray dots from the source's vignette corner
+open(OUT, "w").write(to_svg(96, 65, circles))
 print(len(circles), "circles,", w, "x", h)

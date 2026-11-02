@@ -13,7 +13,6 @@
     var root = getComputedStyle(document.documentElement);
     var SKY_SPEED = +root.getPropertyValue('--sky-speed');
     var SEA_SPEED = +root.getPropertyValue('--sea-speed');
-    var sea = document.querySelectorAll('.bg-sea, .hero-island');
     var still = matchMedia('(prefers-reduced-motion: reduce)'), pending = false;
     var drawBg = function () {
       pending = false;
@@ -21,7 +20,8 @@
       var wrap = 2 * sky.firstElementChild.getBoundingClientRect().height;
       sky.style.transform = 'translateY(' + Math.round(y * SKY_SPEED % wrap) + 'px)';
       var t = 'translateY(' + Math.round(y * SEA_SPEED) + 'px)';
-      sea.forEach(function (el) { el.style.transform = t; });
+      // Looked up each frame: the island <img> is swapped for inline SVG after load
+      document.querySelectorAll('.bg-sea, .hero-island').forEach(function (el) { el.style.transform = t; });
     };
     var queueBg = function () {
       if (!pending) { pending = true; requestAnimationFrame(drawBg); }
@@ -30,6 +30,56 @@
     addEventListener('resize', queueBg);
     still.addEventListener('change', queueBg);
     drawBg();
+  }
+
+  /* ---- Island: dots swell a little under the mouse ----
+     The <img> paints first; with a mouse and motion allowed, the same (cached)
+     SVG is fetched and swapped in inline so its dots can be scaled. Only runs
+     frames while dots are still settling. */
+  var isl = document.querySelector('img.hero-island');
+  if (isl && matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+    fetch(isl.src).then(function (res) { return res.text(); }).then(function (text) {
+      var svg = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
+      svg.setAttribute('class', isl.className);
+      svg.setAttribute('aria-hidden', 'true');
+      svg.style.transform = isl.style.transform;
+      isl.replaceWith(svg);
+      var dots = Array.prototype.map.call(svg.querySelectorAll('circle'), function (c) {
+        // k scatters the growth so neighbouring dots swell by different amounts
+        return { el: c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), r: +c.getAttribute('r'), s: 1, k: 0.3 + Math.random() * 1.4 };
+      });
+      var REACH = 24, GROW = 0.18; // in dot-grid units; GROW is the extra size at the centre
+      var mouse = null, frame = 0;
+      var step = function () {
+        frame = 0;
+        var busy = false;
+        dots.forEach(function (d) {
+          var t = 1;
+          if (mouse) {
+            var f = Math.max(0, 1 - Math.hypot(d.x - mouse.x, d.y - mouse.y) / REACH);
+            t = 1 + GROW * d.k * f * f * (3 - 2 * f);
+          }
+          if (Math.abs(t - d.s) < 0.003) {
+            if (d.s !== t) { d.s = t; d.el.setAttribute('r', d.r * t); }
+            return;
+          }
+          d.s += (t - d.s) * 0.06; // eases in and out over about a second
+          d.el.setAttribute('r', (d.r * d.s).toFixed(3));
+          busy = true;
+        });
+        if (busy) frame = requestAnimationFrame(step);
+      };
+      addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var b = svg.getBoundingClientRect();
+        mouse = { x: (e.clientX - b.left) * 96 / b.width, y: (e.clientY - b.top) * 65 / b.height };
+        if (!frame) frame = requestAnimationFrame(step);
+      });
+      document.documentElement.addEventListener('pointerleave', function () {
+        mouse = null;
+        if (!frame) frame = requestAnimationFrame(step);
+      });
+    }).catch(function () {}); // the static image stays
   }
 
   /* ---- Footer year ---- */
