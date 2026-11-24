@@ -124,7 +124,7 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
     <div class="case-body glass">
       <h2>The job</h2>
-      <p>For Robot Manipulation Project at Curtin, Robert Lewis and I had to make a WX250s robot arm aim and fire a cannon. An operator drives it with a PlayStation controller, and it also has to move to an exact set of joint angles on command.</p>
+      <p>For Robot Manipulation Project at Curtin, my project partner and I had to make a WX250s robot arm aim and fire a cannon. An operator drives it with a PlayStation controller, and it also has to move to an exact set of joint angles on command.</p>
 
       <h2>How it's put together</h2>
       <p>The system runs across two computers on one ROS 2 network. The controller computer reads the gamepad and shows the arm in RViz, the cannon computer runs the control logic and talks to the arm and the firing mechanism. Only two topics cross between them, the controller inputs one way and the joint states back.</p>
