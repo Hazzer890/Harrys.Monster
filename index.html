@@ -26,9 +26,9 @@
   <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=13" media="(max-width: 600px)">
   <link rel="stylesheet" href="css/reset.css?v=14">
   <link rel="stylesheet" href="css/variables.css?v=14">
-  <link rel="stylesheet" href="css/layout.css?v=16">
-  <link rel="stylesheet" href="css/components.css?v=14">
-  <link rel="stylesheet" href="css/responsive.css?v=14">
+  <link rel="stylesheet" href="css/layout.css?v=17">
+  <link rel="stylesheet" href="css/components.css?v=16">
+  <link rel="stylesheet" href="css/responsive.css?v=15">
 <script>
 (function(){var A='https://analytics.harrys.monster/e',v;
 try{v=localStorage.getItem('_aid')||crypto.randomUUID();localStorage.setItem('_aid',v)}catch(e){v='anon'}
@@ -93,12 +93,12 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
           </div></div></li>
         <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-projects">Projects<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-drawer"><div class="nav-menu" id="menu-projects">
+            <a href="team-4788.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span>Team 4788</a>
+            <a href="power-the-town.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#bolt"/></svg></span>Power the Town</a>
             <a href="agentic-tuning.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span>Agentic tuning</a>
-            <a href="single-use-software.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#box"/></svg></span>Single-use software</a>
-            <a href="ai-web-products.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#globe"/></svg></span>Web products with AI</a>
-            <a href="how-i-work.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#compass"/></svg></span>How I work</a>
-            <a href="wares.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span>WARES</a>
-            <a href="#projects" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#grid"/></svg></span>All projects</a>
+            <a href="robot-arm.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#arm"/></svg></span>Robot arm cannon</a>
+            <a href="wares.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>WARES</a>
+            <a href="projects.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#grid"/></svg></span>All projects</a>
           </div></div></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -142,8 +142,8 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
             <span class="section-index">01</span>
             <h2 class="section-title">Projects</h2>
           </div>
-          <p class="projects-rail-note">Case studies in building with AI — and teaching people to do the same.</p>
-          <span class="projects-rail-count">05 case studies</span>
+          <p class="projects-rail-note">Robots, teams and software, and the people I built them with.</p>
+          <a href="projects.html" class="projects-rail-count">All projects &rarr;</a>
         </div>
 
         <div class="projects-list">
@@ -151,9 +151,40 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
           <div class="project-wrap">
             <article class="card glass">
               <p class="card-index">01</p>
+              <h3 class="card-title">FRC Team 4788</h3>
+              <p class="card-body">
+                I joined Curtin's high school robotics program as a student in 2016 and have been lead mentor of Team 4788 since 2021. That's 30+ students and 15+ volunteer mentors each season, and in 2025 the team won its division at the FIRST Championship in Houston.
+              </p>
+              <div class="tags">
+                <span>Mentoring</span>
+                <span>FIRST Robotics</span>
+              </div>
+              <a href="team-4788.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+            </article>
+          </div>
+
+          <div class="project-wrap">
+            <article class="card glass">
+              <p class="card-index">02</p>
+              <h3 class="card-title">Power the Town</h3>
+              <p class="card-body">
+                A renewable energy game for school groups, teams plug solar, wind and battery boards into a town and try to keep the lights on. I designed the boards, wrote the firmware and built a browser version.
+              </p>
+              <div class="tags">
+                <span>Outreach</span>
+                <span>PCB design</span>
+                <span>Arduino</span>
+              </div>
+              <a href="power-the-town.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+            </article>
+          </div>
+
+          <div class="project-wrap">
+            <article class="card glass">
+              <p class="card-index">03</p>
               <h3 class="card-title">Agentic model tuning</h3>
               <p class="card-body">
-                An agentic loop on the Claude API that proposes hyperparameters, runs training, reads the metrics and iterates. Top marks on Machine Learning and Machine Perception assignments at Curtin.
+                An agent that ran 21 rounds of model search for a Machine Learning assignment and logged its reasoning each time. The final ensemble took the Kaggle error from 0.159 to 0.134.
               </p>
               <div class="tags">
                 <span>Python</span>
@@ -165,46 +196,16 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
 
           <div class="project-wrap">
             <article class="card glass">
-              <p class="card-index">02</p>
-              <h3 class="card-title">Single-use software</h3>
-              <p class="card-body">
-                A Curtin Festival of AI talk and a working practice: deterministic, disposable tools built with AI so non-technical professionals get trustworthy software in minutes.
-              </p>
-              <div class="tags">
-                <span>Festival of AI</span>
-                <span>LLM APIs</span>
-              </div>
-              <a href="single-use-software.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
-            </article>
-          </div>
-
-          <div class="project-wrap">
-            <article class="card glass">
-              <p class="card-index">03</p>
-              <h3 class="card-title">Building web products with AI</h3>
-              <p class="card-body">
-                The WARES storefront and Robotics West site, in build end to end with AI coding tools. This portfolio is live proof of the same method.
-              </p>
-              <div class="tags">
-                <span>HTML/CSS/JS</span>
-                <span>AI coding tools</span>
-              </div>
-              <a href="ai-web-products.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
-            </article>
-          </div>
-
-          <div class="project-wrap">
-            <article class="card glass">
               <p class="card-index">04</p>
-              <h3 class="card-title">How I work</h3>
+              <h3 class="card-title">Robot arm cannon</h3>
               <p class="card-body">
-                A daily environment of multi-model agent orchestration: cost-aware routing, custom skill libraries, and cross-model review loops.
+                A WX250s robot arm that aims and fires a cannon from a PlayStation controller, built in ROS 2 for Robot Manipulation Project at Curtin.
               </p>
               <div class="tags">
-                <span>Agents</span>
-                <span>Orchestration</span>
+                <span>ROS 2</span>
+                <span>Kinematics</span>
               </div>
-              <a href="how-i-work.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
+              <a href="robot-arm.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
             </article>
           </div>
 
@@ -213,11 +214,11 @@ window.track=function(n,p){send({t:'custom',name:n,props:p})};
               <p class="card-index">05</p>
               <h3 class="card-title">WARES</h3>
               <p class="card-body">
-                Brand identity for a robotics education supplier: hand-drawn type, a machineable spline mark, and a full identity built from scratch on a $0 budget.
+                Robotics parts for WA schools and universities, co-founded in 2024. The business, the brand I drew for it on a $0 budget, and what I learned moving production to suppliers.
               </p>
               <div class="tags">
+                <span>Co-founder</span>
                 <span>Brand identity</span>
-                <span>Print &amp; web</span>
               </div>
               <a href="wares.html" class="card-link">Read the case study <span aria-hidden="true">&rarr;</span></a>
             </article>

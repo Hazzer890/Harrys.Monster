@@ -418,6 +418,17 @@ body {
 .section > .projects-list > .project-wrap:nth-child(odd)  { margin-right: clamp(0px, 6vw, 72px); }
 .section > .projects-list > .project-wrap:nth-child(even) { margin-left: clamp(0px, 6vw, 72px); }
 
+/* ---------- Projects page: a heading tile, then a two-column card grid ----------
+   Even cards drop a little so the columns stagger like the homepage mosaic. */
+.group-head { max-width: 440px; margin-bottom: 26px; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  align-items: start;
+}
+.card-grid .project-wrap:nth-child(even) { margin-top: clamp(0px, 4vw, 44px); }
+
 /* ---------- Explore: asymmetric pair, second card drops low ---------- */
 .explore {
   display: grid;

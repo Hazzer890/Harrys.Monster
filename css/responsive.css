@@ -11,6 +11,8 @@
   .projects-layout .project-wrap:nth-child(n) { grid-column: auto; margin-top: 0; }
   .section > .projects-list > .project-wrap:nth-child(odd)  { margin-right: 0; }
   .section > .projects-list > .project-wrap:nth-child(even) { margin-left: 0; }
+  .card-grid { grid-template-columns: 1fr; }
+  .card-grid .project-wrap:nth-child(even) { margin-top: 0; }
 }
 
 /* Hero restacks on narrow portrait screens: name, then actions, at the top

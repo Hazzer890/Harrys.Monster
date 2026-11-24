@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How a FIRST Robotics Competition season works, from the game reveal in January to the world championship in April.">
+  <meta name="theme-color" content="#f5f7fc">
+  <link rel="canonical" href="https://harrys.monster/what-is-frc.html">
+  <title>What is FRC? | Harry Cassidy</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/what-is-frc.html">
+  <meta property="og:title" content="What is FRC?">
+  <meta property="og:description" content="How a FIRST Robotics Competition season works, from the game reveal in January to the world championship in April.">
+  <meta property="og:image" content="https://harrys.monster/assets/images/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+
+  <!-- Styles -->
+  <!-- The sky is a CSS background, which browsers discover late; preload it so it is the first image in flight. -->
+  <link rel="preload" as="image" href="assets/images/sky.webp?v=13" media="(min-width: 601px)">
+  <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=13" media="(max-width: 600px)">
+  <link rel="stylesheet" href="css/reset.css?v=14">
+  <link rel="stylesheet" href="css/variables.css?v=14">
+  <link rel="stylesheet" href="css/layout.css?v=17">
+  <link rel="stylesheet" href="css/components.css?v=16">
+  <link rel="stylesheet" href="css/responsive.css?v=15">
+
+<script>
+(function(){var A='https://analytics.harrys.monster/e',v;
+try{v=localStorage.getItem('_aid')||crypto.randomUUID();localStorage.setItem('_aid',v)}catch(e){v='anon'}
+var t0=Date.now(),ms=0,lcp=0,cls=0,de=document.documentElement;
+function send(o){o.vid=v;o.site=location.host;o.path=location.pathname+location.hash;
+try{navigator.sendBeacon(A,JSON.stringify(o))}catch(e){}}
+function pv(){send({t:'pv',ref:document.referrer,q:location.search,ti:document.title,
+lang:navigator.language,tz:Intl.DateTimeFormat().resolvedOptions().timeZone,
+sw:screen.width,sh:screen.height,w:innerWidth,h:innerHeight,dw:de.scrollWidth,dh:de.scrollHeight})}
+pv();addEventListener('hashchange',pv);
+try{new PerformanceObserver(function(l){var e=l.getEntries();lcp=Math.round(e[e.length-1].startTime)}).observe({type:'largest-contentful-paint',buffered:true});
+new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(!e.hadRecentInput)cls+=e.value})}).observe({type:'layout-shift',buffered:true})}catch(e){}
+addEventListener('scroll',function(){var s=(scrollY+innerHeight)/de.scrollHeight*100;if(s>ms)ms=s},{passive:true});
+addEventListener('click',function(e){var el=e.target.closest?e.target.closest('a,button,[data-track]')||e.target:e.target;
+var cn=typeof el.className=='string'&&el.className.trim()?'.'+el.className.trim().split(/\s+/).slice(0,2).join('.'):'';
+var o={t:'click',x:e.pageX,y:e.pageY,w:innerWidth,dw:de.scrollWidth,dh:de.scrollHeight,
+sel:(el.tagName.toLowerCase()+(el.id?'#'+el.id:cn)).slice(0,140)};
+var a=e.target.closest&&e.target.closest('a');if(a&&a.host&&a.host!=location.host)o.out=a.href;
+send(o)},true);
+addEventListener('error',function(e){send({t:'error',name:String(e.message||'error').slice(0,200),
+props:{src:String(e.filename||'').slice(0,200),line:e.lineno,col:e.colno}})});
+addEventListener('visibilitychange',function(){if(document.visibilityState=='hidden'){var n=performance.getEntriesByType('navigation')[0];
+send({t:'leave',dur:Math.round((Date.now()-t0)/1e3),scroll:Math.round(Math.min(ms,100)),
+lcp:lcp,cls:Math.round(cls*1000),load:n&&n.loadEventEnd?Math.round(n.loadEventEnd):0})}});
+window.track=function(n,p){send({t:'custom',name:n,props:p})};
+})();
+</script></head>
+<body>
+  <!-- Pinned sky and sea; each slides down at its own share of the scroll (see layout.css) -->
+  <div class="bg-sky"><i></i><i></i><i></i><i></i></div>
+  <div class="bg-sea"></div>
+
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav-logo" aria-label="Harry Cassidy, home"><svg class="nav-mark" viewBox="0 0 24 18" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 11.19c5.65 0 8.61-6.28 5.98-10.64-.17-.29.15-.69.43-.51C21.77 2.19 24 5.99 24 10.26c0 2.91-1 5.5-2.76 7.58l-3.11-1.07c.6-.56 1.12-1.2 1.55-1.9.98-1.6-1.22-2.59-2.92-1.78-1.44.69-3.05 1.08-4.75 1.08s-3.31-.39-4.75-1.08c-1.69-.81-3.89.17-2.92 1.78.42.69.94 1.33 1.55 1.9l-3.13 1.08C1 15.76 0 13.18 0 10.26 0 5.99 2.23 2.19 5.59.04c.28-.18.6.22.43.51C3.39 4.9 6.35 11.19 12 11.19z"/></svg></a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="timeline.html" class="nav-link">Who am I?</a></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-monsters">Monsters<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-monsters">
+            <a href="https://analytics.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chart"/></svg></span>analytics</a>
+            <a href="https://dl.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#download"/></svg></span>dl</a>
+            <a href="https://dope.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#pill"/></svg></span>dope</a>
+            <a href="https://eggs.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#egg"/></svg></span>eggs</a>
+            <a href="https://facecutout.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#face"/></svg></span>facecutout</a>
+            <a href="https://grace.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#heart"/></svg></span>grace</a>
+            <a href="https://metadata.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>metadata</a>
+            <a href="https://mp3.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#music"/></svg></span>mp3</a>
+            <a href="https://pdf.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#file"/></svg></span>pdf</a>
+            <a href="https://send.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#plane"/></svg></span>send</a>
+            <a href="https://timetable.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#calendar"/></svg></span>timetable</a>
+          </div></div></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-guides">Guides<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-guides">
+            <a href="guide-to-github.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span>GitHub</a>
+            <a href="guide-to-msp430.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chip"/></svg></span>MSP430</a>
+            <a href="guide-to-ssh-curtin.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#terminal"/></svg></span>SSH at Curtin</a>
+            <a href="guides.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#book"/></svg></span>All guides</a>
+          </div></div></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop active" aria-expanded="false" aria-controls="menu-projects">Projects<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-projects">
+            <a href="team-4788.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span>Team 4788</a>
+            <a href="power-the-town.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#bolt"/></svg></span>Power the Town</a>
+            <a href="agentic-tuning.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span>Agentic tuning</a>
+            <a href="robot-arm.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#arm"/></svg></span>Robot arm cannon</a>
+            <a href="wares.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>WARES</a>
+            <a href="projects.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#grid"/></svg></span>All projects</a>
+          </div></div></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="case-main">
+    <div class="case-head">
+      <h1 class="case-title">What is FRC?</h1>
+      <div class="case-meta">
+        <span class="tech-pill">Explainer</span>
+        <span class="tech-pill">FIRST Robotics Competition</span>
+      </div>
+    </div>
+
+    <div class="case-body glass">
+      <h2>The short version</h2>
+      <p>The FIRST Robotics Competition is a robotics competition for high school students aged 14 to 18, run by <a href="what-is-first.html">FIRST</a>. Each January every team in the world is shown a new game at the same moment, and they have about two months to design, build and program a robot of up to 60 kg to play it. More than 3,700 teams took part in 2026.</p>
+
+      <h2>A season</h2>
+      <ul>
+        <li><strong>Kickoff.</strong> On a Saturday in early January the game is revealed. It changes every year, in 2024 the robots shot foam rings and in 2025 they stacked lengths of pipe onto a frame.</li>
+        <li><strong>Build.</strong> The students work out a strategy, design the robot in CAD, make and assemble the parts, wire it and write the code. Mentors (engineers, uni students, teachers and parents) work alongside them.</li>
+        <li><strong>Regional.</strong> The team takes the robot to a three-day event. For Team 4788 that's the Southern Cross Regional in New South Wales, so the students and the robot both have to get across the country.</li>
+        <li><strong>Championship.</strong> Teams that qualify go to the FIRST Championship in Houston in April, where 600 teams are split into eight divisions. In 2025 Team 4788 was on the alliance that won the Archimedes division.</li>
+        <li><strong>Offseason.</strong> Events run later in the year on the same game. WA's is WARP, the West Australian Robotics Playoffs, at Curtin each August.</li>
+      </ul>
+
+      <h2>A match</h2>
+      <p>Six robots play at once, three against three, on a field about 16 m long and 8 m wide. A match lasts under three minutes. It opens with a short autonomous period where the robots run on their code alone, then the student drivers take over.</p>
+      <p>In qualification matches the alliances are drawn for you, so the team you played against this morning can be your partner this afternoon. After qualifying, the top eight teams become alliance captains and pick their partners for the playoffs.</p>
+
+      <h2>What it takes</h2>
+      <p>The students do the CAD, machining, wiring, Java, control and vision work. The team around the robot also has to find sponsors, keep a budget, book the travel and run outreach, so it works a lot like a small engineering company with a hard deadline.</p>
+      <p>The convention, and the way I run it, is that the students build the robot and the mentors teach. You can see what that looks like on the <a href="team-4788.html">Team 4788 page</a>.</p>
+
+      <h2>Words you'll see on this site</h2>
+      <ul>
+        <li><strong>Swerve drive.</strong> A drivetrain where each of the four wheels steers and drives on its own, so the robot can move in any direction while it turns.</li>
+        <li><strong>Alliance.</strong> The three teams playing together in a match.</li>
+        <li><strong>Alliance captain.</strong> One of the top eight teams after qualifying, which gets to pick its playoff partners.</li>
+        <li><strong>Alpha robot.</strong> A rough first robot built early in the season to test ideas, before the competition robot.</li>
+      </ul>
+      <p>The awards (Impact, Engineering Inspiration, Dean's List and Woodie Flowers) are explained on the <a href="what-is-first.html">FIRST page</a>.</p>
+    </div>
+
+    <a href="projects.html" class="case-back btn btn-ghost">&larr; All work</a>
+  </main>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container"><p>Harry Cassidy &copy; <span id="year">2026</span> <span class="footer-note">This site collects just a little data :)</span></p></div>
+  </footer>
+  <script src="js/main.js?v=20" defer></script>
+</body>
+</html>

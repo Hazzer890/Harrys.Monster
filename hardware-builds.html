@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An LED scoreboard wall for robotics events, a volunteer badge that is a circuit board, and a flat-pack riser for an FTC field.">
+  <meta name="theme-color" content="#f5f7fc">
+  <link rel="canonical" href="https://harrys.monster/hardware-builds.html">
+  <title>Hardware builds | Harry Cassidy</title>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harrys.monster/hardware-builds.html">
+  <meta property="og:title" content="Hardware builds">
+  <meta property="og:description" content="An LED scoreboard wall for robotics events, a volunteer badge that is a circuit board, and a flat-pack riser for an FTC field.">
+  <meta property="og:image" content="https://harrys.monster/assets/images/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+
+  <!-- Styles -->
+  <!-- The sky is a CSS background, which browsers discover late; preload it so it is the first image in flight. -->
+  <link rel="preload" as="image" href="assets/images/sky.webp?v=13" media="(min-width: 601px)">
+  <link rel="preload" as="image" href="assets/images/sky-1000.webp?v=13" media="(max-width: 600px)">
+  <link rel="stylesheet" href="css/reset.css?v=14">
+  <link rel="stylesheet" href="css/variables.css?v=14">
+  <link rel="stylesheet" href="css/layout.css?v=17">
+  <link rel="stylesheet" href="css/components.css?v=16">
+  <link rel="stylesheet" href="css/responsive.css?v=15">
+
+<script>
+(function(){var A='https://analytics.harrys.monster/e',v;
+try{v=localStorage.getItem('_aid')||crypto.randomUUID();localStorage.setItem('_aid',v)}catch(e){v='anon'}
+var t0=Date.now(),ms=0,lcp=0,cls=0,de=document.documentElement;
+function send(o){o.vid=v;o.site=location.host;o.path=location.pathname+location.hash;
+try{navigator.sendBeacon(A,JSON.stringify(o))}catch(e){}}
+function pv(){send({t:'pv',ref:document.referrer,q:location.search,ti:document.title,
+lang:navigator.language,tz:Intl.DateTimeFormat().resolvedOptions().timeZone,
+sw:screen.width,sh:screen.height,w:innerWidth,h:innerHeight,dw:de.scrollWidth,dh:de.scrollHeight})}
+pv();addEventListener('hashchange',pv);
+try{new PerformanceObserver(function(l){var e=l.getEntries();lcp=Math.round(e[e.length-1].startTime)}).observe({type:'largest-contentful-paint',buffered:true});
+new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(!e.hadRecentInput)cls+=e.value})}).observe({type:'layout-shift',buffered:true})}catch(e){}
+addEventListener('scroll',function(){var s=(scrollY+innerHeight)/de.scrollHeight*100;if(s>ms)ms=s},{passive:true});
+addEventListener('click',function(e){var el=e.target.closest?e.target.closest('a,button,[data-track]')||e.target:e.target;
+var cn=typeof el.className=='string'&&el.className.trim()?'.'+el.className.trim().split(/\s+/).slice(0,2).join('.'):'';
+var o={t:'click',x:e.pageX,y:e.pageY,w:innerWidth,dw:de.scrollWidth,dh:de.scrollHeight,
+sel:(el.tagName.toLowerCase()+(el.id?'#'+el.id:cn)).slice(0,140)};
+var a=e.target.closest&&e.target.closest('a');if(a&&a.host&&a.host!=location.host)o.out=a.href;
+send(o)},true);
+addEventListener('error',function(e){send({t:'error',name:String(e.message||'error').slice(0,200),
+props:{src:String(e.filename||'').slice(0,200),line:e.lineno,col:e.colno}})});
+addEventListener('visibilitychange',function(){if(document.visibilityState=='hidden'){var n=performance.getEntriesByType('navigation')[0];
+send({t:'leave',dur:Math.round((Date.now()-t0)/1e3),scroll:Math.round(Math.min(ms,100)),
+lcp:lcp,cls:Math.round(cls*1000),load:n&&n.loadEventEnd?Math.round(n.loadEventEnd):0})}});
+window.track=function(n,p){send({t:'custom',name:n,props:p})};
+})();
+</script></head>
+<body>
+  <!-- Pinned sky and sea; each slides down at its own share of the scroll (see layout.css) -->
+  <div class="bg-sky"><i></i><i></i><i></i><i></i></div>
+  <div class="bg-sea"></div>
+
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="nav-logo" aria-label="Harry Cassidy, home"><svg class="nav-mark" viewBox="0 0 24 18" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 11.19c5.65 0 8.61-6.28 5.98-10.64-.17-.29.15-.69.43-.51C21.77 2.19 24 5.99 24 10.26c0 2.91-1 5.5-2.76 7.58l-3.11-1.07c.6-.56 1.12-1.2 1.55-1.9.98-1.6-1.22-2.59-2.92-1.78-1.44.69-3.05 1.08-4.75 1.08s-3.31-.39-4.75-1.08c-1.69-.81-3.89.17-2.92 1.78.42.69.94 1.33 1.55 1.9l-3.13 1.08C1 15.76 0 13.18 0 10.26 0 5.99 2.23 2.19 5.59.04c.28-.18.6.22.43.51C3.39 4.9 6.35 11.19 12 11.19z"/></svg></a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="timeline.html" class="nav-link">Who am I?</a></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-monsters">Monsters<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-monsters">
+            <a href="https://analytics.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chart"/></svg></span>analytics</a>
+            <a href="https://dl.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#download"/></svg></span>dl</a>
+            <a href="https://dope.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#pill"/></svg></span>dope</a>
+            <a href="https://eggs.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#egg"/></svg></span>eggs</a>
+            <a href="https://facecutout.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#face"/></svg></span>facecutout</a>
+            <a href="https://grace.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#heart"/></svg></span>grace</a>
+            <a href="https://metadata.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>metadata</a>
+            <a href="https://mp3.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#music"/></svg></span>mp3</a>
+            <a href="https://pdf.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#file"/></svg></span>pdf</a>
+            <a href="https://send.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#plane"/></svg></span>send</a>
+            <a href="https://timetable.harrys.monster" class="nav-tile" target="_blank" rel="noopener"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#calendar"/></svg></span>timetable</a>
+          </div></div></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop" aria-expanded="false" aria-controls="menu-guides">Guides<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-guides">
+            <a href="guide-to-github.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#branch"/></svg></span>GitHub</a>
+            <a href="guide-to-msp430.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#chip"/></svg></span>MSP430</a>
+            <a href="guide-to-ssh-curtin.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#terminal"/></svg></span>SSH at Curtin</a>
+            <a href="guides.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#book"/></svg></span>All guides</a>
+          </div></div></li>
+        <li class="nav-item"><button type="button" class="nav-link nav-drop active" aria-expanded="false" aria-controls="menu-projects">Projects<svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drawer"><div class="nav-menu" id="menu-projects">
+            <a href="team-4788.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#users"/></svg></span>Team 4788</a>
+            <a href="power-the-town.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#bolt"/></svg></span>Power the Town</a>
+            <a href="agentic-tuning.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#sliders"/></svg></span>Agentic tuning</a>
+            <a href="robot-arm.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#arm"/></svg></span>Robot arm cannon</a>
+            <a href="wares.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#tag"/></svg></span>WARES</a>
+            <a href="projects.html" class="nav-tile"><span class="nav-tile-icon"><svg aria-hidden="true"><use href="assets/icons.svg#grid"/></svg></span>All projects</a>
+          </div></div></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="case-main">
+    <div class="case-head">
+      <h1 class="case-title">Hardware builds</h1>
+      <div class="case-meta">
+        <span class="tech-pill">Raspberry Pi</span>
+        <span class="tech-pill">KiCad</span>
+        <span class="tech-pill">CNC</span>
+        <span class="tech-pill">Python</span>
+      </div>
+    </div>
+
+    <div class="case-body glass">
+      <h2>LED scoreboard wall</h2>
+      <p>Robotics events run their scoreboards as web pages on the local network. This is a 96 by 192 pixel LED wall, made from nine panels and a Raspberry Pi 5 Compute Module, that shows any web page you point it at. A headless browser renders the page and the pixels go out to the panels. Changing what's on screen means editing one file, with no restart.</p>
+      <p>It comes with a build guide, an operator guide for whoever is running it at an event, and an emulator so you can work on it without the panels.</p>
+
+      <h2>A volunteer badge that is a circuit board</h2>
+      <p>The volunteer badges for Robotics West's FTC events are a 54 by 86 mm circuit board with nothing soldered to it. The artwork uses the four tones a blue board gives you: navy where the mask sits on bare board, light blue where it sits on copper, white silkscreen, and gold where the copper is left exposed.</p>
+      <p>A Python script generates the board. The honeycomb in the corner spells the team number 4788 in counts of each kind of cell (4 gold, then 7, 8 and 8), and a second script reads the finished board file back and checks the counts.</p>
+
+      <h2>FTC field riser</h2>
+      <p>An FTC field is 3.6 m square and normally sits on the floor. This is a platform that lifts it about 600 mm, is strong enough to walk on, packs flat and slots together with no fixings.</p>
+      <p>The design problem was the sheet count. Plywood comes 1,200 mm wide and the field is 3,632 mm, so where the joins fall decides how many sheets you buy. A Python script generates every part, nests them and writes the cutting files, and the final design is 41 parts from 11 sheets of 17 mm formply. The same script builds the model in Onshape and checks that nothing collides.</p>
+    </div>
+
+    <a href="projects.html" class="case-back btn btn-ghost">&larr; All work</a>
+  </main>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container"><p>Harry Cassidy &copy; <span id="year">2026</span> <span class="footer-note">This site collects just a little data :)</span></p></div>
+  </footer>
+  <script src="js/main.js?v=20" defer></script>
+</body>
+</html>

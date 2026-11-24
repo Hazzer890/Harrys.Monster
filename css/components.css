@@ -434,6 +434,20 @@ th, td { border: 1px solid var(--glass-brd); padding: 8px 12px; text-align: left
   margin: 0 0 1.15em;
 }
 .case-body p:last-child { margin-bottom: 0; }
+.case-body ul {
+  list-style: disc;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: var(--reading-measure);
+  margin: 0 0 1.15em;
+  padding-left: 1.2em;
+}
+.case-body li { margin-bottom: 0.4em; }
+.case-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; align-items: start; margin: 1.5rem 0; }
+.case-figs figure { margin: 0; }
+.case-figs img { display: block; width: 100%; height: auto; border-radius: 12px; }
+.case-figs figcaption { padding-top: 0.5rem; font-size: 0.85rem; color: var(--ink-mute); }
 .case-back { display: inline-flex; margin-top: clamp(30px, 5vw, 48px); }
 @media (max-width: 900px) {
   .case-body { margin-left: 0; }
